@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ai-eval"
+version = "0.1.0"
+description = "Blinded cross-model AI safety evaluation pipeline"
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "mypy>=1.0",
+    "ruff>=0.4",
+    "black>=24.0",
+    "types-requests>=2.31",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ai_eval"]
+
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "A", "C4", "SIM", "TCH", "RUF"]
+# RUF001/002/003 flag math/typographic Unicode (α, ×, →, em-dash, ′) as
+# "ambiguous" with their ASCII look-alikes. We use these intentionally in
+# statistical metric names and report copy.
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.mypy]
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short --strict-markers"
