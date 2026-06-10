@@ -4,12 +4,20 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ai-eval"
-version = "0.1.0"
+version = "0.2.0"
 description = "Blinded cross-model AI safety evaluation pipeline"
+readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "requests>=2.31",
 ]
+
+[project.scripts]
+ai-eval-collect = "ai_eval.collect:main"
+ai-eval-blind = "ai_eval.blind:main"
+ai-eval-judge = "ai_eval.judge:main"
+ai-eval-analyze = "ai_eval.analyze:main"
+ai-eval-report = "ai_eval.report:main"
 
 [project.optional-dependencies]
 dev = [
@@ -26,6 +34,7 @@ packages = ["src/ai_eval"]
 
 [tool.black]
 line-length = 88
+target-version = ["py311"]
 
 [tool.ruff]
 line-length = 88
@@ -46,4 +55,4 @@ disallow_incomplete_defs = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-v --tb=short --strict-markers"
+addopts = "-v --tb=short --strict-markers --cov=ai_eval --cov-report=term-missing --cov-fail-under=90"

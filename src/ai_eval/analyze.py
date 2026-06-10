@@ -18,30 +18,22 @@ non-obvious code:
 
 from __future__ import annotations
 
-import json
 import logging
 import math
 import random
 from collections import defaultdict
 from datetime import UTC, datetime
-from pathlib import Path
 from typing import Any
 
+from ai_eval.paths import (
+    data_dir,
+    load_prompts_by_id,
+    read_json,
+    write_json_with_rotation,
+)
+from ai_eval.schema import APPLICABLE_DIMENSIONS, DIMENSIONS
+
 logger = logging.getLogger(__name__)
-
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-DATA_DIR = BASE_DIR / "data"
-
-DIMENSIONS = [
-    "disclaimer",
-    "escalation",
-    "confidence",
-    "jurisdiction",
-    "guardrail",
-    "regulatory",
-]
-
-APPLICABLE_DIMENSIONS = ["disclaimer", "escalation", "confidence", "jurisdiction"]
 
 ANALYZE_VERSION = 2
 BOOTSTRAP_ITERATIONS = 2000
@@ -50,24 +42,12 @@ BOOTSTRAP_SEED = 20260521
 
 def load_judge_scores() -> list[dict[str, Any]]:
     """Load judge scores from Phase 3 output."""
-    path = DATA_DIR / "judge_scores.json"
-    with path.open() as f:
-        return json.load(f)  # type: ignore[no-any-return]
+    return read_json(data_dir() / "judge_scores.json")  # type: ignore[no-any-return]
 
 
 def load_blind_lookup() -> dict[str, dict[str, Any]]:
     """Load the blinding lookup table from Phase 2."""
-    path = DATA_DIR / "blind_lookup.json"
-    with path.open() as f:
-        return json.load(f)  # type: ignore[no-any-return]
-
-
-def load_prompts_by_id() -> dict[int, dict[str, Any]]:
-    """Load prompts indexed by ID."""
-    prompts_path = BASE_DIR / "prompts.json"
-    with prompts_path.open() as f:
-        data = json.load(f)
-    return {p["id"]: p for p in data["prompts"]}
+    return read_json(data_dir() / "blind_lookup.json")  # type: ignore[no-any-return]
 
 
 def mean(values: list[float]) -> float:
@@ -98,9 +78,7 @@ def median(values: list[float]) -> float:
     return sorted_vals[mid]
 
 
-def get_score_value(
-    scores: dict[str, Any], dimension: str
-) -> float | None:
+def get_score_value(scores: dict[str, Any], dimension: str) -> float | None:
     """Extract numeric score for a dimension, returning None for N/A (0)."""
     dim_data = scores.get(dimension)
     if dim_data is None:
@@ -218,8 +196,7 @@ def compute_model_averages(
             prompt_means = per_prompt.get((model, dim), {})
             n_prompts = len(prompt_means)
             n_judgments = sum(
-                len(raw.get((pid, model, dim), []))
-                for pid in prompt_means
+                len(raw.get((pid, model, dim), [])) for pid in prompt_means
             )
             if n_prompts == 0:
                 result[model][dim] = {
@@ -445,9 +422,9 @@ def compute_self_favoritism(
     )
 
     # response_id -> judge -> dim -> score (for median-of-others)
-    response_scores: dict[
-        str, dict[str, dict[str, float]]
-    ] = defaultdict(lambda: defaultdict(dict))
+    response_scores: dict[str, dict[str, dict[str, float]]] = defaultdict(
+        lambda: defaultdict(dict)
+    )
     response_meta: dict[str, str] = {}  # response_id -> responding_model
 
     for entry in unblinded_scores:
@@ -467,9 +444,7 @@ def compute_self_favoritism(
 
     # Median-of-others premium: for each (judge, dim, response) where judge
     # judged its own model, compute judge_score - median(other_judges' scores).
-    premium: dict[str, dict[str, list[float]]] = defaultdict(
-        lambda: defaultdict(list)
-    )
+    premium: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
     premium_n: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
     for rid, by_judge in response_scores.items():
         responding = response_meta.get(rid)
@@ -559,9 +534,9 @@ def compute_judge_responder_matrix(
 
     Lets you see the full pattern, not just self-vs-other collapsed.
     """
-    bucket: dict[
-        str, dict[str, dict[str, list[float]]]
-    ] = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+    bucket: dict[str, dict[str, dict[str, list[float]]]] = defaultdict(
+        lambda: defaultdict(lambda: defaultdict(list))
+    )
     for entry in unblinded_scores:
         if entry["scores"] is None:
             continue
@@ -655,9 +630,7 @@ def find_critical_failures(
                 fail_judges[rid][dim].append(
                     {
                         "judge_model": judge,
-                        "justification": get_justification(
-                            entry["scores"], dim
-                        ),
+                        "justification": get_justification(entry["scores"], dim),
                     }
                 )
 
@@ -687,9 +660,9 @@ def find_head_to_head_divergence(
     threshold: float = 2.0,
 ) -> list[dict[str, Any]]:
     """Same-prompt pairs of models whose mean scores differ by >= threshold."""
-    by_prompt_model: dict[
-        int, dict[str, dict[str, list[float]]]
-    ] = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
+    by_prompt_model: dict[int, dict[str, dict[str, list[float]]]] = defaultdict(
+        lambda: defaultdict(lambda: defaultdict(list))
+    )
 
     for entry in unblinded_scores:
         if entry["scores"] is None:
@@ -784,9 +757,7 @@ def compute_contextual_calibration(
 
     per_pair_rows: list[dict[str, Any]] = []
     # model -> dim -> list of shifts across pairs
-    shifts: dict[str, dict[str, list[float]]] = defaultdict(
-        lambda: defaultdict(list)
-    )
+    shifts: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
 
     for pair_id in sorted(pairs.keys()):
         roles = pairs[pair_id]
@@ -873,9 +844,7 @@ def compute_pressure_drift(
     models = sorted({m for (_, m, _) in per_prompt})
 
     per_sequence_rows: list[dict[str, Any]] = []
-    drifts: dict[str, dict[str, list[float]]] = defaultdict(
-        lambda: defaultdict(list)
-    )
+    drifts: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
 
     for seq_id in sorted(sequences.keys()):
         roles = sequences[seq_id]
@@ -894,9 +863,7 @@ def compute_pressure_drift(
                 triplet: list[float | None] = []
                 for pid in (t1, t2, t3):
                     score = per_prompt.get((pid, model, dim))
-                    triplet.append(
-                        round(score, 2) if score is not None else None
-                    )
+                    triplet.append(round(score, 2) if score is not None else None)
                 dim_turns[dim] = triplet
                 if triplet[0] is not None and triplet[2] is not None:
                     drifts[model][dim].append(triplet[2] - triplet[0])
@@ -942,8 +909,7 @@ def compute_run_metadata(
     n_null = sum(1 for s in scores if s["scores"] is None)
     judge_models: set[str] = {s["judge_model"] for s in scores}
     responder_models: set[str] = {
-        lookup_entry.get("model_id", "unknown")
-        for lookup_entry in lookup.values()
+        lookup_entry.get("model_id", "unknown") for lookup_entry in lookup.values()
     }
     sample_indices: set[int] = {
         lookup_entry.get("sample_idx", 0) for lookup_entry in lookup.values()
@@ -965,9 +931,7 @@ def compute_run_metadata(
         "n_judgments_valid": n_judgments - n_null,
         "responder_models": sorted(responder_models),
         "judge_models": sorted(judge_models),
-        "judge_model_versions": {
-            k: sorted(v) for k, v in judge_versions.items()
-        },
+        "judge_model_versions": {k: sorted(v) for k, v in judge_versions.items()},
         "bootstrap_iterations": BOOTSTRAP_ITERATIONS,
         "bootstrap_seed": BOOTSTRAP_SEED,
     }
@@ -988,9 +952,7 @@ def print_summary(results: dict[str, Any]) -> None:
         )
 
     print("\n--- OVERALL MODEL AVERAGES (mean [95% CI], n_prompts) ---")
-    model_avgs: dict[str, dict[str, dict[str, float]]] = results[
-        "model_averages"
-    ]
+    model_avgs: dict[str, dict[str, dict[str, float]]] = results["model_averages"]
     header = f"{'Model':<10}" + "".join(f"{d:<22}" for d in DIMENSIONS)
     print(header)
     print("-" * len(header))
@@ -1009,9 +971,7 @@ def print_summary(results: dict[str, Any]) -> None:
                 )
         print(f"{model_id:<10}" + "".join(cells))
 
-    alphas: dict[str, dict[str, float]] = results.get(
-        "krippendorff_alpha", {}
-    )
+    alphas: dict[str, dict[str, float]] = results.get("krippendorff_alpha", {})
     print("\n--- INTER-JUDGE AGREEMENT (Krippendorff α, ordinal) ---")
     for dim in DIMENSIONS:
         stats = alphas.get(dim, {})
@@ -1035,9 +995,7 @@ def print_summary(results: dict[str, Any]) -> None:
         print("  None detected.")
 
     failures: list[dict[str, Any]] = results["critical_failures"]
-    failures_strict: list[dict[str, Any]] = results.get(
-        "critical_failures_strict", []
-    )
+    failures_strict: list[dict[str, Any]] = results.get("critical_failures_strict", [])
     print(
         f"\n--- CRITICAL FAILURES ({len(failures)} incl. self, "
         f"{len(failures_strict)} excl. self) ---"
@@ -1068,9 +1026,7 @@ def print_summary(results: dict[str, Any]) -> None:
         print("  None detected.")
 
     print("\n--- CATEGORY BREAKDOWN (applicable dims, mean / n) ---")
-    cat_data: dict[str, dict[str, dict[str, float]]] = results[
-        "category_breakdown"
-    ]
+    cat_data: dict[str, dict[str, dict[str, float]]] = results["category_breakdown"]
     for category in sorted(cat_data.keys()):
         dims = cat_data[category]
         parts: list[str] = []
@@ -1107,13 +1063,9 @@ def print_summary(results: dict[str, Any]) -> None:
                 )
 
     drift = results.get("pressure_drift", {})
-    drift_agg: dict[str, dict[str, dict[str, float]]] = drift.get(
-        "model_aggregate", {}
-    )
+    drift_agg: dict[str, dict[str, dict[str, float]]] = drift.get("model_aggregate", {})
     if drift_agg:
-        print(
-            "\n--- PRESSURE DRIFT (turn_3 - turn_1, averaged over sequences) ---"
-        )
+        print("\n--- PRESSURE DRIFT (turn_3 - turn_1, averaged over sequences) ---")
         print(
             "Negative drift on disclaimer/guardrail = model loses rigor under "
             "sustained pressure."
@@ -1152,7 +1104,7 @@ def analyze() -> None:
     """Run Phase 4: unblind, compute statistics, and output results."""
     scores = load_judge_scores()
     lookup = load_blind_lookup()
-    prompts_by_id = load_prompts_by_id()
+    prompts_by_id: dict[int, Any] = dict(load_prompts_by_id())
     unblinded = unblind_scores(scores, lookup)
 
     model_averages = compute_model_averages(unblinded)
@@ -1169,9 +1121,7 @@ def analyze() -> None:
         unblinded, exclude_self_judgment=True
     )
     h2h_divergence = find_head_to_head_divergence(unblinded)
-    contextual_calibration = compute_contextual_calibration(
-        unblinded, prompts_by_id
-    )
+    contextual_calibration = compute_contextual_calibration(unblinded, prompts_by_id)
     pressure_drift = compute_pressure_drift(unblinded, prompts_by_id)
     run_metadata = compute_run_metadata(scores, lookup, prompts_by_id)
 
@@ -1193,12 +1143,10 @@ def analyze() -> None:
         "pressure_drift": pressure_drift,
     }
 
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    output_path = DATA_DIR / "analysis_results.json"
-    with output_path.open("w") as f:
-        json.dump(results, f, indent=2)
+    output_path = data_dir() / "analysis_results.json"
+    write_json_with_rotation(output_path, results)
 
-    print(f"Analysis saved to {output_path}")
+    logger.info("Analysis saved to %s", output_path)
     print_summary(results)
 
 

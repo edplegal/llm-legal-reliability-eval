@@ -2,28 +2,26 @@
 
 from __future__ import annotations
 
-import hashlib
 import html
-import json
 import logging
 import subprocess
 from datetime import UTC, datetime
-from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+from ai_eval.paths import (
+    base_dir,
+    data_dir,
+    load_prompts_by_id,
+    prompts_file_hash,
+    read_json,
+    write_text_with_rotation,
+)
+from ai_eval.schema import DIMENSIONS
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 logger = logging.getLogger(__name__)
-
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-DATA_DIR = BASE_DIR / "data"
-
-DIMENSIONS = [
-    "disclaimer",
-    "escalation",
-    "confidence",
-    "jurisdiction",
-    "guardrail",
-    "regulatory",
-]
 
 DIMENSION_NA_NOTE = {
     "guardrail": "Applies only to adversarial_pressure prompts.",
@@ -33,9 +31,7 @@ DIMENSION_NA_NOTE = {
 
 def load_json(filename: str) -> Any:
     """Load a JSON file from the data directory."""
-    path = DATA_DIR / filename
-    with path.open() as f:
-        return json.load(f)
+    return read_json(data_dir() / filename)
 
 
 def esc(text: Any) -> str:
@@ -88,8 +84,7 @@ def simple_badge(score: float, n: int | None = None) -> str:
     color = score_color(score)
     suffix = f'<div class="badge-n">n={n}</div>' if n is not None else ""
     return (
-        f'<span class="badge" style="background:{color}">{score:.1f}</span>'
-        f"{suffix}"
+        f'<span class="badge" style="background:{color}">{score:.1f}</span>' f"{suffix}"
     )
 
 
@@ -98,7 +93,7 @@ def get_git_sha() -> str:
     try:
         out = subprocess.check_output(
             ["git", "rev-parse", "--short", "HEAD"],
-            cwd=str(BASE_DIR),
+            cwd=str(base_dir()),
             stderr=subprocess.DEVNULL,
             timeout=2,
         )
@@ -120,11 +115,9 @@ def detect_prompts_data_mismatch(
     """
     if not raw_responses:
         return None
-    prompts_path = BASE_DIR / "prompts.json"
-    if not prompts_path.exists():
+    if not (base_dir() / "prompts.json").exists():
         return None
-    with prompts_path.open("rb") as f:
-        current_hash = hashlib.sha256(f.read()).hexdigest()[:12]
+    current_hash = prompts_file_hash()
 
     stamps = {r.get("prompts_hash") for r in raw_responses}
     if stamps == {None}:
@@ -202,13 +195,17 @@ def build_model_averages_section(analysis: dict[str, Any]) -> str:
         cells = ""
         for d in DIMENSIONS:
             stats = dims.get(d, {})
-            cells += "<td>" + score_badge_with_ci(
-                float(stats.get("mean", 0.0)),
-                float(stats.get("ci_low", 0.0)),
-                float(stats.get("ci_high", 0.0)),
-                int(stats.get("n_prompts", 0)),
-                int(stats.get("n_judgments", 0)),
-            ) + "</td>"
+            cells += (
+                "<td>"
+                + score_badge_with_ci(
+                    float(stats.get("mean", 0.0)),
+                    float(stats.get("ci_low", 0.0)),
+                    float(stats.get("ci_high", 0.0)),
+                    int(stats.get("n_prompts", 0)),
+                    int(stats.get("n_judgments", 0)),
+                )
+                + "</td>"
+            )
         rows += f"<tr><td><strong>{esc(model_id)}</strong></td>{cells}</tr>\n"
     headers = "".join(f"<th>{esc(d)}</th>" for d in DIMENSIONS)
     na_notes = "".join(
@@ -253,14 +250,13 @@ def build_paired_diffs_section(analysis: dict[str, Any]) -> str:
             ci_low = float(stats.get("ci_low", 0.0))
             ci_high = float(stats.get("ci_high", 0.0))
             crosses_zero = ci_low <= 0 <= ci_high
-            color = "#7f8c8d" if crosses_zero else (
-                "#27ae60" if m_diff > 0 else "#e74c3c"
+            color = (
+                "#7f8c8d" if crosses_zero else ("#27ae60" if m_diff > 0 else "#e74c3c")
             )
             sign = "+" if m_diff >= 0 else ""
             title = (
                 f"diff={m_diff:.3f}, 95% CI=[{ci_low:.3f}, {ci_high:.3f}], "
-                f"n_paired_prompts={n}"
-                + (" (CI crosses zero)" if crosses_zero else "")
+                f"n_paired_prompts={n}" + (" (CI crosses zero)" if crosses_zero else "")
             )
             cells += (
                 f'<td><span class="badge" style="background:{color}"'
@@ -296,8 +292,7 @@ def build_krippendorff_section(analysis: dict[str, Any]) -> str:
         n_units = int(stats.get("n_units", 0))
         if n_units == 0:
             rows += (
-                f"<tr><td>{esc(dim)}</td><td colspan='3'>"
-                "insufficient data</td></tr>"
+                f"<tr><td>{esc(dim)}</td><td colspan='3'>" "insufficient data</td></tr>"
             )
             continue
         alpha = float(stats.get("alpha", 0.0))
@@ -337,9 +332,7 @@ def build_krippendorff_section(analysis: dict[str, Any]) -> str:
 
 def build_self_favoritism_section(analysis: dict[str, Any]) -> str:
     """Self-favoritism with median-of-others premium, plus 3×3 matrix."""
-    favoritism: dict[str, dict[str, dict[str, float]]] = analysis[
-        "self_favoritism"
-    ]
+    favoritism: dict[str, dict[str, dict[str, float]]] = analysis["self_favoritism"]
     flags: list[dict[str, Any]] = analysis["self_favoritism_flags"]
     matrix: dict[str, dict[str, dict[str, dict[str, float]]]] = analysis.get(
         "judge_responder_matrix", {}
@@ -362,12 +355,8 @@ def build_self_favoritism_section(analysis: dict[str, Any]) -> str:
             )
             premium = stats.get("self_premium_vs_median_of_others", 0.0)
             n_self = int(stats.get("n_self_responses", 0))
-            flag_class = (
-                ' class="flagged"' if n_self and abs(premium) > 0.5 else ""
-            )
-            premium_disp = (
-                f"{premium:+.2f}" if n_self else "<em>n=0</em>"
-            )
+            flag_class = ' class="flagged"' if n_self and abs(premium) > 0.5 else ""
+            premium_disp = f"{premium:+.2f}" if n_self else "<em>n=0</em>"
             rows += f"""<tr{flag_class}>
                 <td>{esc(dim)}</td>
                 <td>{stats['self_avg']:.2f}</td>
@@ -391,9 +380,7 @@ def build_self_favoritism_section(analysis: dict[str, Any]) -> str:
     # 3×3 Judge × Responder matrix per dimension
     if matrix:
         all_judges = sorted(matrix.keys())
-        all_responders = sorted({
-            r for by_resp in matrix.values() for r in by_resp
-        })
+        all_responders = sorted({r for by_resp in matrix.values() for r in by_resp})
         matrix_blocks = ""
         for dim in DIMENSIONS:
             cells = ""
@@ -407,9 +394,7 @@ def build_self_favoritism_section(analysis: dict[str, Any]) -> str:
                     )
                     row_cells += f"<td>{badge}</td>"
                 cells += f"<tr><td><strong>{esc(j)}</strong></td>{row_cells}</tr>"
-            header_cells = "".join(
-                f"<th>resp: {esc(r)}</th>" for r in all_responders
-            )
+            header_cells = "".join(f"<th>resp: {esc(r)}</th>" for r in all_responders)
             matrix_blocks += f"""
             <h4>{esc(dim)}</h4>
             <table class="compact matrix">
@@ -450,9 +435,7 @@ def build_critical_failures_section(
 ) -> str:
     """Critical failures with judge justifications inline."""
     failures: list[dict[str, Any]] = analysis["critical_failures"]
-    failures_strict: list[dict[str, Any]] = analysis.get(
-        "critical_failures_strict", []
-    )
+    failures_strict: list[dict[str, Any]] = analysis.get("critical_failures_strict", [])
     if not failures:
         return """
         <section id="critical-failures">
@@ -465,9 +448,7 @@ def build_critical_failures_section(
         key = (r["prompt_id"], r["model_id"], r.get("sample_idx", 0))
         response_text_map[f"{key[0]}_{key[1]}_{key[2]}"] = r["response_text"]
 
-    strict_ids = {
-        (f["response_id"], f["dimension"]) for f in failures_strict
-    }
+    strict_ids = {(f["response_id"], f["dimension"]) for f in failures_strict}
 
     # Group failures by response_id, preserve sort order from analyze.
     by_response: dict[str, list[dict[str, Any]]] = {}
@@ -512,24 +493,22 @@ def build_critical_failures_section(
             strict_marker = (
                 ' <span class="strict-flag" title="Still a failure when '
                 'self-judgment is excluded">strict</span>'
-                if is_strict else ""
+                if is_strict
+                else ""
             )
             just_rows = ""
             for jr in f.get("judge_records", []):
                 judge = jr.get("judge_model", "?")
                 is_self = judge == model
                 self_note = (
-                    ' <em class="self-judge">(self-judged)</em>'
-                    if is_self else ""
+                    ' <em class="self-judge">(self-judged)</em>' if is_self else ""
                 )
                 just_rows += (
                     f"<li><strong>{esc(judge)}{self_note}:</strong> "
                     f"{esc(jr.get('justification', ''))}</li>"
                 )
             if not just_rows:
-                just_rows = (
-                    "<li><em>(no justifications recorded)</em></li>"
-                )
+                just_rows = "<li><em>(no justifications recorded)</em></li>"
             dim_blocks += f"""
             <div class="fail-dim">
                 <strong>{esc(dim)}</strong>{strict_marker}
@@ -560,6 +539,10 @@ def build_critical_failures_section(
             </details>
         </div>"""
 
+    model_options = "".join(
+        f'<option value="{esc(m)}">{esc(m)}</option>'
+        for m in sorted({entry.get("model_id", "unknown") for entry in lookup.values()})
+    )
     return f"""
     <section id="critical-failures">
     <h2>Critical Failures
@@ -573,9 +556,7 @@ def build_critical_failures_section(
         <label>Filter by model:
         <select id="failure-model-filter" onchange="filterFailures()">
             <option value="all">All</option>
-            <option value="chatgpt">chatgpt</option>
-            <option value="claude">claude</option>
-            <option value="gemini">gemini</option>
+            {model_options}
         </select></label>
     </div>
     {cards}
@@ -593,9 +574,7 @@ def build_category_breakdown_section(analysis: dict[str, Any]) -> str:
         for d in DIMENSIONS:
             stats = dims.get(d, {})
             n = int(stats.get("n", 0))
-            cells += (
-                f"<td>{simple_badge(float(stats.get('mean', 0.0)), n)}</td>"
-            )
+            cells += f"<td>{simple_badge(float(stats.get('mean', 0.0)), n)}</td>"
         rows += f"<tr><td><strong>{esc(category)}</strong></td>{cells}</tr>\n"
 
     na_notes = "".join(
@@ -632,9 +611,7 @@ def _shift_badge(shift: float | None, desirable_positive: bool = True) -> str:
     else:
         color = "#e67e22" if abs_s < 1.0 else "#e74c3c"
     sign = "+" if shift >= 0 else ""
-    return (
-        f'<span class="badge" style="background:{color}">{sign}{shift:.2f}</span>'
-    )
+    return f'<span class="badge" style="background:{color}">{sign}{shift:.2f}</span>'
 
 
 def build_contextual_calibration_section(
@@ -644,9 +621,7 @@ def build_contextual_calibration_section(
     """The headline-insight section: do models elevate safety on crisis framings?"""
     calibration = analysis.get("contextual_calibration", {})
     per_pair: list[dict[str, Any]] = calibration.get("per_pair", [])
-    agg: dict[str, dict[str, dict[str, float]]] = calibration.get(
-        "model_aggregate", {}
-    )
+    agg: dict[str, dict[str, dict[str, float]]] = calibration.get("model_aggregate", {})
     if not per_pair and not agg:
         return ""
 
@@ -693,9 +668,7 @@ def build_contextual_calibration_section(
             for d in DIMENSIONS:
                 shift = dim_shifts.get(d)
                 cells += f"<td>{_shift_badge(shift)}</td>"
-            model_rows += (
-                f"<tr><td><strong>{esc(model)}</strong></td>{cells}</tr>\n"
-            )
+            model_rows += f"<tr><td><strong>{esc(model)}</strong></td>{cells}</tr>\n"
 
         pair_cards += f"""
         <div class="pair-card">
@@ -752,9 +725,7 @@ def build_pressure_drift_section(
     """Multi-turn pressure: does rigor decay across turns 1→2→3?"""
     drift = analysis.get("pressure_drift", {})
     per_seq: list[dict[str, Any]] = drift.get("per_sequence", [])
-    agg: dict[str, dict[str, dict[str, float]]] = drift.get(
-        "model_aggregate", {}
-    )
+    agg: dict[str, dict[str, dict[str, float]]] = drift.get("model_aggregate", {})
     if not per_seq and not agg:
         return ""
 
@@ -808,15 +779,12 @@ def build_pressure_drift_section(
                 if all(v is None for v in triplet):
                     continue
                 cells = "".join(
-                    f"<td>{('—' if v is None else f'{v:.1f}')}</td>"
-                    for v in triplet
+                    f"<td>{('—' if v is None else f'{v:.1f}')}</td>" for v in triplet
                 )
                 arrow = ""
                 if triplet[0] is not None and triplet[2] is not None:
                     delta = triplet[2] - triplet[0]
-                    arrow = (
-                        f"<td>{_shift_badge(round(delta, 2))}</td>"
-                    )
+                    arrow = f"<td>{_shift_badge(round(delta, 2))}</td>"
                 else:
                     arrow = '<td><span class="badge na">N/A</span></td>'
                 trajectory_rows += (
@@ -925,9 +893,7 @@ def build_tiebreaker_section(
         sample_idx = lookup_entry.get("sample_idx", 0)
         prompt_info = prompts_by_id.get(pid, {})
         prompt_text = prompt_info.get("text", "Unknown")
-        resp_text = response_text_map.get(
-            f"{pid}_{model}_{sample_idx}", "Not found"
-        )
+        resp_text = response_text_map.get(f"{pid}_{model}_{sample_idx}", "Not found")
         cards += f"""
         <div class="review-card null-score">
             <div class="review-header">
@@ -965,9 +931,7 @@ def build_tiebreaker_section(
         sample_idx = lookup_entry.get("sample_idx", 0)
         prompt_info = prompts_by_id.get(pid, {})
         prompt_text = prompt_info.get("text", "Unknown")
-        resp_text = response_text_map.get(
-            f"{pid}_{model}_{sample_idx}", "Not found"
-        )
+        resp_text = response_text_map.get(f"{pid}_{model}_{sample_idx}", "Not found")
         judge_rows = ""
         rid_scores = score_lookup.get(rid, {})
         for judge_model, sc in rid_scores.items():
@@ -1072,13 +1036,7 @@ def generate_report() -> Path:
     scores = load_json("judge_scores.json")
     raw_responses = load_json("raw_responses.json")
     lookup = load_json("blind_lookup.json")
-
-    prompts_path = BASE_DIR / "prompts.json"
-    with prompts_path.open() as f:
-        prompts_data = json.load(f)
-    prompts_by_id: dict[int, dict[str, Any]] = {
-        p["id"]: p for p in prompts_data["prompts"]
-    }
+    prompts_by_id: dict[int, Any] = dict(load_prompts_by_id())
 
     meta = analysis.get("metadata", {})
     data_warning = detect_prompts_data_mismatch(raw_responses)
@@ -1092,9 +1050,7 @@ def generate_report() -> Path:
         build_krippendorff_section(analysis),
         build_self_favoritism_section(analysis),
         build_category_breakdown_section(analysis),
-        build_critical_failures_section(
-            analysis, raw_responses, prompts_by_id, lookup
-        ),
+        build_critical_failures_section(analysis, raw_responses, prompts_by_id, lookup),
         build_h2h_section(analysis),
         build_null_scores_summary(scores, lookup),
         build_tiebreaker_section(
@@ -1405,11 +1361,10 @@ document.addEventListener('DOMContentLoaded', () => {{
 </body>
 </html>"""
 
-    output_path = DATA_DIR / "report.html"
-    with output_path.open("w") as f:
-        f.write(report_html)
+    output_path = data_dir() / "report.html"
+    write_text_with_rotation(output_path, report_html)
 
-    print(f"Report generated: {output_path}")
+    logger.info("Report generated: %s", output_path)
     return output_path
 
 

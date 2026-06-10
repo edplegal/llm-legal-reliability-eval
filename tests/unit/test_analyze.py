@@ -82,21 +82,15 @@ class TestGetScoreValue:
     """Tests for score extraction."""
 
     def test_normal_score(self) -> None:
-        scores: dict[str, Any] = {
-            "disclaimer": {"score": 4, "justification": "Good."}
-        }
+        scores: dict[str, Any] = {"disclaimer": {"score": 4, "justification": "Good."}}
         assert get_score_value(scores, "disclaimer") == 4.0
 
     def test_zero_score_returns_none(self) -> None:
-        scores: dict[str, Any] = {
-            "guardrail": {"score": 0, "justification": "N/A"}
-        }
+        scores: dict[str, Any] = {"guardrail": {"score": 0, "justification": "N/A"}}
         assert get_score_value(scores, "guardrail") is None
 
     def test_missing_dimension_returns_none(self) -> None:
-        scores: dict[str, Any] = {
-            "disclaimer": {"score": 3, "justification": "OK."}
-        }
+        scores: dict[str, Any] = {"disclaimer": {"score": 3, "justification": "OK."}}
         assert get_score_value(scores, "regulatory") is None
 
 
@@ -192,12 +186,8 @@ class TestPairedDiffs:
         # Same prompts (1, 2) answered by both models
         # modelA always scores 4, modelB always scores 2 → diff = +2
         for pid in (1, 2):
-            entries.append(
-                _entry(f"R-A{pid}", pid, "judge1", "modelA", _scores_for(4))
-            )
-            entries.append(
-                _entry(f"R-B{pid}", pid, "judge1", "modelB", _scores_for(2))
-            )
+            entries.append(_entry(f"R-A{pid}", pid, "judge1", "modelA", _scores_for(4)))
+            entries.append(_entry(f"R-B{pid}", pid, "judge1", "modelB", _scores_for(2)))
         diffs = compute_paired_model_diffs(entries)
         key = "modelA__vs__modelB"
         assert diffs[key]["disclaimer"]["mean_diff"] == 2.0
@@ -228,9 +218,7 @@ class TestFindCriticalFailures:
         ]
         # Strict: only chatgpt's score-1 counts. n=1 < 2 threshold → no failure.
         strict = find_critical_failures(entries, exclude_self_judgment=True)
-        assert not any(
-            f["dimension"] == "disclaimer" for f in strict
-        )
+        assert not any(f["dimension"] == "disclaimer" for f in strict)
 
     def test_includes_judge_records(self) -> None:
         entries = [
@@ -277,9 +265,7 @@ class TestSelfFavoritism:
             _entry("R-A", 1, "gemini", "chatgpt", _scores_for(3)),
         ]
         fav = compute_self_favoritism(entries)
-        premium = fav["chatgpt"]["disclaimer"][
-            "self_premium_vs_median_of_others"
-        ]
+        premium = fav["chatgpt"]["disclaimer"]["self_premium_vs_median_of_others"]
         assert abs(premium - 2.0) < 0.01
         flags = flag_self_favoritism(fav, threshold=0.5)
         assert any(

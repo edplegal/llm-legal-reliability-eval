@@ -9,14 +9,24 @@ from unittest.mock import MagicMock, patch
 if TYPE_CHECKING:
     from pathlib import Path
 
+    from ai_eval.schema import ModelConfig
+
 import pytest
 import requests
 
 from ai_eval.collect import (
     call_model_with_retry,
+    collect,
     get_completed_keys,
     load_existing_responses,
 )
+
+MOCK_CONFIG: ModelConfig = {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "api_key_env": "OPENAI_API_KEY",
+    "base_url": "https://api.openai.com/v1/chat/completions",
+}
 
 
 class TestCallModelWithRetry:
@@ -24,25 +34,24 @@ class TestCallModelWithRetry:
 
     def test_success_on_first_attempt(self) -> None:
         """Happy path: API call succeeds immediately."""
-        mock_config: dict[str, Any] = {
-            "provider": "openai",
-            "model": "gpt-4o",
-            "api_key_env": "OPENAI_API_KEY",
-            "base_url": "https://api.openai.com/v1/chat/completions",
-        }
         expected = {
-            "response_text": "Hello!",
+            "text": "Hello!",
             "model_version": "gpt-4o",
             "tokens_used": 100,
         }
         mock_caller = MagicMock(return_value=expected)
 
         with patch.dict(
-            "ai_eval.collect.PROVIDER_CALLERS",
+            "ai_eval.clients.PROVIDER_CALLERS",
             {"openai": mock_caller},
         ):
             result = call_model_with_retry(
-                "test prompt", "chatgpt", mock_config, 0.7, 2048
+                "test prompt",
+                "chatgpt",
+                MOCK_CONFIG,
+                system_prompt="You are a helpful assistant.",
+                temperature=0.7,
+                max_tokens=2048,
             )
 
         assert result == expected
@@ -50,14 +59,8 @@ class TestCallModelWithRetry:
 
     def test_retries_on_request_exception(self) -> None:
         """API call fails then succeeds on retry."""
-        mock_config: dict[str, Any] = {
-            "provider": "openai",
-            "model": "gpt-4o",
-            "api_key_env": "OPENAI_API_KEY",
-            "base_url": "https://api.openai.com/v1/chat/completions",
-        }
         expected = {
-            "response_text": "Recovered!",
+            "text": "Recovered!",
             "model_version": "gpt-4o",
             "tokens_used": 150,
         }
@@ -70,13 +73,18 @@ class TestCallModelWithRetry:
 
         with (
             patch.dict(
-                "ai_eval.collect.PROVIDER_CALLERS",
+                "ai_eval.clients.PROVIDER_CALLERS",
                 {"openai": mock_caller},
             ),
-            patch("ai_eval.collect.time.sleep"),
+            patch("ai_eval.clients.time.sleep"),
         ):
             result = call_model_with_retry(
-                "test prompt", "chatgpt", mock_config, 0.7, 2048
+                "test prompt",
+                "chatgpt",
+                MOCK_CONFIG,
+                system_prompt="You are a helpful assistant.",
+                temperature=0.7,
+                max_tokens=2048,
             )
 
         assert result == expected
@@ -84,38 +92,44 @@ class TestCallModelWithRetry:
 
     def test_raises_after_max_retries(self) -> None:
         """All retries exhausted raises the exception."""
-        mock_config: dict[str, Any] = {
-            "provider": "openai",
-            "model": "gpt-4o",
-            "api_key_env": "OPENAI_API_KEY",
-            "base_url": "https://api.openai.com/v1/chat/completions",
-        }
         mock_caller = MagicMock(
             side_effect=requests.RequestException("persistent failure")
         )
 
         with (
             patch.dict(
-                "ai_eval.collect.PROVIDER_CALLERS",
+                "ai_eval.clients.PROVIDER_CALLERS",
                 {"openai": mock_caller},
             ),
-            patch("ai_eval.collect.time.sleep"),
+            patch("ai_eval.clients.time.sleep"),
             pytest.raises(
                 requests.RequestException,
                 match="persistent failure",
             ),
         ):
             call_model_with_retry(
-                "test prompt", "chatgpt", mock_config, 0.7, 2048
+                "test prompt",
+                "chatgpt",
+                MOCK_CONFIG,
+                system_prompt="You are a helpful assistant.",
+                temperature=0.7,
+                max_tokens=2048,
             )
+
+
+class TestCollectValidation:
+    """Tests for collect() input validation."""
+
+    def test_collect_zero_samples_raises_value_error(self) -> None:
+        """samples < 1 is rejected before any IO happens."""
+        with pytest.raises(ValueError, match="samples must be >= 1"):
+            collect(samples=0)
 
 
 class TestResumeSupport:
     """Tests for resume/skip logic."""
 
-    def test_load_existing_responses_file_exists(
-        self, tmp_path: Path
-    ) -> None:
+    def test_load_existing_responses_file_exists(self, tmp_path: Path) -> None:
         """Loads responses from existing file and back-fills sample_idx=0
         for entries written before multi-sample support was added."""
         data = [{"prompt_id": 1, "model_id": "chatgpt"}]
@@ -124,13 +138,9 @@ class TestResumeSupport:
             json.dump(data, f)
 
         result = load_existing_responses(path)
-        assert result == [
-            {"prompt_id": 1, "model_id": "chatgpt", "sample_idx": 0}
-        ]
+        assert result == [{"prompt_id": 1, "model_id": "chatgpt", "sample_idx": 0}]
 
-    def test_load_existing_responses_file_missing(
-        self, tmp_path: Path
-    ) -> None:
+    def test_load_existing_responses_file_missing(self, tmp_path: Path) -> None:
         """Returns empty list when file doesn't exist."""
         path = tmp_path / "nonexistent.json"
         result = load_existing_responses(path)
@@ -139,7 +149,7 @@ class TestResumeSupport:
     def test_get_completed_keys_defaults_sample_idx(self) -> None:
         """Extracts (prompt_id, model_id, sample_idx) tuples; legacy entries
         without sample_idx default to 0."""
-        responses: list[dict[str, Any]] = [
+        responses: list[Any] = [
             {"prompt_id": 1, "model_id": "chatgpt"},
             {"prompt_id": 1, "model_id": "claude"},
             {"prompt_id": 2, "model_id": "gemini"},
@@ -153,7 +163,7 @@ class TestResumeSupport:
 
     def test_get_completed_keys_respects_sample_idx(self) -> None:
         """Multiple samples per (prompt, model) generate distinct keys."""
-        responses: list[dict[str, Any]] = [
+        responses: list[Any] = [
             {"prompt_id": 1, "model_id": "chatgpt", "sample_idx": 0},
             {"prompt_id": 1, "model_id": "chatgpt", "sample_idx": 1},
             {"prompt_id": 1, "model_id": "chatgpt", "sample_idx": 2},
