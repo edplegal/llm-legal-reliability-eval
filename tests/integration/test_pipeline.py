@@ -393,3 +393,43 @@ class TestFullPipeline:
         blind.blind()
         judge.judge(dry_run=True)
         assert not (pipeline_env / "data" / "judge_scores.json").exists()
+
+    def test_persistent_provider_outage_skips_cell_and_resumes(
+        self, pipeline_env: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """One provider 503-ing on one prompt must not kill the run: the
+        cell is skipped, everything else is collected, collect() reports
+        the failure (and main() exits nonzero), and a later --resume
+        retries exactly the missing cell."""
+        import requests as requests_lib
+
+        def outage_post(url: str, **kwargs: Any) -> MagicMock:
+            if "google.test" in url:
+                user = kwargs["json"]["contents"][0]["parts"][0]["text"]
+                if "triage" in user:
+                    raise requests_lib.HTTPError(
+                        "503 Server Error: Service Unavailable"
+                    )
+            return fake_post(url, **kwargs)
+
+        monkeypatch.setattr("ai_eval.clients.requests.post", outage_post)
+
+        data = pipeline_env / "data"
+        n_cells = len(PROMPTS["prompts"]) * len(CONFIG["models"])
+
+        failed = collect.collect(samples=1)
+        assert failed == [(6, "gemini", 0)]
+        raw = json.loads((data / "raw_responses.json").read_text())
+        assert len(raw) == n_cells - 1
+
+        # The CLI surfaces partial collection as a nonzero exit, which
+        # stops run_all.sh before blinding a partial set.
+        monkeypatch.setattr("sys.argv", ["ai-eval-collect", "--resume"])
+        with pytest.raises(SystemExit):
+            collect.main()
+
+        # Service recovers; resume retries only the missing cell.
+        monkeypatch.setattr("ai_eval.clients.requests.post", fake_post)
+        assert collect.collect(resume=True, samples=1) == []
+        raw = json.loads((data / "raw_responses.json").read_text())
+        assert len(raw) == n_cells

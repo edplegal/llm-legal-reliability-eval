@@ -156,6 +156,9 @@ PROVIDER_CALLERS: dict[str, ProviderCaller] = {
 }
 
 
+MAX_RETRY_WAIT = 60
+
+
 def call_model_with_retry(
     prompt_text: str,
     model_id: str,
@@ -164,11 +167,15 @@ def call_model_with_retry(
     system_prompt: str,
     temperature: float,
     max_tokens: int,
-    max_retries: int = 3,
+    max_retries: int = 5,
 ) -> ProviderResult:
     """Call a model API with exponential-backoff retry.
 
-    Raises the final exception if every attempt fails.
+    Waits 2, 4, 8, 16... seconds (capped at MAX_RETRY_WAIT) between
+    attempts — enough to ride out transient 429/5xx weather like an
+    overloaded Gemini endpoint. Raises the final exception if every
+    attempt fails; callers decide whether that is fatal (the collect
+    phase skips the cell and continues).
     """
     caller = PROVIDER_CALLERS[model_config["provider"]]
     for attempt in range(max_retries):
@@ -183,7 +190,7 @@ def call_model_with_retry(
         except (requests.RequestException, KeyError, IndexError) as exc:
             if attempt == max_retries - 1:
                 raise
-            wait = 2 ** (attempt + 1)
+            wait = min(2 ** (attempt + 1), MAX_RETRY_WAIT)
             logger.warning(
                 "Attempt %d/%d for %s failed: %s. Retrying in %ds...",
                 attempt + 1,

@@ -6,9 +6,12 @@ import argparse
 import hashlib
 import json
 import logging
+import sys
 import time
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any
+
+import requests
 
 from ai_eval.clients import PROVIDER_CALLERS, call_model_with_retry
 from ai_eval.paths import (
@@ -82,7 +85,7 @@ def collect(
     resume: bool = False,
     dry_run: bool = False,
     samples: int = 1,
-) -> None:
+) -> list[tuple[int, str, int]]:
     """Run Phase 1: collect responses from all models for all prompts.
 
     With ``samples > 1``, each (prompt, model) cell is queried that many times
@@ -90,6 +93,11 @@ def collect(
 
     A fresh (non-resume) run rotates any existing raw_responses.json to
     ``data/legacy/`` before writing — outputs are never silently overwritten.
+
+    A cell whose API call fails even after retries is skipped, not fatal:
+    collection continues so one flaky provider can't kill a long run. The
+    failed (prompt_id, model_id, sample_idx) keys are returned; re-running
+    with ``resume=True`` retries exactly those cells.
     """
     if samples < 1:
         raise ValueError("samples must be >= 1")
@@ -116,6 +124,7 @@ def collect(
 
     total_calls = len(prompts) * len(models) * samples
     call_num = 0
+    failed: list[tuple[int, str, int]] = []
 
     for prompt in prompts:
         prompt_id = prompt["id"]
@@ -137,14 +146,24 @@ def collect(
                     logger.info("%s: DRY RUN", label)
                     continue
 
-                result = call_model_with_retry(
-                    prompt_text,
-                    model_id,
-                    model_config,
-                    system_prompt=SYSTEM_PROMPT,
-                    temperature=temperature,
-                    max_tokens=max_tokens,
-                )
+                try:
+                    result = call_model_with_retry(
+                        prompt_text,
+                        model_id,
+                        model_config,
+                        system_prompt=SYSTEM_PROMPT,
+                        temperature=temperature,
+                        max_tokens=max_tokens,
+                    )
+                except (requests.RequestException, KeyError, IndexError) as exc:
+                    logger.error(
+                        "%s: FAILED after retries (%s); continuing with "
+                        "remaining cells.",
+                        label,
+                        exc,
+                    )
+                    failed.append((prompt_id, model_id, sample_idx))
+                    continue
 
                 entry: ResponseRecord = {
                     "prompt_id": prompt_id,
@@ -169,6 +188,14 @@ def collect(
             len(responses),
             output_path,
         )
+    if failed:
+        logger.error(
+            "%d cell(s) failed after retries: %s. Re-run with --resume to "
+            "retry only these.",
+            len(failed),
+            ", ".join(f"(p{p}, {m}, s{s})" for p, m, s in failed),
+        )
+    return failed
 
 
 def main() -> None:
@@ -203,7 +230,10 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    collect(resume=args.resume, dry_run=args.dry_run, samples=args.samples)
+    failed = collect(resume=args.resume, dry_run=args.dry_run, samples=args.samples)
+    if failed:
+        # Nonzero exit stops run_all.sh before blinding a partial collection.
+        sys.exit(1)
 
 
 if __name__ == "__main__":
