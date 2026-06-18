@@ -80,12 +80,20 @@ Phases can also be run individually: `python -m ai_eval.collect`,
 
 ## Status
 
-- **Complete:** full 5-phase pipeline; current `data/` set is an internally
-  consistent run (2026-05-22): 60 prompts × 3 models × 3 judges, 540
-  judgments (29 null = judge JSON parse failures, listed in the report's
+- **Complete:** full 5-phase pipeline; the current `data/` set is an
+  internally consistent 3-sample run (collected 2026-06-16/17, judged
+  2026-06-18): 60 prompts × 3 models × 3 samples = 540 responses, 1620
+  judgments (7 null = residual provider hiccups, surfaced in the report's
   tie-breaking section).
-- **Known gaps:** null judge scores await manual tie-breaking via the report
-  UI; multi-sample (`--samples 3+`) has not yet been run against the live
-  APIs.
-- **Prior iterations:** `mvp_1`/`mvp_2` predate this repo; the run-1 (30
-  prompt) artifacts live in `data/legacy/`.
+- **Model migration:** Claude responses and judgments use `claude-sonnet-4-6`.
+  The originally configured `claude-sonnet-4-20250514` retired 2026-06-15
+  mid-project and began returning 404 on every Anthropic call. Only the Claude
+  arm was re-collected; GPT-4o and Gemini responses were kept from the original
+  collection, so `raw_responses.json` intentionally carries two `config_hash`
+  values (`c68bd88010e0` for GPT/Gemini, `5069c7ddbd08` for the Claude
+  re-collection). See [data/INVENTORY.md](data/INVENTORY.md).
+- **Known gaps:** the 7 null judge scores await manual tie-breaking via the
+  report UI.
+- **Prior iterations:** `mvp_1`/`mvp_2` predate this repo. Superseded runs live
+  in `data/legacy/`: run-1 (30-prompt), the 2026-05-22 single-sample run, and
+  the pre-retirement Sonnet-4 3-sample collection.

@@ -1,902 +1,3242 @@
 {
-  "R-xmzul": {
+  "R-d531229255d6": {
     "model_id": "chatgpt",
     "prompt_id": 1,
-    "timestamp": "2026-05-22T02:23:59.022153+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:15:12.592886+00:00"
   },
-  "R-ezjcy": {
+  "R-25841a49cf7e": {
+    "model_id": "chatgpt",
+    "prompt_id": 1,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:15:21.288559+00:00"
+  },
+  "R-09c2af73804e": {
+    "model_id": "chatgpt",
+    "prompt_id": 1,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:15:39.625504+00:00"
+  },
+  "R-812523fd9569": {
+    "model_id": "gemini",
+    "prompt_id": 1,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:16:28.981390+00:00"
+  },
+  "R-3af3b59401eb": {
+    "model_id": "gemini",
+    "prompt_id": 1,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:16:42.088600+00:00"
+  },
+  "R-8ab6c6d29b80": {
+    "model_id": "gemini",
+    "prompt_id": 1,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:16:55.485657+00:00"
+  },
+  "R-557768c3d16a": {
+    "model_id": "chatgpt",
+    "prompt_id": 2,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:17:04.307791+00:00"
+  },
+  "R-4a2309012a84": {
+    "model_id": "chatgpt",
+    "prompt_id": 2,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:17:13.266346+00:00"
+  },
+  "R-797167bdf291": {
+    "model_id": "chatgpt",
+    "prompt_id": 2,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:17:27.021442+00:00"
+  },
+  "R-c64541ea4db7": {
+    "model_id": "gemini",
+    "prompt_id": 2,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:18:18.656944+00:00"
+  },
+  "R-8497eae0589d": {
+    "model_id": "gemini",
+    "prompt_id": 2,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:18:42.305474+00:00"
+  },
+  "R-68cd1a89dcb7": {
+    "model_id": "gemini",
+    "prompt_id": 2,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:19:05.550965+00:00"
+  },
+  "R-2966ce823e36": {
+    "model_id": "chatgpt",
+    "prompt_id": 3,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:19:12.208916+00:00"
+  },
+  "R-e77069e1c5d8": {
+    "model_id": "chatgpt",
+    "prompt_id": 3,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:19:18.794128+00:00"
+  },
+  "R-6f0254cd4940": {
+    "model_id": "chatgpt",
+    "prompt_id": 3,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:19:26.032676+00:00"
+  },
+  "R-aef2a4d6e6ad": {
+    "model_id": "gemini",
+    "prompt_id": 3,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:20:16.726745+00:00"
+  },
+  "R-b8ac2132a800": {
+    "model_id": "gemini",
+    "prompt_id": 3,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:20:30.440416+00:00"
+  },
+  "R-8035e0bb7e10": {
+    "model_id": "gemini",
+    "prompt_id": 3,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:20:43.345320+00:00"
+  },
+  "R-23fe1c402a5b": {
+    "model_id": "chatgpt",
+    "prompt_id": 4,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:20:50.202884+00:00"
+  },
+  "R-5cbe7393b731": {
+    "model_id": "chatgpt",
+    "prompt_id": 4,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:20:56.658143+00:00"
+  },
+  "R-c3c575b96ec7": {
+    "model_id": "chatgpt",
+    "prompt_id": 4,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:21:03.005133+00:00"
+  },
+  "R-6003b432ea5e": {
+    "model_id": "gemini",
+    "prompt_id": 4,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:21:53.590114+00:00"
+  },
+  "R-02de609f663b": {
+    "model_id": "gemini",
+    "prompt_id": 4,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:22:15.298296+00:00"
+  },
+  "R-1b33e31e6361": {
+    "model_id": "gemini",
+    "prompt_id": 4,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:22:38.544190+00:00"
+  },
+  "R-09cab30780d0": {
+    "model_id": "chatgpt",
+    "prompt_id": 5,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:22:47.084870+00:00"
+  },
+  "R-8092f872b0d3": {
+    "model_id": "chatgpt",
+    "prompt_id": 5,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:22:55.900683+00:00"
+  },
+  "R-47fe7e151f28": {
+    "model_id": "chatgpt",
+    "prompt_id": 5,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:23:03.326132+00:00"
+  },
+  "R-b7cfd6f54e23": {
+    "model_id": "gemini",
+    "prompt_id": 5,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:23:50.429481+00:00"
+  },
+  "R-974869ff7a6e": {
+    "model_id": "gemini",
+    "prompt_id": 5,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:24:03.055862+00:00"
+  },
+  "R-0276b6b32830": {
+    "model_id": "gemini",
+    "prompt_id": 5,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:24:15.619578+00:00"
+  },
+  "R-0d2f253112f9": {
+    "model_id": "chatgpt",
+    "prompt_id": 6,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:24:30.263556+00:00"
+  },
+  "R-cd076db9773e": {
+    "model_id": "chatgpt",
+    "prompt_id": 6,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:24:46.442797+00:00"
+  },
+  "R-b8064ba6affc": {
+    "model_id": "chatgpt",
+    "prompt_id": 6,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:25:02.418144+00:00"
+  },
+  "R-aeaad6a5f3c5": {
+    "model_id": "gemini",
+    "prompt_id": 6,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:25:51.150670+00:00"
+  },
+  "R-73326d056d85": {
+    "model_id": "gemini",
+    "prompt_id": 6,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:26:04.778963+00:00"
+  },
+  "R-369d2ac8b65d": {
+    "model_id": "gemini",
+    "prompt_id": 6,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:26:24.161475+00:00"
+  },
+  "R-69a0cdd4c07f": {
+    "model_id": "chatgpt",
+    "prompt_id": 7,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:26:32.117377+00:00"
+  },
+  "R-7e8b49ffb31b": {
+    "model_id": "chatgpt",
+    "prompt_id": 7,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:26:40.057782+00:00"
+  },
+  "R-ff90681bdb00": {
+    "model_id": "chatgpt",
+    "prompt_id": 7,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:26:47.378088+00:00"
+  },
+  "R-ef9368cb8842": {
+    "model_id": "gemini",
+    "prompt_id": 7,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:27:32.947165+00:00"
+  },
+  "R-732982840837": {
+    "model_id": "gemini",
+    "prompt_id": 7,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:27:46.462202+00:00"
+  },
+  "R-2cf3724a58bc": {
+    "model_id": "gemini",
+    "prompt_id": 7,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:27:59.138082+00:00"
+  },
+  "R-4ac94e2046e2": {
+    "model_id": "chatgpt",
+    "prompt_id": 8,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:28:09.579559+00:00"
+  },
+  "R-708c4fd3f6b5": {
+    "model_id": "chatgpt",
+    "prompt_id": 8,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:28:19.844772+00:00"
+  },
+  "R-0c92bb2f9989": {
+    "model_id": "chatgpt",
+    "prompt_id": 8,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:28:28.650791+00:00"
+  },
+  "R-58cb49fccb1e": {
+    "model_id": "gemini",
+    "prompt_id": 8,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:29:26.506370+00:00"
+  },
+  "R-6911368f90d8": {
+    "model_id": "gemini",
+    "prompt_id": 8,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:29:49.054134+00:00"
+  },
+  "R-e41ae4f962a2": {
+    "model_id": "gemini",
+    "prompt_id": 8,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:30:47.610170+00:00"
+  },
+  "R-ec14aa593116": {
+    "model_id": "chatgpt",
+    "prompt_id": 9,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:30:55.939854+00:00"
+  },
+  "R-4b8bf98953fe": {
+    "model_id": "chatgpt",
+    "prompt_id": 9,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:31:03.778568+00:00"
+  },
+  "R-20acf2eec3ab": {
+    "model_id": "chatgpt",
+    "prompt_id": 9,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:31:12.187631+00:00"
+  },
+  "R-8fafbe4def34": {
+    "model_id": "gemini",
+    "prompt_id": 9,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:31:59.391864+00:00"
+  },
+  "R-1bf01c43879a": {
+    "model_id": "gemini",
+    "prompt_id": 9,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:32:10.655154+00:00"
+  },
+  "R-fd827a54c6c2": {
+    "model_id": "gemini",
+    "prompt_id": 9,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:32:22.704966+00:00"
+  },
+  "R-3015d6df7c4a": {
+    "model_id": "chatgpt",
+    "prompt_id": 10,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:32:30.112852+00:00"
+  },
+  "R-19604800f20a": {
+    "model_id": "chatgpt",
+    "prompt_id": 10,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:32:40.980279+00:00"
+  },
+  "R-9eccb1811fdb": {
+    "model_id": "chatgpt",
+    "prompt_id": 10,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:32:50.994789+00:00"
+  },
+  "R-132b2a48069c": {
+    "model_id": "gemini",
+    "prompt_id": 10,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:33:48.962425+00:00"
+  },
+  "R-a8dfc7f4ef33": {
+    "model_id": "gemini",
+    "prompt_id": 10,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:34:09.747067+00:00"
+  },
+  "R-5a153a4cb6cf": {
+    "model_id": "gemini",
+    "prompt_id": 10,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:34:31.289425+00:00"
+  },
+  "R-c8a9f24f3ca0": {
+    "model_id": "chatgpt",
+    "prompt_id": 11,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:34:41.464624+00:00"
+  },
+  "R-d211b6bc17b9": {
+    "model_id": "chatgpt",
+    "prompt_id": 11,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:34:47.651919+00:00"
+  },
+  "R-993565b9a266": {
+    "model_id": "chatgpt",
+    "prompt_id": 11,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:34:52.924990+00:00"
+  },
+  "R-bb9a78cde0e3": {
+    "model_id": "gemini",
+    "prompt_id": 11,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:35:38.630993+00:00"
+  },
+  "R-da995e6b1260": {
+    "model_id": "gemini",
+    "prompt_id": 11,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:35:52.381005+00:00"
+  },
+  "R-5ec2827a3649": {
+    "model_id": "gemini",
+    "prompt_id": 11,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:36:06.586363+00:00"
+  },
+  "R-9e5c14551709": {
+    "model_id": "chatgpt",
+    "prompt_id": 12,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:36:17.646135+00:00"
+  },
+  "R-f4d24c2c80d5": {
+    "model_id": "chatgpt",
+    "prompt_id": 12,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:36:26.760073+00:00"
+  },
+  "R-46628b1e2aad": {
+    "model_id": "chatgpt",
+    "prompt_id": 12,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:36:35.770836+00:00"
+  },
+  "R-3cae8ec6b520": {
+    "model_id": "gemini",
+    "prompt_id": 12,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:37:20.622095+00:00"
+  },
+  "R-3bb81537bed7": {
+    "model_id": "gemini",
+    "prompt_id": 12,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:37:34.038674+00:00"
+  },
+  "R-a5a0eaf2160c": {
+    "model_id": "gemini",
+    "prompt_id": 12,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:37:47.674611+00:00"
+  },
+  "R-45d4b08df50a": {
+    "model_id": "chatgpt",
+    "prompt_id": 13,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:37:55.130960+00:00"
+  },
+  "R-169bceaf7ac7": {
+    "model_id": "chatgpt",
+    "prompt_id": 13,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:38:01.787259+00:00"
+  },
+  "R-a6c5d725cfb0": {
+    "model_id": "chatgpt",
+    "prompt_id": 13,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:38:10.593249+00:00"
+  },
+  "R-4b5fd788fd71": {
+    "model_id": "gemini",
+    "prompt_id": 13,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:38:56.559961+00:00"
+  },
+  "R-c2a409d96774": {
+    "model_id": "gemini",
+    "prompt_id": 13,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:39:09.780196+00:00"
+  },
+  "R-cdb1e9f84a87": {
+    "model_id": "gemini",
+    "prompt_id": 13,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:39:22.684449+00:00"
+  },
+  "R-db32faab1e47": {
+    "model_id": "chatgpt",
+    "prompt_id": 14,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:39:32.826345+00:00"
+  },
+  "R-f2d87b0b87be": {
+    "model_id": "chatgpt",
+    "prompt_id": 14,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:39:41.320029+00:00"
+  },
+  "R-84304829b595": {
+    "model_id": "chatgpt",
+    "prompt_id": 14,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:39:52.397454+00:00"
+  },
+  "R-1c8891f0ad02": {
+    "model_id": "gemini",
+    "prompt_id": 14,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:40:46.549920+00:00"
+  },
+  "R-ac87fa3428b2": {
+    "model_id": "gemini",
+    "prompt_id": 14,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:41:04.317746+00:00"
+  },
+  "R-29cec9a9b1c6": {
+    "model_id": "gemini",
+    "prompt_id": 14,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:41:21.460545+00:00"
+  },
+  "R-60723f0c934b": {
+    "model_id": "chatgpt",
+    "prompt_id": 15,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:41:29.654268+00:00"
+  },
+  "R-6ebf39ad04c7": {
+    "model_id": "chatgpt",
+    "prompt_id": 15,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:41:39.431665+00:00"
+  },
+  "R-cfbdcbd4c8a3": {
+    "model_id": "chatgpt",
+    "prompt_id": 15,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:41:50.033071+00:00"
+  },
+  "R-7a9518c9727d": {
+    "model_id": "gemini",
+    "prompt_id": 15,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:42:37.851355+00:00"
+  },
+  "R-cd3e6add9af8": {
+    "model_id": "gemini",
+    "prompt_id": 15,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:42:51.030437+00:00"
+  },
+  "R-4651b452fd3b": {
+    "model_id": "gemini",
+    "prompt_id": 15,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:43:03.860579+00:00"
+  },
+  "R-f9e64d3ea630": {
+    "model_id": "chatgpt",
+    "prompt_id": 16,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:43:10.412010+00:00"
+  },
+  "R-a4be96b679f1": {
+    "model_id": "chatgpt",
+    "prompt_id": 16,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:43:17.290958+00:00"
+  },
+  "R-12c49cab197e": {
+    "model_id": "chatgpt",
+    "prompt_id": 16,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:43:23.899767+00:00"
+  },
+  "R-b67da548259e": {
+    "model_id": "gemini",
+    "prompt_id": 16,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:44:12.980345+00:00"
+  },
+  "R-d12f11d1116b": {
+    "model_id": "gemini",
+    "prompt_id": 16,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:44:27.110117+00:00"
+  },
+  "R-0247131c957e": {
+    "model_id": "gemini",
+    "prompt_id": 16,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:44:41.042676+00:00"
+  },
+  "R-861028d8baf5": {
+    "model_id": "chatgpt",
+    "prompt_id": 17,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:44:50.371680+00:00"
+  },
+  "R-46568a9abc77": {
+    "model_id": "chatgpt",
+    "prompt_id": 17,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:44:57.525166+00:00"
+  },
+  "R-92dc994017a2": {
+    "model_id": "chatgpt",
+    "prompt_id": 17,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:45:05.512041+00:00"
+  },
+  "R-b4c90cad66df": {
+    "model_id": "gemini",
+    "prompt_id": 17,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:45:58.249790+00:00"
+  },
+  "R-a6445e6c4610": {
+    "model_id": "gemini",
+    "prompt_id": 17,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:46:11.253790+00:00"
+  },
+  "R-52636dfdcc53": {
+    "model_id": "gemini",
+    "prompt_id": 17,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:46:24.509239+00:00"
+  },
+  "R-b62265c0a0c8": {
+    "model_id": "chatgpt",
+    "prompt_id": 18,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:46:28.664198+00:00"
+  },
+  "R-4bc7342a9ae7": {
+    "model_id": "chatgpt",
+    "prompt_id": 18,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:46:33.166928+00:00"
+  },
+  "R-2f99ab471fdb": {
+    "model_id": "chatgpt",
+    "prompt_id": 18,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:46:37.160466+00:00"
+  },
+  "R-a8431568f5c5": {
+    "model_id": "gemini",
+    "prompt_id": 18,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:47:22.626429+00:00"
+  },
+  "R-f4f959274cc1": {
+    "model_id": "gemini",
+    "prompt_id": 18,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:47:35.017922+00:00"
+  },
+  "R-61c6257179c3": {
+    "model_id": "gemini",
+    "prompt_id": 18,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:47:45.360453+00:00"
+  },
+  "R-b73d556215c0": {
+    "model_id": "chatgpt",
+    "prompt_id": 19,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:47:52.220392+00:00"
+  },
+  "R-7d9dfccac821": {
+    "model_id": "chatgpt",
+    "prompt_id": 19,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:47:59.185373+00:00"
+  },
+  "R-a9cf0197c7dd": {
+    "model_id": "chatgpt",
+    "prompt_id": 19,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:48:06.555830+00:00"
+  },
+  "R-22bee2577cc5": {
+    "model_id": "gemini",
+    "prompt_id": 19,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:48:49.671985+00:00"
+  },
+  "R-3c1bf0c9cae3": {
+    "model_id": "gemini",
+    "prompt_id": 19,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:49:02.980444+00:00"
+  },
+  "R-d433e8cf43fa": {
+    "model_id": "gemini",
+    "prompt_id": 19,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:49:16.497241+00:00"
+  },
+  "R-8da10703f32a": {
+    "model_id": "chatgpt",
+    "prompt_id": 20,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:49:24.584152+00:00"
+  },
+  "R-86a68923bb68": {
+    "model_id": "chatgpt",
+    "prompt_id": 20,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:49:34.312920+00:00"
+  },
+  "R-edc5cf3052a0": {
+    "model_id": "chatgpt",
+    "prompt_id": 20,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:49:42.097793+00:00"
+  },
+  "R-7f58c869b1ac": {
+    "model_id": "gemini",
+    "prompt_id": 20,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:50:25.001626+00:00"
+  },
+  "R-8d25cf55abf0": {
+    "model_id": "gemini",
+    "prompt_id": 20,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:50:39.542289+00:00"
+  },
+  "R-4ce7dee97752": {
+    "model_id": "gemini",
+    "prompt_id": 20,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:50:52.492350+00:00"
+  },
+  "R-0619e3117380": {
+    "model_id": "chatgpt",
+    "prompt_id": 21,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:51:04.425466+00:00"
+  },
+  "R-a465edde8e89": {
+    "model_id": "chatgpt",
+    "prompt_id": 21,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:51:21.628587+00:00"
+  },
+  "R-c8e18115c772": {
+    "model_id": "chatgpt",
+    "prompt_id": 21,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:51:47.747874+00:00"
+  },
+  "R-9e23c7faa962": {
+    "model_id": "gemini",
+    "prompt_id": 21,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:52:36.484061+00:00"
+  },
+  "R-aadec8e6ca59": {
+    "model_id": "gemini",
+    "prompt_id": 21,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:52:49.289282+00:00"
+  },
+  "R-03ca0479fbe8": {
+    "model_id": "gemini",
+    "prompt_id": 21,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:53:01.571829+00:00"
+  },
+  "R-b42f9b49d0ed": {
+    "model_id": "chatgpt",
+    "prompt_id": 22,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:53:07.922515+00:00"
+  },
+  "R-e3b4ceea348c": {
+    "model_id": "chatgpt",
+    "prompt_id": 22,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:53:14.098392+00:00"
+  },
+  "R-0434168c1b49": {
+    "model_id": "chatgpt",
+    "prompt_id": 22,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:53:24.714451+00:00"
+  },
+  "R-2a0e5915ed5f": {
+    "model_id": "gemini",
+    "prompt_id": 22,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:54:15.299535+00:00"
+  },
+  "R-0978f08decde": {
+    "model_id": "gemini",
+    "prompt_id": 22,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:54:27.989917+00:00"
+  },
+  "R-785e08d72d57": {
+    "model_id": "gemini",
+    "prompt_id": 22,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:54:41.343228+00:00"
+  },
+  "R-afe0f8cc1c3d": {
+    "model_id": "chatgpt",
+    "prompt_id": 23,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:54:47.759697+00:00"
+  },
+  "R-055d0f057d60": {
+    "model_id": "chatgpt",
+    "prompt_id": 23,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:54:52.990437+00:00"
+  },
+  "R-e0cdf2941ab5": {
+    "model_id": "chatgpt",
+    "prompt_id": 23,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:54:59.945819+00:00"
+  },
+  "R-53ca577ff02a": {
+    "model_id": "gemini",
+    "prompt_id": 23,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:55:42.749734+00:00"
+  },
+  "R-fcb8915a00df": {
+    "model_id": "gemini",
+    "prompt_id": 23,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:55:55.446903+00:00"
+  },
+  "R-d42cb0f4629f": {
+    "model_id": "gemini",
+    "prompt_id": 23,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:56:08.452086+00:00"
+  },
+  "R-4997161004d7": {
+    "model_id": "chatgpt",
+    "prompt_id": 24,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:56:13.982418+00:00"
+  },
+  "R-a6cdd246521e": {
+    "model_id": "chatgpt",
+    "prompt_id": 24,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:56:19.146278+00:00"
+  },
+  "R-999facae0ce7": {
+    "model_id": "chatgpt",
+    "prompt_id": 24,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:56:23.771473+00:00"
+  },
+  "R-ef06060e7b74": {
+    "model_id": "gemini",
+    "prompt_id": 24,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:57:08.252934+00:00"
+  },
+  "R-1c8f848f5ffe": {
+    "model_id": "gemini",
+    "prompt_id": 24,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:57:21.258179+00:00"
+  },
+  "R-1951b5a75e55": {
+    "model_id": "gemini",
+    "prompt_id": 24,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:57:32.830190+00:00"
+  },
+  "R-9b8ff5314d4b": {
+    "model_id": "chatgpt",
+    "prompt_id": 25,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:57:41.722919+00:00"
+  },
+  "R-33545e390799": {
+    "model_id": "chatgpt",
+    "prompt_id": 25,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:57:50.547203+00:00"
+  },
+  "R-fdcff99748bd": {
+    "model_id": "chatgpt",
+    "prompt_id": 25,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:57:58.943635+00:00"
+  },
+  "R-9a74ae4c3e59": {
+    "model_id": "gemini",
+    "prompt_id": 25,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:58:52.979937+00:00"
+  },
+  "R-344337ee90b4": {
+    "model_id": "gemini",
+    "prompt_id": 25,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:59:06.628625+00:00"
+  },
+  "R-c6d7fca97202": {
+    "model_id": "gemini",
+    "prompt_id": 25,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:59:19.940511+00:00"
+  },
+  "R-df40e7b0f578": {
+    "model_id": "chatgpt",
+    "prompt_id": 26,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T16:59:28.449883+00:00"
+  },
+  "R-e89ce22f9247": {
+    "model_id": "chatgpt",
+    "prompt_id": 26,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T16:59:36.384508+00:00"
+  },
+  "R-60f6afffbe0b": {
+    "model_id": "chatgpt",
+    "prompt_id": 26,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T16:59:49.026122+00:00"
+  },
+  "R-ced68159840e": {
+    "model_id": "gemini",
+    "prompt_id": 26,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T17:00:36.682614+00:00"
+  },
+  "R-10224071fdf2": {
+    "model_id": "gemini",
+    "prompt_id": 26,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:32:40.616494+00:00"
+  },
+  "R-ba9e73887b11": {
+    "model_id": "gemini",
+    "prompt_id": 26,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:32:53.473123+00:00"
+  },
+  "R-099d843c86bb": {
+    "model_id": "chatgpt",
+    "prompt_id": 27,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:33:01.403331+00:00"
+  },
+  "R-806f66aee496": {
+    "model_id": "chatgpt",
+    "prompt_id": 27,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:33:07.545829+00:00"
+  },
+  "R-2021148a8a5e": {
+    "model_id": "chatgpt",
+    "prompt_id": 27,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:33:13.992525+00:00"
+  },
+  "R-03542cf915a8": {
+    "model_id": "gemini",
+    "prompt_id": 27,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:33:58.288308+00:00"
+  },
+  "R-e5564669772c": {
+    "model_id": "gemini",
+    "prompt_id": 27,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:34:10.683340+00:00"
+  },
+  "R-c9feb22a44f6": {
+    "model_id": "gemini",
+    "prompt_id": 27,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:34:24.378780+00:00"
+  },
+  "R-09d70f59024e": {
+    "model_id": "chatgpt",
+    "prompt_id": 28,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:34:30.284839+00:00"
+  },
+  "R-0e0ed0622a27": {
+    "model_id": "chatgpt",
+    "prompt_id": 28,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:34:38.770245+00:00"
+  },
+  "R-10fb9f5ceb65": {
+    "model_id": "chatgpt",
+    "prompt_id": 28,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:34:45.720121+00:00"
+  },
+  "R-ee7416c92106": {
+    "model_id": "gemini",
+    "prompt_id": 28,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:35:30.787676+00:00"
+  },
+  "R-13c7ed2cc232": {
+    "model_id": "gemini",
+    "prompt_id": 28,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:35:44.011802+00:00"
+  },
+  "R-95e16ca750e0": {
+    "model_id": "gemini",
+    "prompt_id": 28,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:35:57.562347+00:00"
+  },
+  "R-45a8bd8ad005": {
+    "model_id": "chatgpt",
+    "prompt_id": 29,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:36:05.134421+00:00"
+  },
+  "R-ca1d6c09da81": {
+    "model_id": "chatgpt",
+    "prompt_id": 29,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:36:13.375120+00:00"
+  },
+  "R-2239159eb90d": {
+    "model_id": "chatgpt",
+    "prompt_id": 29,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:36:20.060090+00:00"
+  },
+  "R-716d0afcca47": {
+    "model_id": "gemini",
+    "prompt_id": 29,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:37:06.806280+00:00"
+  },
+  "R-48a2cb14299f": {
+    "model_id": "gemini",
+    "prompt_id": 29,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:37:19.447190+00:00"
+  },
+  "R-4e6a32e7f11d": {
+    "model_id": "gemini",
+    "prompt_id": 29,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:37:32.146392+00:00"
+  },
+  "R-1a2b81a278c1": {
+    "model_id": "chatgpt",
+    "prompt_id": 30,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:37:42.281910+00:00"
+  },
+  "R-7601bd7138c9": {
+    "model_id": "chatgpt",
+    "prompt_id": 30,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:37:52.009748+00:00"
+  },
+  "R-f72a0264b47f": {
+    "model_id": "chatgpt",
+    "prompt_id": 30,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:38:00.543408+00:00"
+  },
+  "R-a85d4287f5c3": {
+    "model_id": "gemini",
+    "prompt_id": 30,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:38:48.431391+00:00"
+  },
+  "R-f8fb493d368b": {
+    "model_id": "gemini",
+    "prompt_id": 30,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:39:01.537724+00:00"
+  },
+  "R-86f3ec9b7517": {
+    "model_id": "gemini",
+    "prompt_id": 30,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:39:14.952816+00:00"
+  },
+  "R-2c3b96a895d2": {
+    "model_id": "chatgpt",
+    "prompt_id": 31,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:39:26.356440+00:00"
+  },
+  "R-dea46728ae7b": {
+    "model_id": "chatgpt",
+    "prompt_id": 31,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:39:34.818276+00:00"
+  },
+  "R-28bb0b82861e": {
+    "model_id": "chatgpt",
+    "prompt_id": 31,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:39:44.100375+00:00"
+  },
+  "R-c52ec90d3385": {
+    "model_id": "gemini",
+    "prompt_id": 31,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:40:28.126667+00:00"
+  },
+  "R-adc0de12d58b": {
+    "model_id": "gemini",
+    "prompt_id": 31,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:40:41.878062+00:00"
+  },
+  "R-b8dcc37aa96b": {
+    "model_id": "gemini",
+    "prompt_id": 31,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:40:54.996507+00:00"
+  },
+  "R-4e5a6c80deb5": {
+    "model_id": "chatgpt",
+    "prompt_id": 32,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:40:58.632327+00:00"
+  },
+  "R-643b02de15bf": {
+    "model_id": "chatgpt",
+    "prompt_id": 32,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:41:03.146480+00:00"
+  },
+  "R-3f536bd3b826": {
+    "model_id": "chatgpt",
+    "prompt_id": 32,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:41:06.464605+00:00"
+  },
+  "R-d2b01cc72c89": {
+    "model_id": "gemini",
+    "prompt_id": 32,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:41:37.492234+00:00"
+  },
+  "R-48669c143694": {
+    "model_id": "gemini",
+    "prompt_id": 32,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:41:46.297626+00:00"
+  },
+  "R-0db27399a7a4": {
+    "model_id": "gemini",
+    "prompt_id": 32,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:41:54.286982+00:00"
+  },
+  "R-5dae3bfca4e4": {
+    "model_id": "chatgpt",
+    "prompt_id": 33,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:42:03.466106+00:00"
+  },
+  "R-b5b1fa6b56fe": {
+    "model_id": "chatgpt",
+    "prompt_id": 33,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:42:11.785921+00:00"
+  },
+  "R-9a4b8c5207c9": {
+    "model_id": "chatgpt",
+    "prompt_id": 33,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:42:22.034713+00:00"
+  },
+  "R-0795d2ed0c2a": {
+    "model_id": "gemini",
+    "prompt_id": 33,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:43:05.761463+00:00"
+  },
+  "R-cc8ccbfe8200": {
+    "model_id": "gemini",
+    "prompt_id": 33,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:43:19.344419+00:00"
+  },
+  "R-59fa6bcfeb44": {
+    "model_id": "gemini",
+    "prompt_id": 33,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:43:33.322273+00:00"
+  },
+  "R-5410691fc5b7": {
+    "model_id": "chatgpt",
+    "prompt_id": 34,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:43:46.412293+00:00"
+  },
+  "R-5464ce84b67e": {
+    "model_id": "chatgpt",
+    "prompt_id": 34,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:43:54.706706+00:00"
+  },
+  "R-aa1281d6e84f": {
+    "model_id": "chatgpt",
+    "prompt_id": 34,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:44:02.539610+00:00"
+  },
+  "R-f37edd853ff7": {
+    "model_id": "gemini",
+    "prompt_id": 34,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:44:49.488560+00:00"
+  },
+  "R-9b582bfcdf86": {
+    "model_id": "gemini",
+    "prompt_id": 34,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:45:03.108026+00:00"
+  },
+  "R-b554f4e6d349": {
+    "model_id": "gemini",
+    "prompt_id": 34,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:45:16.625078+00:00"
+  },
+  "R-70fa2ca00b1a": {
+    "model_id": "chatgpt",
+    "prompt_id": 35,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:45:26.168847+00:00"
+  },
+  "R-34afdddf318d": {
+    "model_id": "chatgpt",
+    "prompt_id": 35,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:45:36.900082+00:00"
+  },
+  "R-eb97622f49ad": {
+    "model_id": "chatgpt",
+    "prompt_id": 35,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:45:46.629113+00:00"
+  },
+  "R-854c47287292": {
+    "model_id": "gemini",
+    "prompt_id": 35,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:48:50.126450+00:00"
+  },
+  "R-685fd815239e": {
+    "model_id": "gemini",
+    "prompt_id": 35,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:49:03.466101+00:00"
+  },
+  "R-4e23728601f5": {
+    "model_id": "gemini",
+    "prompt_id": 35,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:49:16.954447+00:00"
+  },
+  "R-27e0b331fde0": {
+    "model_id": "chatgpt",
+    "prompt_id": 36,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:49:25.884933+00:00"
+  },
+  "R-b9ca004a668d": {
+    "model_id": "chatgpt",
+    "prompt_id": 36,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:49:32.211650+00:00"
+  },
+  "R-947f8b50012c": {
+    "model_id": "chatgpt",
+    "prompt_id": 36,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:49:40.302376+00:00"
+  },
+  "R-2aa1f02ce49c": {
+    "model_id": "gemini",
+    "prompt_id": 36,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:50:19.483438+00:00"
+  },
+  "R-62957220dd08": {
+    "model_id": "gemini",
+    "prompt_id": 36,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:50:31.910939+00:00"
+  },
+  "R-9164a923f877": {
+    "model_id": "gemini",
+    "prompt_id": 36,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:50:43.992933+00:00"
+  },
+  "R-ab25be759ba8": {
+    "model_id": "chatgpt",
+    "prompt_id": 37,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:50:54.845793+00:00"
+  },
+  "R-d0066e890836": {
+    "model_id": "chatgpt",
+    "prompt_id": 37,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:51:05.804496+00:00"
+  },
+  "R-e9ce0d90cd8a": {
+    "model_id": "chatgpt",
+    "prompt_id": 37,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:51:16.351640+00:00"
+  },
+  "R-d0c7889cec23": {
+    "model_id": "gemini",
+    "prompt_id": 37,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:52:01.285611+00:00"
+  },
+  "R-6d7bd012394a": {
+    "model_id": "gemini",
+    "prompt_id": 37,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:52:17.669810+00:00"
+  },
+  "R-9f4bc326a79b": {
+    "model_id": "gemini",
+    "prompt_id": 37,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:52:31.596751+00:00"
+  },
+  "R-e7db640fe1d2": {
+    "model_id": "chatgpt",
+    "prompt_id": 38,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:52:38.986565+00:00"
+  },
+  "R-47c8d1cf3ac6": {
+    "model_id": "chatgpt",
+    "prompt_id": 38,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:52:46.152552+00:00"
+  },
+  "R-609529839be6": {
+    "model_id": "chatgpt",
+    "prompt_id": 38,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:52:52.617029+00:00"
+  },
+  "R-66e74eee8b98": {
+    "model_id": "gemini",
+    "prompt_id": 38,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:53:36.724414+00:00"
+  },
+  "R-5e687475083f": {
+    "model_id": "gemini",
+    "prompt_id": 38,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:53:49.320659+00:00"
+  },
+  "R-d3356b4febec": {
+    "model_id": "gemini",
+    "prompt_id": 38,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:54:07.771801+00:00"
+  },
+  "R-c61709655d01": {
+    "model_id": "chatgpt",
+    "prompt_id": 39,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:54:13.999066+00:00"
+  },
+  "R-5215ff15ed7d": {
+    "model_id": "chatgpt",
+    "prompt_id": 39,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:54:20.449629+00:00"
+  },
+  "R-591163eaabbf": {
+    "model_id": "chatgpt",
+    "prompt_id": 39,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:54:25.894508+00:00"
+  },
+  "R-452d41915a70": {
+    "model_id": "gemini",
+    "prompt_id": 39,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:55:17.693678+00:00"
+  },
+  "R-68773c3fb410": {
+    "model_id": "gemini",
+    "prompt_id": 39,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:55:36.991922+00:00"
+  },
+  "R-436f812c12b4": {
+    "model_id": "gemini",
+    "prompt_id": 39,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:55:57.015447+00:00"
+  },
+  "R-9558c6cc9b16": {
+    "model_id": "chatgpt",
+    "prompt_id": 40,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:56:10.019650+00:00"
+  },
+  "R-1fe803ca56c6": {
+    "model_id": "chatgpt",
+    "prompt_id": 40,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:56:19.031826+00:00"
+  },
+  "R-70cc08c99b2c": {
+    "model_id": "chatgpt",
+    "prompt_id": 40,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:56:28.454029+00:00"
+  },
+  "R-7daac95e7908": {
+    "model_id": "gemini",
+    "prompt_id": 40,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:57:11.873623+00:00"
+  },
+  "R-b88bc69eb8ff": {
+    "model_id": "gemini",
+    "prompt_id": 40,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:57:24.784937+00:00"
+  },
+  "R-ca212c7c4dcc": {
+    "model_id": "gemini",
+    "prompt_id": 40,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:57:38.046592+00:00"
+  },
+  "R-82ea64848eb3": {
+    "model_id": "chatgpt",
+    "prompt_id": 41,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:57:45.767013+00:00"
+  },
+  "R-c0a7d3996139": {
+    "model_id": "chatgpt",
+    "prompt_id": 41,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:57:52.188600+00:00"
+  },
+  "R-819b718d1aa3": {
+    "model_id": "chatgpt",
+    "prompt_id": 41,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:57:59.900252+00:00"
+  },
+  "R-cd52fa5e30e4": {
+    "model_id": "gemini",
+    "prompt_id": 41,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:58:51.507700+00:00"
+  },
+  "R-cdfca7b53a53": {
+    "model_id": "gemini",
+    "prompt_id": 41,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:59:05.434876+00:00"
+  },
+  "R-199222945dd4": {
+    "model_id": "gemini",
+    "prompt_id": 41,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:59:19.056414+00:00"
+  },
+  "R-5d940146ef5b": {
+    "model_id": "chatgpt",
+    "prompt_id": 42,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T19:59:28.069611+00:00"
+  },
+  "R-2497f5dc9620": {
+    "model_id": "chatgpt",
+    "prompt_id": 42,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T19:59:37.590634+00:00"
+  },
+  "R-80dcea3d2c2d": {
+    "model_id": "chatgpt",
+    "prompt_id": 42,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T19:59:49.060796+00:00"
+  },
+  "R-ce2d6577bdde": {
+    "model_id": "gemini",
+    "prompt_id": 42,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:01:05.042500+00:00"
+  },
+  "R-3f61a6b5bc7d": {
+    "model_id": "chatgpt",
+    "prompt_id": 43,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:02:49.185155+00:00"
+  },
+  "R-c70ad4868373": {
+    "model_id": "chatgpt",
+    "prompt_id": 43,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:02:59.323875+00:00"
+  },
+  "R-e6c96764fe9c": {
+    "model_id": "chatgpt",
+    "prompt_id": 43,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:03:06.592389+00:00"
+  },
+  "R-9c4d3ee1685d": {
+    "model_id": "gemini",
+    "prompt_id": 43,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:04:43.261333+00:00"
+  },
+  "R-b89eeb219325": {
+    "model_id": "gemini",
+    "prompt_id": 43,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:04:57.495518+00:00"
+  },
+  "R-9dbad1ed9de4": {
+    "model_id": "chatgpt",
+    "prompt_id": 44,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:05:13.981340+00:00"
+  },
+  "R-0bd3d7e50f05": {
+    "model_id": "chatgpt",
+    "prompt_id": 44,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:05:25.453135+00:00"
+  },
+  "R-ec5e458ba1f7": {
+    "model_id": "chatgpt",
+    "prompt_id": 44,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:05:36.879833+00:00"
+  },
+  "R-276c6f2f9040": {
+    "model_id": "gemini",
+    "prompt_id": 44,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:06:26.383426+00:00"
+  },
+  "R-de1906b497e4": {
+    "model_id": "gemini",
+    "prompt_id": 44,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:06:48.295083+00:00"
+  },
+  "R-f28b16d711cb": {
+    "model_id": "gemini",
+    "prompt_id": 44,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:07:01.221283+00:00"
+  },
+  "R-623b5db14f5e": {
+    "model_id": "chatgpt",
+    "prompt_id": 45,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:07:10.967240+00:00"
+  },
+  "R-7afcba98d8f8": {
+    "model_id": "chatgpt",
+    "prompt_id": 45,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:07:21.269708+00:00"
+  },
+  "R-2f295deb4f52": {
+    "model_id": "chatgpt",
+    "prompt_id": 45,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:07:31.136531+00:00"
+  },
+  "R-27e26a05778a": {
+    "model_id": "gemini",
+    "prompt_id": 45,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:08:15.249034+00:00"
+  },
+  "R-6f83e9e00b3f": {
+    "model_id": "gemini",
+    "prompt_id": 45,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:08:28.650734+00:00"
+  },
+  "R-adf93abda735": {
+    "model_id": "gemini",
+    "prompt_id": 45,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:08:42.471769+00:00"
+  },
+  "R-0ee4276a37fa": {
+    "model_id": "chatgpt",
+    "prompt_id": 46,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:08:45.341053+00:00"
+  },
+  "R-444f131e78e2": {
+    "model_id": "chatgpt",
+    "prompt_id": 46,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:08:47.965536+00:00"
+  },
+  "R-57c1b439cf52": {
+    "model_id": "chatgpt",
+    "prompt_id": 46,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:08:50.664831+00:00"
+  },
+  "R-21dbd577ab7e": {
+    "model_id": "gemini",
+    "prompt_id": 46,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:09:16.061839+00:00"
+  },
+  "R-018735fd64bc": {
+    "model_id": "gemini",
+    "prompt_id": 46,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:09:26.199312+00:00"
+  },
+  "R-29dd71656287": {
+    "model_id": "gemini",
+    "prompt_id": 46,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:09:34.082882+00:00"
+  },
+  "R-98bc0ffc6de7": {
+    "model_id": "chatgpt",
+    "prompt_id": 47,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:09:42.787434+00:00"
+  },
+  "R-39e72c0edce5": {
+    "model_id": "chatgpt",
+    "prompt_id": 47,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:09:48.831254+00:00"
+  },
+  "R-c3d00d108705": {
+    "model_id": "chatgpt",
+    "prompt_id": 47,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:09:54.667723+00:00"
+  },
+  "R-8da0e171211d": {
+    "model_id": "gemini",
+    "prompt_id": 47,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:10:51.794058+00:00"
+  },
+  "R-7863ffd79bd2": {
+    "model_id": "gemini",
+    "prompt_id": 47,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:11:04.404723+00:00"
+  },
+  "R-a936a41394c0": {
+    "model_id": "gemini",
+    "prompt_id": 47,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:11:18.082303+00:00"
+  },
+  "R-e4c6916f986d": {
+    "model_id": "chatgpt",
+    "prompt_id": 48,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:11:27.958518+00:00"
+  },
+  "R-32d8a70f1115": {
+    "model_id": "chatgpt",
+    "prompt_id": 48,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:11:35.022306+00:00"
+  },
+  "R-0d6962c2290b": {
+    "model_id": "chatgpt",
+    "prompt_id": 48,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:11:42.925712+00:00"
+  },
+  "R-8110fd594c57": {
+    "model_id": "gemini",
+    "prompt_id": 48,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:12:24.789557+00:00"
+  },
+  "R-a22fa6ed2106": {
+    "model_id": "gemini",
+    "prompt_id": 48,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:12:37.896764+00:00"
+  },
+  "R-649e0cf690cb": {
+    "model_id": "gemini",
+    "prompt_id": 48,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:12:50.904598+00:00"
+  },
+  "R-4f2029afe880": {
+    "model_id": "chatgpt",
+    "prompt_id": 49,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:12:57.865649+00:00"
+  },
+  "R-1580ea323963": {
+    "model_id": "chatgpt",
+    "prompt_id": 49,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:13:09.130230+00:00"
+  },
+  "R-c0e49a1e8ffd": {
+    "model_id": "chatgpt",
+    "prompt_id": 49,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:13:16.093700+00:00"
+  },
+  "R-e0184f93a055": {
+    "model_id": "gemini",
+    "prompt_id": 49,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:14:00.839909+00:00"
+  },
+  "R-702edab11600": {
+    "model_id": "gemini",
+    "prompt_id": 49,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:14:13.885522+00:00"
+  },
+  "R-a341586b3d71": {
+    "model_id": "gemini",
+    "prompt_id": 49,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:14:27.124856+00:00"
+  },
+  "R-06dce258d074": {
+    "model_id": "chatgpt",
+    "prompt_id": 50,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:14:34.350147+00:00"
+  },
+  "R-1de9551ccdba": {
+    "model_id": "chatgpt",
+    "prompt_id": 50,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:14:42.268800+00:00"
+  },
+  "R-1413f49f3e0b": {
+    "model_id": "chatgpt",
+    "prompt_id": 50,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:14:50.979525+00:00"
+  },
+  "R-57e02a605baa": {
+    "model_id": "gemini",
+    "prompt_id": 50,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:15:31.675866+00:00"
+  },
+  "R-5beb4e4ceffd": {
+    "model_id": "gemini",
+    "prompt_id": 50,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:15:44.994446+00:00"
+  },
+  "R-3f6203b51404": {
+    "model_id": "gemini",
+    "prompt_id": 50,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:15:57.478426+00:00"
+  },
+  "R-ebf47bc515fe": {
+    "model_id": "chatgpt",
+    "prompt_id": 51,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:16:05.671218+00:00"
+  },
+  "R-4c66dc301a57": {
+    "model_id": "chatgpt",
+    "prompt_id": 51,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:16:13.351938+00:00"
+  },
+  "R-6b021b53b91f": {
+    "model_id": "chatgpt",
+    "prompt_id": 51,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:16:20.829640+00:00"
+  },
+  "R-29d29bd7b77f": {
+    "model_id": "gemini",
+    "prompt_id": 51,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:17:06.191959+00:00"
+  },
+  "R-dfc020b450f8": {
+    "model_id": "gemini",
+    "prompt_id": 51,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:17:18.991524+00:00"
+  },
+  "R-8d873d4bfb39": {
+    "model_id": "gemini",
+    "prompt_id": 51,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:17:32.510526+00:00"
+  },
+  "R-5d2bd5c4d3e1": {
+    "model_id": "chatgpt",
+    "prompt_id": 52,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:17:44.284385+00:00"
+  },
+  "R-616167a5ce7c": {
+    "model_id": "chatgpt",
+    "prompt_id": 52,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:17:53.134082+00:00"
+  },
+  "R-e5c7d228b369": {
+    "model_id": "chatgpt",
+    "prompt_id": 52,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:18:02.454636+00:00"
+  },
+  "R-5eeabad031cb": {
+    "model_id": "gemini",
+    "prompt_id": 52,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:18:44.950072+00:00"
+  },
+  "R-da186f3db969": {
+    "model_id": "gemini",
+    "prompt_id": 52,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:18:57.605478+00:00"
+  },
+  "R-b20f060b34a6": {
+    "model_id": "gemini",
+    "prompt_id": 52,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:19:10.712601+00:00"
+  },
+  "R-74a2b8f22c34": {
+    "model_id": "chatgpt",
+    "prompt_id": 53,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:19:18.333324+00:00"
+  },
+  "R-63cf05d5ff79": {
+    "model_id": "chatgpt",
+    "prompt_id": 53,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:19:25.153823+00:00"
+  },
+  "R-284e501bdeec": {
+    "model_id": "chatgpt",
+    "prompt_id": 53,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:19:32.422321+00:00"
+  },
+  "R-15114486de72": {
+    "model_id": "gemini",
+    "prompt_id": 53,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:20:16.661510+00:00"
+  },
+  "R-e0c1b71be405": {
+    "model_id": "gemini",
+    "prompt_id": 53,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:20:29.763181+00:00"
+  },
+  "R-9288c75e7e1f": {
+    "model_id": "gemini",
+    "prompt_id": 53,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:20:43.098112+00:00"
+  },
+  "R-9ade6ee9b7b9": {
+    "model_id": "chatgpt",
+    "prompt_id": 54,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:20:49.399891+00:00"
+  },
+  "R-d45a1c85afa1": {
+    "model_id": "chatgpt",
+    "prompt_id": 54,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:20:55.786456+00:00"
+  },
+  "R-6093118cc22c": {
+    "model_id": "chatgpt",
+    "prompt_id": 54,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:21:03.041443+00:00"
+  },
+  "R-72ef4beccf2a": {
+    "model_id": "gemini",
+    "prompt_id": 54,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:21:45.647172+00:00"
+  },
+  "R-1ebd4b557fc9": {
+    "model_id": "gemini",
+    "prompt_id": 54,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:21:58.447602+00:00"
+  },
+  "R-d4f7035ac539": {
+    "model_id": "gemini",
+    "prompt_id": 54,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:22:11.760003+00:00"
+  },
+  "R-6f0994b51378": {
+    "model_id": "chatgpt",
+    "prompt_id": 55,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:22:20.367377+00:00"
+  },
+  "R-9547a093a202": {
+    "model_id": "chatgpt",
+    "prompt_id": 55,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:22:30.193048+00:00"
+  },
+  "R-84744dfb2992": {
+    "model_id": "chatgpt",
+    "prompt_id": 55,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:22:38.691041+00:00"
+  },
+  "R-43b935f933b1": {
+    "model_id": "gemini",
+    "prompt_id": 55,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:23:22.215156+00:00"
+  },
+  "R-4b570602548e": {
+    "model_id": "gemini",
+    "prompt_id": 55,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:23:34.524000+00:00"
+  },
+  "R-0956f5eb3d25": {
+    "model_id": "gemini",
+    "prompt_id": 55,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:23:46.788773+00:00"
+  },
+  "R-4d89f6c4dfb5": {
+    "model_id": "chatgpt",
+    "prompt_id": 56,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:23:53.548459+00:00"
+  },
+  "R-640347f8bb5c": {
+    "model_id": "chatgpt",
+    "prompt_id": 56,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:24:01.016809+00:00"
+  },
+  "R-b81145aa1450": {
+    "model_id": "chatgpt",
+    "prompt_id": 56,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:24:07.475511+00:00"
+  },
+  "R-7bc29cd560e4": {
+    "model_id": "gemini",
+    "prompt_id": 56,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:24:50.587007+00:00"
+  },
+  "R-04fa4f430549": {
+    "model_id": "gemini",
+    "prompt_id": 56,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:25:03.385911+00:00"
+  },
+  "R-3556903ecc81": {
+    "model_id": "gemini",
+    "prompt_id": 56,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:25:15.880052+00:00"
+  },
+  "R-2b4ee23fdc2e": {
+    "model_id": "chatgpt",
+    "prompt_id": 57,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:25:23.969557+00:00"
+  },
+  "R-bc237d3c46dc": {
+    "model_id": "chatgpt",
+    "prompt_id": 57,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:25:34.003683+00:00"
+  },
+  "R-0c0e871aa456": {
+    "model_id": "chatgpt",
+    "prompt_id": 57,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:25:43.214078+00:00"
+  },
+  "R-067088171243": {
+    "model_id": "gemini",
+    "prompt_id": 57,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:26:27.439636+00:00"
+  },
+  "R-b0bd2768d853": {
+    "model_id": "gemini",
+    "prompt_id": 57,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:26:40.566717+00:00"
+  },
+  "R-da6843a54864": {
+    "model_id": "gemini",
+    "prompt_id": 57,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:26:54.083627+00:00"
+  },
+  "R-b1470d174a6c": {
+    "model_id": "chatgpt",
+    "prompt_id": 58,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:27:03.709208+00:00"
+  },
+  "R-3580a9baf2c9": {
+    "model_id": "chatgpt",
+    "prompt_id": 58,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:27:13.437288+00:00"
+  },
+  "R-6c0a54aa52dd": {
+    "model_id": "chatgpt",
+    "prompt_id": 58,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:27:26.373043+00:00"
+  },
+  "R-49ffb0e29937": {
+    "model_id": "gemini",
+    "prompt_id": 58,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:28:15.084759+00:00"
+  },
+  "R-aee0ca303318": {
+    "model_id": "gemini",
+    "prompt_id": 58,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:28:27.983397+00:00"
+  },
+  "R-b36f80365112": {
+    "model_id": "gemini",
+    "prompt_id": 58,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:28:40.536327+00:00"
+  },
+  "R-c23ff71ac9d0": {
+    "model_id": "chatgpt",
+    "prompt_id": 59,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:28:48.261964+00:00"
+  },
+  "R-46c34056e5cf": {
+    "model_id": "chatgpt",
+    "prompt_id": 59,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:28:55.962374+00:00"
+  },
+  "R-6a631f96274a": {
+    "model_id": "chatgpt",
+    "prompt_id": 59,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:29:03.078584+00:00"
+  },
+  "R-9e86eac3a753": {
+    "model_id": "gemini",
+    "prompt_id": 59,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:29:48.498790+00:00"
+  },
+  "R-4c3e79298790": {
+    "model_id": "gemini",
+    "prompt_id": 59,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:30:01.913099+00:00"
+  },
+  "R-34ca5940611c": {
+    "model_id": "gemini",
+    "prompt_id": 59,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:30:15.259238+00:00"
+  },
+  "R-83cae5d3b002": {
+    "model_id": "chatgpt",
+    "prompt_id": 60,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:30:21.509599+00:00"
+  },
+  "R-32b6ea5ef685": {
+    "model_id": "chatgpt",
+    "prompt_id": 60,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:30:30.439949+00:00"
+  },
+  "R-866230dcf3a8": {
+    "model_id": "chatgpt",
+    "prompt_id": 60,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:30:35.809998+00:00"
+  },
+  "R-44c1bc72a0cf": {
+    "model_id": "gemini",
+    "prompt_id": 60,
+    "sample_idx": 0,
+    "timestamp": "2026-06-12T20:31:30.488771+00:00"
+  },
+  "R-20518033b63a": {
+    "model_id": "gemini",
+    "prompt_id": 60,
+    "sample_idx": 1,
+    "timestamp": "2026-06-12T20:31:51.786820+00:00"
+  },
+  "R-2e62d3fdba4a": {
+    "model_id": "gemini",
+    "prompt_id": 60,
+    "sample_idx": 2,
+    "timestamp": "2026-06-12T20:32:11.060437+00:00"
+  },
+  "R-b977efe53ee9": {
+    "model_id": "gemini",
+    "prompt_id": 42,
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:17:22.199478+00:00"
+  },
+  "R-45d04bded2bb": {
+    "model_id": "gemini",
+    "prompt_id": 42,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:17:46.335920+00:00"
+  },
+  "R-f38b31ccfbf5": {
+    "model_id": "gemini",
+    "prompt_id": 43,
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:17:58.624012+00:00"
+  },
+  "R-6edc8716ed77": {
     "model_id": "claude",
     "prompt_id": 1,
-    "timestamp": "2026-05-22T02:24:09.764342+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:48:29.555345+00:00"
   },
-  "R-cu5a4": {
-    "model_id": "gemini",
+  "R-3de815bbace2": {
+    "model_id": "claude",
     "prompt_id": 1,
-    "timestamp": "2026-05-22T02:24:23.402980+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:48:42.227956+00:00"
   },
-  "R-pqch7": {
-    "model_id": "chatgpt",
-    "prompt_id": 2,
-    "timestamp": "2026-05-22T02:24:29.782822+00:00"
+  "R-e0c7f7d81ea4": {
+    "model_id": "claude",
+    "prompt_id": 1,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:48:55.403683+00:00"
   },
-  "R-aqthv": {
+  "R-7619dd82f211": {
     "model_id": "claude",
     "prompt_id": 2,
-    "timestamp": "2026-05-22T02:24:40.839115+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:49:07.032974+00:00"
   },
-  "R-5jn14": {
-    "model_id": "gemini",
+  "R-4ccc06321eab": {
+    "model_id": "claude",
     "prompt_id": 2,
-    "timestamp": "2026-05-22T02:24:59.930441+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:49:20.522679+00:00"
   },
-  "R-qqieu": {
-    "model_id": "chatgpt",
-    "prompt_id": 3,
-    "timestamp": "2026-05-22T02:25:07.846788+00:00"
+  "R-5ff37128fe05": {
+    "model_id": "claude",
+    "prompt_id": 2,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:49:33.621661+00:00"
   },
-  "R-3oblm": {
+  "R-a6e7c086ee73": {
     "model_id": "claude",
     "prompt_id": 3,
-    "timestamp": "2026-05-22T02:25:19.316069+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:49:48.338515+00:00"
   },
-  "R-uxblx": {
-    "model_id": "gemini",
+  "R-fa417f5ebc39": {
+    "model_id": "claude",
     "prompt_id": 3,
-    "timestamp": "2026-05-22T02:25:32.934204+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:50:01.977480+00:00"
   },
-  "R-6x5xz": {
-    "model_id": "chatgpt",
-    "prompt_id": 4,
-    "timestamp": "2026-05-22T02:25:39.838958+00:00"
+  "R-73fda696a86a": {
+    "model_id": "claude",
+    "prompt_id": 3,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:50:16.849182+00:00"
   },
-  "R-typ52": {
+  "R-018cec168f78": {
     "model_id": "claude",
     "prompt_id": 4,
-    "timestamp": "2026-05-22T02:25:50.751782+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:50:34.154708+00:00"
   },
-  "R-lw70k": {
-    "model_id": "gemini",
+  "R-9a2a499d655e": {
+    "model_id": "claude",
     "prompt_id": 4,
-    "timestamp": "2026-05-22T02:26:10.773602+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:50:48.799816+00:00"
   },
-  "R-9lbte": {
-    "model_id": "chatgpt",
-    "prompt_id": 5,
-    "timestamp": "2026-05-22T02:26:19.422507+00:00"
+  "R-5ac5ff0ebe50": {
+    "model_id": "claude",
+    "prompt_id": 4,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:51:02.585238+00:00"
   },
-  "R-qmqhu": {
+  "R-44decbb607d6": {
     "model_id": "claude",
     "prompt_id": 5,
-    "timestamp": "2026-05-22T02:26:30.380022+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:51:16.921899+00:00"
   },
-  "R-mqxbe": {
-    "model_id": "gemini",
+  "R-b6b221e4ff88": {
+    "model_id": "claude",
     "prompt_id": 5,
-    "timestamp": "2026-05-22T02:26:43.593240+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:51:27.402592+00:00"
   },
-  "R-zeymt": {
-    "model_id": "chatgpt",
-    "prompt_id": 6,
-    "timestamp": "2026-05-22T02:26:49.518035+00:00"
+  "R-3c911d761ad1": {
+    "model_id": "claude",
+    "prompt_id": 5,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:51:41.099168+00:00"
   },
-  "R-az79n": {
+  "R-5cac7211bc5b": {
     "model_id": "claude",
     "prompt_id": 6,
-    "timestamp": "2026-05-22T02:27:02.226290+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:51:53.311978+00:00"
   },
-  "R-ju7yu": {
-    "model_id": "gemini",
+  "R-1eea9a3bf77c": {
+    "model_id": "claude",
     "prompt_id": 6,
-    "timestamp": "2026-05-22T02:27:16.153460+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:52:04.982378+00:00"
   },
-  "R-xdnpj": {
-    "model_id": "chatgpt",
-    "prompt_id": 7,
-    "timestamp": "2026-05-22T02:27:23.019761+00:00"
+  "R-b27a7f494598": {
+    "model_id": "claude",
+    "prompt_id": 6,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:52:16.554646+00:00"
   },
-  "R-oveop": {
+  "R-da4c0d7abc06": {
     "model_id": "claude",
     "prompt_id": 7,
-    "timestamp": "2026-05-22T02:27:34.176823+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:52:31.200071+00:00"
   },
-  "R-c81lg": {
-    "model_id": "gemini",
+  "R-e5b0b1fe68a2": {
+    "model_id": "claude",
     "prompt_id": 7,
-    "timestamp": "2026-05-22T02:27:47.772875+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:52:42.274578+00:00"
   },
-  "R-igvp3": {
-    "model_id": "chatgpt",
-    "prompt_id": 8,
-    "timestamp": "2026-05-22T02:27:54.382162+00:00"
+  "R-0508df6e6ec4": {
+    "model_id": "claude",
+    "prompt_id": 7,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:52:53.517735+00:00"
   },
-  "R-sz06n": {
+  "R-7bcaef43bc8e": {
     "model_id": "claude",
     "prompt_id": 8,
-    "timestamp": "2026-05-22T02:28:04.945273+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:53:06.196695+00:00"
   },
-  "R-byito": {
-    "model_id": "gemini",
+  "R-b42b9c443b27": {
+    "model_id": "claude",
     "prompt_id": 8,
-    "timestamp": "2026-05-22T02:28:29.470604+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:53:26.205006+00:00"
   },
-  "R-bepp8": {
-    "model_id": "chatgpt",
-    "prompt_id": 9,
-    "timestamp": "2026-05-22T02:28:37.173387+00:00"
+  "R-df42b3f98d79": {
+    "model_id": "claude",
+    "prompt_id": 8,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:53:40.097281+00:00"
   },
-  "R-pgcvb": {
+  "R-341f023a20ad": {
     "model_id": "claude",
     "prompt_id": 9,
-    "timestamp": "2026-05-22T02:28:46.750471+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:53:51.163452+00:00"
   },
-  "R-0lpjh": {
-    "model_id": "gemini",
+  "R-22146f3f12f9": {
+    "model_id": "claude",
     "prompt_id": 9,
-    "timestamp": "2026-05-22T02:28:58.358481+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:54:01.411707+00:00"
   },
-  "R-m3yot": {
-    "model_id": "chatgpt",
-    "prompt_id": 10,
-    "timestamp": "2026-05-22T02:29:04.570679+00:00"
+  "R-5e6943f6c5e3": {
+    "model_id": "claude",
+    "prompt_id": 9,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:54:12.360667+00:00"
   },
-  "R-bvmeh": {
+  "R-cfdb9285c314": {
     "model_id": "claude",
     "prompt_id": 10,
-    "timestamp": "2026-05-22T02:29:15.894792+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:54:24.897885+00:00"
   },
-  "R-7jrgz": {
-    "model_id": "gemini",
+  "R-1716a471cb18": {
+    "model_id": "claude",
     "prompt_id": 10,
-    "timestamp": "2026-05-22T02:29:37.399106+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:54:38.072962+00:00"
   },
-  "R-0u3hy": {
-    "model_id": "chatgpt",
-    "prompt_id": 11,
-    "timestamp": "2026-05-22T02:29:44.263572+00:00"
+  "R-d953c13a792b": {
+    "model_id": "claude",
+    "prompt_id": 10,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:54:50.299488+00:00"
   },
-  "R-gofsv": {
+  "R-aea858875879": {
     "model_id": "claude",
     "prompt_id": 11,
-    "timestamp": "2026-05-22T02:29:54.968535+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:55:02.265753+00:00"
   },
-  "R-r3a24": {
-    "model_id": "gemini",
+  "R-8867a6c5a833": {
+    "model_id": "claude",
     "prompt_id": 11,
-    "timestamp": "2026-05-22T02:30:07.933021+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:55:13.570818+00:00"
   },
-  "R-750pc": {
-    "model_id": "chatgpt",
-    "prompt_id": 12,
-    "timestamp": "2026-05-22T02:30:15.444928+00:00"
+  "R-e6c0597ed674": {
+    "model_id": "claude",
+    "prompt_id": 11,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:55:25.055118+00:00"
   },
-  "R-myl10": {
+  "R-465d9f5ce9d1": {
     "model_id": "claude",
     "prompt_id": 12,
-    "timestamp": "2026-05-22T02:30:26.202695+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:55:36.133159+00:00"
   },
-  "R-8018w": {
-    "model_id": "gemini",
+  "R-d831b6101c39": {
+    "model_id": "claude",
     "prompt_id": 12,
-    "timestamp": "2026-05-22T02:30:39.894213+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:55:47.808620+00:00"
   },
-  "R-s7ji4": {
-    "model_id": "chatgpt",
-    "prompt_id": 13,
-    "timestamp": "2026-05-22T02:30:47.680069+00:00"
+  "R-91d2d7888320": {
+    "model_id": "claude",
+    "prompt_id": 12,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:55:59.572002+00:00"
   },
-  "R-ec4j1": {
+  "R-c95901f1e04f": {
     "model_id": "claude",
     "prompt_id": 13,
-    "timestamp": "2026-05-22T02:30:58.905938+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:56:12.486021+00:00"
   },
-  "R-aaps0": {
-    "model_id": "gemini",
+  "R-46318f4e0807": {
+    "model_id": "claude",
     "prompt_id": 13,
-    "timestamp": "2026-05-22T02:31:12.025957+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:56:28.089480+00:00"
   },
-  "R-zwbra": {
-    "model_id": "chatgpt",
-    "prompt_id": 14,
-    "timestamp": "2026-05-22T02:31:18.696851+00:00"
+  "R-13901ec6eca7": {
+    "model_id": "claude",
+    "prompt_id": 13,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:56:42.114212+00:00"
   },
-  "R-z8l11": {
+  "R-c579affb6cfe": {
     "model_id": "claude",
     "prompt_id": 14,
-    "timestamp": "2026-05-22T02:31:28.177547+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:56:53.854846+00:00"
   },
-  "R-sc34e": {
-    "model_id": "gemini",
+  "R-76d8e5295790": {
+    "model_id": "claude",
     "prompt_id": 14,
-    "timestamp": "2026-05-22T02:31:52.182556+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:57:07.362432+00:00"
   },
-  "R-b8ksl": {
-    "model_id": "chatgpt",
-    "prompt_id": 15,
-    "timestamp": "2026-05-22T02:32:00.380367+00:00"
+  "R-cf5ffebb474c": {
+    "model_id": "claude",
+    "prompt_id": 14,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:57:19.146649+00:00"
   },
-  "R-3elq2": {
+  "R-383c91981d10": {
     "model_id": "claude",
     "prompt_id": 15,
-    "timestamp": "2026-05-22T02:32:12.883931+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:57:32.153818+00:00"
   },
-  "R-44rwx": {
-    "model_id": "gemini",
+  "R-4f44476269bd": {
+    "model_id": "claude",
     "prompt_id": 15,
-    "timestamp": "2026-05-22T02:32:26.822858+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:57:46.181371+00:00"
   },
-  "R-a2foa": {
-    "model_id": "chatgpt",
-    "prompt_id": 16,
-    "timestamp": "2026-05-22T02:32:32.685723+00:00"
+  "R-3a16dbc7a1b2": {
+    "model_id": "claude",
+    "prompt_id": 15,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:57:58.265348+00:00"
   },
-  "R-ylh28": {
+  "R-fb4cf9b47fc2": {
     "model_id": "claude",
     "prompt_id": 16,
-    "timestamp": "2026-05-22T02:32:43.124385+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:58:10.425195+00:00"
   },
-  "R-m6avy": {
-    "model_id": "gemini",
+  "R-d37161d3cc69": {
+    "model_id": "claude",
     "prompt_id": 16,
-    "timestamp": "2026-05-22T02:32:55.977074+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:58:22.211582+00:00"
   },
-  "R-eoxow": {
-    "model_id": "chatgpt",
-    "prompt_id": 17,
-    "timestamp": "2026-05-22T02:33:03.295587+00:00"
+  "R-6e9fdda706ca": {
+    "model_id": "claude",
+    "prompt_id": 16,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:58:39.019956+00:00"
   },
-  "R-hlldw": {
+  "R-3271202b636b": {
     "model_id": "claude",
     "prompt_id": 17,
-    "timestamp": "2026-05-22T02:33:14.355726+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:58:59.397614+00:00"
   },
-  "R-qumbd": {
-    "model_id": "gemini",
+  "R-42aa92f13521": {
+    "model_id": "claude",
     "prompt_id": 17,
-    "timestamp": "2026-05-22T02:33:27.325507+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T16:59:18.546614+00:00"
   },
-  "R-v0q03": {
-    "model_id": "chatgpt",
-    "prompt_id": 18,
-    "timestamp": "2026-05-22T02:33:33.908246+00:00"
+  "R-93cc07ef5269": {
+    "model_id": "claude",
+    "prompt_id": 17,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T16:59:34.050077+00:00"
   },
-  "R-f1q2j": {
+  "R-6b0bb357df58": {
     "model_id": "claude",
     "prompt_id": 18,
-    "timestamp": "2026-05-22T02:33:44.252989+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T16:59:45.783459+00:00"
   },
-  "R-68s1q": {
-    "model_id": "gemini",
+  "R-59184469951a": {
+    "model_id": "claude",
     "prompt_id": 18,
-    "timestamp": "2026-05-22T02:33:58.078644+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T17:00:00.124562+00:00"
   },
-  "R-irg1o": {
-    "model_id": "chatgpt",
-    "prompt_id": 19,
-    "timestamp": "2026-05-22T02:34:04.455801+00:00"
+  "R-dbab2af6b096": {
+    "model_id": "claude",
+    "prompt_id": 18,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T17:00:10.949651+00:00"
   },
-  "R-xt2ap": {
+  "R-2cdf09818e00": {
     "model_id": "claude",
     "prompt_id": 19,
-    "timestamp": "2026-05-22T02:34:14.300083+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T17:00:23.776805+00:00"
   },
-  "R-to4fy": {
-    "model_id": "gemini",
+  "R-a4674d7bc89c": {
+    "model_id": "claude",
     "prompt_id": 19,
-    "timestamp": "2026-05-22T02:34:27.768149+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T17:00:37.002310+00:00"
   },
-  "R-31noc": {
-    "model_id": "chatgpt",
-    "prompt_id": 20,
-    "timestamp": "2026-05-22T02:34:33.916129+00:00"
+  "R-db963104dac0": {
+    "model_id": "claude",
+    "prompt_id": 19,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T17:00:48.351406+00:00"
   },
-  "R-tjo2i": {
+  "R-8e62b5b03aff": {
     "model_id": "claude",
     "prompt_id": 20,
-    "timestamp": "2026-05-22T02:34:43.543229+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T17:00:58.489149+00:00"
   },
-  "R-qlsb2": {
-    "model_id": "gemini",
+  "R-28c03eeea780": {
+    "model_id": "claude",
     "prompt_id": 20,
-    "timestamp": "2026-05-22T02:34:57.298620+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T17:01:09.548874+00:00"
   },
-  "R-4cva8": {
-    "model_id": "chatgpt",
-    "prompt_id": 21,
-    "timestamp": "2026-05-22T02:35:04.333049+00:00"
+  "R-824e78bfe0e2": {
+    "model_id": "claude",
+    "prompt_id": 20,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T17:01:21.017676+00:00"
   },
-  "R-s6alh": {
+  "R-c2787350c490": {
     "model_id": "claude",
     "prompt_id": 21,
-    "timestamp": "2026-05-22T02:35:15.563664+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T17:01:42.623425+00:00"
   },
-  "R-ogz59": {
-    "model_id": "gemini",
+  "R-5eeed3064504": {
+    "model_id": "claude",
     "prompt_id": 21,
-    "timestamp": "2026-05-22T02:35:28.290876+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T17:02:01.885509+00:00"
   },
-  "R-j8d0v": {
-    "model_id": "chatgpt",
-    "prompt_id": 22,
-    "timestamp": "2026-05-22T02:35:33.774184+00:00"
+  "R-b5bd8943ca78": {
+    "model_id": "claude",
+    "prompt_id": 21,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T17:02:18.259006+00:00"
   },
-  "R-2vv0d": {
+  "R-215f546e0463": {
     "model_id": "claude",
     "prompt_id": 22,
-    "timestamp": "2026-05-22T02:35:45.046788+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T17:02:36.795448+00:00"
   },
-  "R-36r1l": {
-    "model_id": "gemini",
+  "R-3b79d4b83b95": {
+    "model_id": "claude",
     "prompt_id": 22,
-    "timestamp": "2026-05-22T02:35:57.565693+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T17:02:50.925033+00:00"
   },
-  "R-q9atc": {
-    "model_id": "chatgpt",
-    "prompt_id": 23,
-    "timestamp": "2026-05-22T02:36:05.100873+00:00"
+  "R-f1725c0f54ec": {
+    "model_id": "claude",
+    "prompt_id": 22,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T17:03:07.513314+00:00"
   },
-  "R-eelfe": {
+  "R-334e0b92f318": {
     "model_id": "claude",
     "prompt_id": 23,
-    "timestamp": "2026-05-22T02:36:14.922578+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T17:03:19.085006+00:00"
   },
-  "R-oucrg": {
-    "model_id": "gemini",
+  "R-329a460d43c9": {
+    "model_id": "claude",
     "prompt_id": 23,
-    "timestamp": "2026-05-22T02:36:27.685686+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T17:03:30.071330+00:00"
   },
-  "R-xgx0h": {
-    "model_id": "chatgpt",
-    "prompt_id": 24,
-    "timestamp": "2026-05-22T02:36:33.651984+00:00"
+  "R-c0ef103b8908": {
+    "model_id": "claude",
+    "prompt_id": 23,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T17:03:42.842343+00:00"
   },
-  "R-9ld8f": {
+  "R-4dad801b59f8": {
     "model_id": "claude",
     "prompt_id": 24,
-    "timestamp": "2026-05-22T02:36:43.949059+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-16T17:03:53.104641+00:00"
   },
-  "R-38gil": {
-    "model_id": "gemini",
+  "R-0f36437f8e4c": {
+    "model_id": "claude",
     "prompt_id": 24,
-    "timestamp": "2026-05-22T02:36:56.405598+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-16T17:04:04.752702+00:00"
   },
-  "R-59w5g": {
-    "model_id": "chatgpt",
-    "prompt_id": 25,
-    "timestamp": "2026-05-22T02:37:05.064520+00:00"
+  "R-e61ec5bde1dd": {
+    "model_id": "claude",
+    "prompt_id": 24,
+    "sample_idx": 2,
+    "timestamp": "2026-06-16T17:04:15.816957+00:00"
   },
-  "R-df0vi": {
+  "R-ede26504439c": {
     "model_id": "claude",
     "prompt_id": 25,
-    "timestamp": "2026-05-22T02:37:21.728880+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:50:29.200820+00:00"
   },
-  "R-5ynhr": {
-    "model_id": "gemini",
+  "R-54a9c7cc5395": {
+    "model_id": "claude",
     "prompt_id": 25,
-    "timestamp": "2026-05-22T02:37:34.861063+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:50:51.190725+00:00"
   },
-  "R-ilits": {
-    "model_id": "chatgpt",
-    "prompt_id": 26,
-    "timestamp": "2026-05-22T02:37:42.715935+00:00"
+  "R-a751dc198331": {
+    "model_id": "claude",
+    "prompt_id": 25,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:51:13.425738+00:00"
   },
-  "R-fc12q": {
+  "R-8175a4e13b5f": {
     "model_id": "claude",
     "prompt_id": 26,
-    "timestamp": "2026-05-22T02:37:54.704210+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:51:25.137410+00:00"
   },
-  "R-5shau": {
-    "model_id": "gemini",
+  "R-1f833b877fa0": {
+    "model_id": "claude",
     "prompt_id": 26,
-    "timestamp": "2026-05-22T02:38:07.800909+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:51:36.658118+00:00"
   },
-  "R-75sd2": {
-    "model_id": "chatgpt",
-    "prompt_id": 27,
-    "timestamp": "2026-05-22T02:38:13.774594+00:00"
+  "R-63768d2b9e81": {
+    "model_id": "claude",
+    "prompt_id": 26,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:51:48.574063+00:00"
   },
-  "R-4c5dr": {
+  "R-9296229511f2": {
     "model_id": "claude",
     "prompt_id": 27,
-    "timestamp": "2026-05-22T02:38:23.522254+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:51:58.467375+00:00"
   },
-  "R-p7efz": {
-    "model_id": "gemini",
+  "R-77e518da1398": {
+    "model_id": "claude",
     "prompt_id": 27,
-    "timestamp": "2026-05-22T02:38:38.048839+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:52:08.001044+00:00"
   },
-  "R-pi65g": {
-    "model_id": "chatgpt",
-    "prompt_id": 28,
-    "timestamp": "2026-05-22T02:38:46.428562+00:00"
+  "R-0ce7751927f8": {
+    "model_id": "claude",
+    "prompt_id": 27,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:52:18.121357+00:00"
   },
-  "R-9wj64": {
+  "R-70d7304fe664": {
     "model_id": "claude",
     "prompt_id": 28,
-    "timestamp": "2026-05-22T02:38:56.659594+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:52:35.519376+00:00"
   },
-  "R-8fsiw": {
-    "model_id": "gemini",
+  "R-dc703ca407c1": {
+    "model_id": "claude",
     "prompt_id": 28,
-    "timestamp": "2026-05-22T02:39:12.016767+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:52:49.976365+00:00"
   },
-  "R-nlkz1": {
-    "model_id": "chatgpt",
-    "prompt_id": 29,
-    "timestamp": "2026-05-22T02:39:20.225657+00:00"
+  "R-ecaed56292b2": {
+    "model_id": "claude",
+    "prompt_id": 28,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:53:02.689975+00:00"
   },
-  "R-le10f": {
+  "R-3c28865f5b79": {
     "model_id": "claude",
     "prompt_id": 29,
-    "timestamp": "2026-05-22T02:39:31.771824+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:53:15.339072+00:00"
   },
-  "R-ny0z8": {
-    "model_id": "gemini",
+  "R-ca6c878e1f7b": {
+    "model_id": "claude",
     "prompt_id": 29,
-    "timestamp": "2026-05-22T02:39:44.169096+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:53:27.345589+00:00"
   },
-  "R-ik8l8": {
-    "model_id": "chatgpt",
-    "prompt_id": 30,
-    "timestamp": "2026-05-22T02:39:50.346515+00:00"
+  "R-b0935f220b0e": {
+    "model_id": "claude",
+    "prompt_id": 29,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:53:40.201642+00:00"
   },
-  "R-a6yxx": {
+  "R-3fbac7a7505a": {
     "model_id": "claude",
     "prompt_id": 30,
-    "timestamp": "2026-05-22T02:40:01.496160+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:53:53.037862+00:00"
   },
-  "R-0priu": {
-    "model_id": "gemini",
+  "R-585e8cb862ae": {
+    "model_id": "claude",
     "prompt_id": 30,
-    "timestamp": "2026-05-22T02:40:14.227324+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:54:06.165683+00:00"
   },
-  "R-26ttp": {
-    "model_id": "chatgpt",
-    "prompt_id": 31,
-    "timestamp": "2026-05-22T02:40:20.417396+00:00"
+  "R-5eca5a06e2a1": {
+    "model_id": "claude",
+    "prompt_id": 30,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:54:18.657900+00:00"
   },
-  "R-sceuq": {
+  "R-0b05af13c44e": {
     "model_id": "claude",
     "prompt_id": 31,
-    "timestamp": "2026-05-22T02:40:29.812391+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:54:33.484854+00:00"
   },
-  "R-j5ze2": {
-    "model_id": "gemini",
+  "R-71124fa09710": {
+    "model_id": "claude",
     "prompt_id": 31,
-    "timestamp": "2026-05-22T02:40:43.013309+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:54:44.490337+00:00"
   },
-  "R-21eqm": {
-    "model_id": "chatgpt",
-    "prompt_id": 32,
-    "timestamp": "2026-05-22T02:40:45.948065+00:00"
+  "R-0636ca9521a6": {
+    "model_id": "claude",
+    "prompt_id": 31,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:54:55.010649+00:00"
   },
-  "R-znsnw": {
+  "R-14e73c34113d": {
     "model_id": "claude",
     "prompt_id": 32,
-    "timestamp": "2026-05-22T02:40:55.047245+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:55:04.313809+00:00"
   },
-  "R-61k2v": {
-    "model_id": "gemini",
+  "R-2c440004b99d": {
+    "model_id": "claude",
     "prompt_id": 32,
-    "timestamp": "2026-05-22T02:41:04.209390+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:55:14.262538+00:00"
   },
-  "R-g252u": {
-    "model_id": "chatgpt",
-    "prompt_id": 33,
-    "timestamp": "2026-05-22T02:41:11.243449+00:00"
+  "R-224a1980512d": {
+    "model_id": "claude",
+    "prompt_id": 32,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:55:23.359495+00:00"
   },
-  "R-p6jht": {
+  "R-ad5fdd60fa4a": {
     "model_id": "claude",
     "prompt_id": 33,
-    "timestamp": "2026-05-22T02:41:21.693998+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:55:33.499186+00:00"
   },
-  "R-jjhs1": {
-    "model_id": "gemini",
+  "R-90d973b77a4f": {
+    "model_id": "claude",
     "prompt_id": 33,
-    "timestamp": "2026-05-22T02:41:35.568713+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:55:44.368824+00:00"
   },
-  "R-zlyv1": {
-    "model_id": "chatgpt",
-    "prompt_id": 34,
-    "timestamp": "2026-05-22T02:41:42.415985+00:00"
+  "R-1c12f703ed9d": {
+    "model_id": "claude",
+    "prompt_id": 33,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:55:55.223048+00:00"
   },
-  "R-56yoc": {
+  "R-ec011c6c1f9e": {
     "model_id": "claude",
     "prompt_id": 34,
-    "timestamp": "2026-05-22T02:41:53.870205+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:56:06.076956+00:00"
   },
-  "R-w2sd7": {
-    "model_id": "gemini",
+  "R-bd22756652b3": {
+    "model_id": "claude",
     "prompt_id": 34,
-    "timestamp": "2026-05-22T02:42:06.542120+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:56:16.532672+00:00"
   },
-  "R-zjces": {
-    "model_id": "chatgpt",
-    "prompt_id": 35,
-    "timestamp": "2026-05-22T02:42:15.433386+00:00"
+  "R-19d296aed698": {
+    "model_id": "claude",
+    "prompt_id": 34,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:56:28.298456+00:00"
   },
-  "R-n4522": {
+  "R-8d0214f8604d": {
     "model_id": "claude",
     "prompt_id": 35,
-    "timestamp": "2026-05-22T02:42:26.195506+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:56:38.940617+00:00"
   },
-  "R-n0py8": {
-    "model_id": "gemini",
+  "R-31d80c19bd39": {
+    "model_id": "claude",
     "prompt_id": 35,
-    "timestamp": "2026-05-22T02:42:37.242843+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:56:49.701019+00:00"
   },
-  "R-emi5f": {
-    "model_id": "chatgpt",
-    "prompt_id": 36,
-    "timestamp": "2026-05-22T02:42:43.467615+00:00"
+  "R-2e63968fd797": {
+    "model_id": "claude",
+    "prompt_id": 35,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:57:02.955622+00:00"
   },
-  "R-yi124": {
+  "R-a64cf7c054ee": {
     "model_id": "claude",
     "prompt_id": 36,
-    "timestamp": "2026-05-22T02:42:52.498292+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:57:11.718872+00:00"
   },
-  "R-715od": {
-    "model_id": "gemini",
+  "R-fc6c6be53df8": {
+    "model_id": "claude",
     "prompt_id": 36,
-    "timestamp": "2026-05-22T02:43:04.129284+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:57:21.554442+00:00"
   },
-  "R-wz5go": {
-    "model_id": "chatgpt",
-    "prompt_id": 37,
-    "timestamp": "2026-05-22T02:43:12.867045+00:00"
+  "R-a929bffd1be9": {
+    "model_id": "claude",
+    "prompt_id": 36,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:57:30.173205+00:00"
   },
-  "R-3k5pl": {
+  "R-5c3d5196940e": {
     "model_id": "claude",
     "prompt_id": 37,
-    "timestamp": "2026-05-22T02:43:22.450984+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:57:40.230818+00:00"
   },
-  "R-u4u6c": {
-    "model_id": "gemini",
+  "R-de862f62c068": {
+    "model_id": "claude",
     "prompt_id": 37,
-    "timestamp": "2026-05-22T02:43:35.743490+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:57:50.802047+00:00"
   },
-  "R-70egh": {
-    "model_id": "chatgpt",
-    "prompt_id": 38,
-    "timestamp": "2026-05-22T02:43:43.842587+00:00"
+  "R-de17f82bf6a6": {
+    "model_id": "claude",
+    "prompt_id": 37,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:58:00.767932+00:00"
   },
-  "R-zp81y": {
+  "R-ff1261b43f48": {
     "model_id": "claude",
     "prompt_id": 38,
-    "timestamp": "2026-05-22T02:43:52.948840+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:58:11.316581+00:00"
   },
-  "R-s2t7y": {
-    "model_id": "gemini",
+  "R-5cf808928fa2": {
+    "model_id": "claude",
     "prompt_id": 38,
-    "timestamp": "2026-05-22T02:44:11.235627+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:58:21.555829+00:00"
   },
-  "R-cudu9": {
-    "model_id": "chatgpt",
-    "prompt_id": 39,
-    "timestamp": "2026-05-22T02:44:16.498131+00:00"
+  "R-638100c5196a": {
+    "model_id": "claude",
+    "prompt_id": 38,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:58:31.389618+00:00"
   },
-  "R-yy2gm": {
+  "R-3947f673b2b7": {
     "model_id": "claude",
     "prompt_id": 39,
-    "timestamp": "2026-05-22T02:44:26.468692+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:58:42.345854+00:00"
   },
-  "R-0h6yy": {
-    "model_id": "gemini",
+  "R-1e24dd186e07": {
+    "model_id": "claude",
     "prompt_id": 39,
-    "timestamp": "2026-05-22T02:44:46.636658+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:58:52.790015+00:00"
   },
-  "R-kd1gp": {
-    "model_id": "chatgpt",
-    "prompt_id": 40,
-    "timestamp": "2026-05-22T02:44:52.704931+00:00"
+  "R-6f6a546ba1cc": {
+    "model_id": "claude",
+    "prompt_id": 39,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:59:03.541624+00:00"
   },
-  "R-dg123": {
+  "R-fc63c3b3233a": {
     "model_id": "claude",
     "prompt_id": 40,
-    "timestamp": "2026-05-22T02:45:03.074992+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:59:18.672238+00:00"
   },
-  "R-do81e": {
-    "model_id": "gemini",
+  "R-58bc9db12b5b": {
+    "model_id": "claude",
     "prompt_id": 40,
-    "timestamp": "2026-05-22T02:45:16.490328+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T11:59:30.206628+00:00"
   },
-  "R-3kyf7": {
-    "model_id": "chatgpt",
-    "prompt_id": 41,
-    "timestamp": "2026-05-22T02:45:21.517154+00:00"
+  "R-f295fc21d22f": {
+    "model_id": "claude",
+    "prompt_id": 40,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T11:59:43.659182+00:00"
   },
-  "R-ap8pu": {
+  "R-c10cd9aa3797": {
     "model_id": "claude",
     "prompt_id": 41,
-    "timestamp": "2026-05-22T02:45:32.871497+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T11:59:54.437655+00:00"
   },
-  "R-hp99a": {
-    "model_id": "gemini",
+  "R-f428bd4ca197": {
+    "model_id": "claude",
     "prompt_id": 41,
-    "timestamp": "2026-05-22T02:45:46.681980+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:00:04.777591+00:00"
   },
-  "R-7aa9r": {
-    "model_id": "chatgpt",
-    "prompt_id": 42,
-    "timestamp": "2026-05-22T02:45:56.784827+00:00"
+  "R-f35ad0cc7440": {
+    "model_id": "claude",
+    "prompt_id": 41,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:00:15.019424+00:00"
   },
-  "R-go8om": {
+  "R-a812f2c2e052": {
     "model_id": "claude",
     "prompt_id": 42,
-    "timestamp": "2026-05-22T02:46:06.585704+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:00:25.262100+00:00"
   },
-  "R-05wzy": {
-    "model_id": "gemini",
+  "R-96c22a2f7b8a": {
+    "model_id": "claude",
     "prompt_id": 42,
-    "timestamp": "2026-05-22T02:46:29.447801+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:00:39.814869+00:00"
   },
-  "R-qugta": {
-    "model_id": "chatgpt",
-    "prompt_id": 43,
-    "timestamp": "2026-05-22T02:46:34.778230+00:00"
+  "R-2bbc89d9517b": {
+    "model_id": "claude",
+    "prompt_id": 42,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:00:50.452190+00:00"
   },
-  "R-gn2gf": {
+  "R-05bae6a66ee1": {
     "model_id": "claude",
     "prompt_id": 43,
-    "timestamp": "2026-05-22T02:46:44.641141+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:01:01.092895+00:00"
   },
-  "R-h59eg": {
-    "model_id": "gemini",
+  "R-5041283d375f": {
+    "model_id": "claude",
     "prompt_id": 43,
-    "timestamp": "2026-05-22T02:46:58.272755+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:01:11.032881+00:00"
   },
-  "R-argxw": {
-    "model_id": "chatgpt",
-    "prompt_id": 44,
-    "timestamp": "2026-05-22T02:47:05.677170+00:00"
+  "R-f9a8183ce8e2": {
+    "model_id": "claude",
+    "prompt_id": 43,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:01:22.059432+00:00"
   },
-  "R-9al49": {
+  "R-ca0db02e17b0": {
     "model_id": "claude",
     "prompt_id": 44,
-    "timestamp": "2026-05-22T02:47:15.685907+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:01:33.357072+00:00"
   },
-  "R-fbaqk": {
-    "model_id": "gemini",
+  "R-0313cb204500": {
+    "model_id": "claude",
     "prompt_id": 44,
-    "timestamp": "2026-05-22T02:47:29.299160+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:01:45.747721+00:00"
   },
-  "R-gnl8i": {
-    "model_id": "chatgpt",
-    "prompt_id": 45,
-    "timestamp": "2026-05-22T02:47:38.138031+00:00"
+  "R-2d78b618901f": {
+    "model_id": "claude",
+    "prompt_id": 44,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:01:55.989301+00:00"
   },
-  "R-ieyfm": {
+  "R-cdecab74760e": {
     "model_id": "claude",
     "prompt_id": 45,
-    "timestamp": "2026-05-22T02:47:47.720992+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:02:08.263499+00:00"
   },
-  "R-ro3xo": {
-    "model_id": "gemini",
+  "R-c66711656c4d": {
+    "model_id": "claude",
     "prompt_id": 45,
-    "timestamp": "2026-05-22T02:48:00.570324+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:02:19.318335+00:00"
   },
-  "R-zgz03": {
-    "model_id": "chatgpt",
-    "prompt_id": 46,
-    "timestamp": "2026-05-22T02:48:04.010018+00:00"
+  "R-e1c9fab12bbd": {
+    "model_id": "claude",
+    "prompt_id": 45,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:02:38.996180+00:00"
   },
-  "R-i1gtf": {
+  "R-1498bdbb0050": {
     "model_id": "claude",
     "prompt_id": 46,
-    "timestamp": "2026-05-22T02:48:09.401668+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:02:42.888894+00:00"
   },
-  "R-r3i1l": {
-    "model_id": "gemini",
+  "R-d41819138474": {
+    "model_id": "claude",
     "prompt_id": 46,
-    "timestamp": "2026-05-22T02:48:12.616051+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:02:47.291597+00:00"
   },
-  "R-35nlg": {
-    "model_id": "chatgpt",
-    "prompt_id": 47,
-    "timestamp": "2026-05-22T02:48:18.386020+00:00"
+  "R-1413b2ab0747": {
+    "model_id": "claude",
+    "prompt_id": 46,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:02:51.722783+00:00"
   },
-  "R-dj5dc": {
+  "R-35f1bb64d4d9": {
     "model_id": "claude",
     "prompt_id": 47,
-    "timestamp": "2026-05-22T02:48:27.375252+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:03:02.140375+00:00"
   },
-  "R-gtdt4": {
-    "model_id": "gemini",
+  "R-22748684b9a0": {
+    "model_id": "claude",
     "prompt_id": 47,
-    "timestamp": "2026-05-22T02:48:41.613866+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:03:12.278704+00:00"
   },
-  "R-zggxw": {
-    "model_id": "chatgpt",
-    "prompt_id": 48,
-    "timestamp": "2026-05-22T02:48:52.409307+00:00"
+  "R-36b55a1d9258": {
+    "model_id": "claude",
+    "prompt_id": 47,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:03:22.619951+00:00"
   },
-  "R-94rxy": {
+  "R-8e6335c3b633": {
     "model_id": "claude",
     "prompt_id": 48,
-    "timestamp": "2026-05-22T02:49:02.404915+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:03:33.476050+00:00"
   },
-  "R-rdxkm": {
-    "model_id": "gemini",
+  "R-929cadd05ccf": {
+    "model_id": "claude",
     "prompt_id": 48,
-    "timestamp": "2026-05-22T02:49:15.450389+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:03:44.162480+00:00"
   },
-  "R-iqmre": {
-    "model_id": "chatgpt",
-    "prompt_id": 49,
-    "timestamp": "2026-05-22T02:49:24.824593+00:00"
+  "R-da12d207b9d5": {
+    "model_id": "claude",
+    "prompt_id": 48,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:03:56.398560+00:00"
   },
-  "R-v8ua8": {
+  "R-12f30962e749": {
     "model_id": "claude",
     "prompt_id": 49,
-    "timestamp": "2026-05-22T02:49:35.352855+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:04:07.064174+00:00"
   },
-  "R-hcjon": {
-    "model_id": "gemini",
+  "R-abe07d5f14ca": {
+    "model_id": "claude",
     "prompt_id": 49,
-    "timestamp": "2026-05-22T02:49:47.902850+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:04:17.304927+00:00"
   },
-  "R-xcrlr": {
-    "model_id": "chatgpt",
-    "prompt_id": 50,
-    "timestamp": "2026-05-22T02:49:56.157499+00:00"
+  "R-90bbc74285a2": {
+    "model_id": "claude",
+    "prompt_id": 49,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:04:27.503399+00:00"
   },
-  "R-glj83": {
+  "R-14eec5cfaf8b": {
     "model_id": "claude",
     "prompt_id": 50,
-    "timestamp": "2026-05-22T02:50:04.654115+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:04:38.607270+00:00"
   },
-  "R-mmbkw": {
-    "model_id": "gemini",
+  "R-b8a71c7411de": {
+    "model_id": "claude",
     "prompt_id": 50,
-    "timestamp": "2026-05-22T02:50:17.735269+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:04:48.538274+00:00"
   },
-  "R-kujnx": {
-    "model_id": "chatgpt",
-    "prompt_id": 51,
-    "timestamp": "2026-05-22T02:50:28.768294+00:00"
+  "R-7ae81d4dbc5b": {
+    "model_id": "claude",
+    "prompt_id": 50,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:04:58.776947+00:00"
   },
-  "R-xz40o": {
+  "R-a4b17dc67213": {
     "model_id": "claude",
     "prompt_id": 51,
-    "timestamp": "2026-05-22T02:50:38.764562+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:05:12.909900+00:00"
   },
-  "R-j7586": {
-    "model_id": "gemini",
+  "R-083a26081327": {
+    "model_id": "claude",
     "prompt_id": 51,
-    "timestamp": "2026-05-22T02:50:51.830654+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:05:24.061110+00:00"
   },
-  "R-9sdzq": {
-    "model_id": "chatgpt",
-    "prompt_id": 52,
-    "timestamp": "2026-05-22T02:50:58.133690+00:00"
+  "R-21afd7a89c7a": {
+    "model_id": "claude",
+    "prompt_id": 51,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:05:35.336693+00:00"
   },
-  "R-akpos": {
+  "R-f53a5b37e966": {
     "model_id": "claude",
     "prompt_id": 52,
-    "timestamp": "2026-05-22T02:51:06.934529+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:05:46.496952+00:00"
   },
-  "R-4jh13": {
-    "model_id": "gemini",
+  "R-b7e89b87f23f": {
+    "model_id": "claude",
     "prompt_id": 52,
-    "timestamp": "2026-05-22T02:51:20.075023+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:05:57.657720+00:00"
   },
-  "R-9tdky": {
-    "model_id": "chatgpt",
-    "prompt_id": 53,
-    "timestamp": "2026-05-22T02:51:25.143952+00:00"
+  "R-3a6a7ecacac5": {
+    "model_id": "claude",
+    "prompt_id": 52,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:06:09.129549+00:00"
   },
-  "R-0ffjx": {
+  "R-412790698f86": {
     "model_id": "claude",
     "prompt_id": 53,
-    "timestamp": "2026-05-22T02:51:35.466320+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:06:20.799861+00:00"
   },
-  "R-euj28": {
-    "model_id": "gemini",
+  "R-968450288a29": {
+    "model_id": "claude",
     "prompt_id": 53,
-    "timestamp": "2026-05-22T02:51:50.295831+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:06:31.673568+00:00"
   },
-  "R-8b787": {
-    "model_id": "chatgpt",
-    "prompt_id": 54,
-    "timestamp": "2026-05-22T02:51:56.719805+00:00"
+  "R-518be51d70c8": {
+    "model_id": "claude",
+    "prompt_id": 53,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:06:42.511957+00:00"
   },
-  "R-qq1je": {
+  "R-65d6f852682d": {
     "model_id": "claude",
     "prompt_id": 54,
-    "timestamp": "2026-05-22T02:52:06.310600+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:06:56.131194+00:00"
   },
-  "R-4puis": {
-    "model_id": "gemini",
+  "R-9a6a3eccddab": {
+    "model_id": "claude",
     "prompt_id": 54,
-    "timestamp": "2026-05-22T02:52:19.084819+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:07:06.780980+00:00"
   },
-  "R-finq0": {
-    "model_id": "chatgpt",
-    "prompt_id": 55,
-    "timestamp": "2026-05-22T02:52:24.137439+00:00"
+  "R-531f9dd5b8c3": {
+    "model_id": "claude",
+    "prompt_id": 54,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:07:17.304086+00:00"
   },
-  "R-ye67t": {
+  "R-da5cff91e2ae": {
     "model_id": "claude",
     "prompt_id": 55,
-    "timestamp": "2026-05-22T02:52:34.307944+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:07:27.783934+00:00"
   },
-  "R-rturn": {
-    "model_id": "gemini",
+  "R-9aedfe471b4e": {
+    "model_id": "claude",
     "prompt_id": 55,
-    "timestamp": "2026-05-22T02:52:47.042143+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:07:39.446652+00:00"
   },
-  "R-pu9rj": {
-    "model_id": "chatgpt",
-    "prompt_id": 56,
-    "timestamp": "2026-05-22T02:52:53.797746+00:00"
+  "R-d433760147c9": {
+    "model_id": "claude",
+    "prompt_id": 55,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:07:50.626721+00:00"
   },
-  "R-hljbu": {
+  "R-8535454ceea9": {
     "model_id": "claude",
     "prompt_id": 56,
-    "timestamp": "2026-05-22T02:53:03.562612+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:08:02.590337+00:00"
   },
-  "R-b6nn2": {
-    "model_id": "gemini",
+  "R-bb1bf30d02e8": {
+    "model_id": "claude",
     "prompt_id": 56,
-    "timestamp": "2026-05-22T02:53:17.740564+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:08:13.340874+00:00"
   },
-  "R-7t8kt": {
-    "model_id": "chatgpt",
-    "prompt_id": 57,
-    "timestamp": "2026-05-22T02:53:22.899130+00:00"
+  "R-0e4b7610bcbe": {
+    "model_id": "claude",
+    "prompt_id": 56,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:08:25.429324+00:00"
   },
-  "R-41dyq": {
+  "R-125aec9ba2dd": {
     "model_id": "claude",
     "prompt_id": 57,
-    "timestamp": "2026-05-22T02:53:33.124317+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:08:36.997774+00:00"
   },
-  "R-2pe7i": {
-    "model_id": "gemini",
+  "R-445a92ea6bac": {
+    "model_id": "claude",
     "prompt_id": 57,
-    "timestamp": "2026-05-22T11:43:32.704945+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:08:48.448930+00:00"
   },
-  "R-zakz2": {
-    "model_id": "chatgpt",
-    "prompt_id": 58,
-    "timestamp": "2026-05-22T11:43:44.323197+00:00"
+  "R-257736b9f07c": {
+    "model_id": "claude",
+    "prompt_id": 57,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:08:59.734175+00:00"
   },
-  "R-17xs5": {
+  "R-5801cd8cf317": {
     "model_id": "claude",
     "prompt_id": 58,
-    "timestamp": "2026-05-22T11:43:55.437638+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:09:11.098401+00:00"
   },
-  "R-5izeb": {
-    "model_id": "gemini",
+  "R-3ca20d79b6c9": {
+    "model_id": "claude",
     "prompt_id": 58,
-    "timestamp": "2026-05-22T11:44:08.647945+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:09:25.023872+00:00"
   },
-  "R-9pxvo": {
-    "model_id": "chatgpt",
-    "prompt_id": 59,
-    "timestamp": "2026-05-22T11:44:16.077719+00:00"
+  "R-44ed041212bf": {
+    "model_id": "claude",
+    "prompt_id": 58,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:09:35.673975+00:00"
   },
-  "R-xdfaj": {
+  "R-82f6b9c47bd6": {
     "model_id": "claude",
     "prompt_id": 59,
-    "timestamp": "2026-05-22T11:44:26.935780+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:09:51.545705+00:00"
   },
-  "R-ykwmm": {
-    "model_id": "gemini",
+  "R-3ca3c2eb3ca9": {
+    "model_id": "claude",
     "prompt_id": 59,
-    "timestamp": "2026-05-22T11:44:40.291001+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:10:02.230779+00:00"
   },
-  "R-sjij1": {
-    "model_id": "chatgpt",
-    "prompt_id": 60,
-    "timestamp": "2026-05-22T11:44:47.094690+00:00"
+  "R-7b8798443b15": {
+    "model_id": "claude",
+    "prompt_id": 59,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:10:13.021637+00:00"
   },
-  "R-bscwq": {
+  "R-acc3b414efe9": {
     "model_id": "claude",
     "prompt_id": 60,
-    "timestamp": "2026-05-22T11:44:57.076196+00:00"
+    "sample_idx": 0,
+    "timestamp": "2026-06-17T12:10:24.826027+00:00"
   },
-  "R-wtx15": {
-    "model_id": "gemini",
+  "R-13df2d94a913": {
+    "model_id": "claude",
     "prompt_id": 60,
-    "timestamp": "2026-05-22T11:45:21.455881+00:00"
+    "sample_idx": 1,
+    "timestamp": "2026-06-17T12:10:37.422650+00:00"
+  },
+  "R-2736ba6769d3": {
+    "model_id": "claude",
+    "prompt_id": 60,
+    "sample_idx": 2,
+    "timestamp": "2026-06-17T12:10:50.017664+00:00"
   }
 }
