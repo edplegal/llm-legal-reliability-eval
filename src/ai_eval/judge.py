@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING, Any
 
 import requests
 
-from ai_eval.clients import PROVIDER_CALLERS
+from ai_eval.clients import call_model_with_retry
 from ai_eval.paths import (
     base_dir,
     data_dir,
@@ -87,46 +87,64 @@ def call_judge_with_retry(
     model_config: ModelConfig,
     temperature: float,
     max_tokens: int,
+    *,
+    parse_attempts: int = 2,
 ) -> tuple[dict[str, Any] | None, str | None]:
-    """Call a judge model and parse its JSON response, retrying once on failure.
+    """Call a judge model and parse its JSON response.
 
-    Returns (parsed_scores, model_version). The model_version captures the
-    actual model snapshot returned by the API (e.g., 'gpt-4o-2024-08-06')
-    so analysis_results.json carries reproducibility metadata.
+    Transport failures (timeouts, 429/5xx weather like an overloaded Gemini
+    endpoint) are absorbed by :func:`call_model_with_retry`'s exponential
+    backoff, so a flaky provider no longer drops a judgment on the first
+    hiccup. Layered on top, a call that succeeds but returns unparseable JSON
+    is re-asked up to ``parse_attempts`` times, since judge JSON validity is
+    not fully deterministic even at temperature 0.
+
+    Returns ``(parsed_scores, model_version)``. ``model_version`` captures the
+    actual snapshot the API returned (e.g. 'gpt-4o-2024-08-06') so
+    analysis_results.json carries reproducibility metadata. Returns
+    ``(None, last_model_version)`` if the API never succeeds or every parse
+    attempt fails — the caller stores null scores, which surface in the
+    report's tie-breaking section.
     """
-    caller = PROVIDER_CALLERS[model_config["provider"]]
     last_model_version: str | None = None
-    for attempt in range(2):
+    for attempt in range(parse_attempts):
         try:
-            result = caller(
+            result = call_model_with_retry(
                 judge_prompt,
+                model_id,
                 model_config,
                 system_prompt=JUDGE_SYSTEM_PROMPT,
                 temperature=temperature,
                 max_tokens=max_tokens,
             )
-            last_model_version = result["model_version"]
+        except (requests.RequestException, KeyError, IndexError) as exc:
+            logger.error(
+                "Judge call to %s failed after retries: %s. Storing null.",
+                model_id,
+                exc,
+            )
+            return None, last_model_version
+        last_model_version = result["model_version"]
+        try:
             return extract_json(result["text"]), last_model_version
-        except (
-            requests.RequestException,
-            KeyError,
-            IndexError,
-            ValueError,
-        ) as exc:
-            if attempt == 0:
-                logger.warning(
-                    "Judge call to %s failed (attempt 1): %s. Retrying...",
-                    model_id,
-                    exc,
-                )
-                time.sleep(2)
-            else:
+        except ValueError as exc:
+            if attempt == parse_attempts - 1:
                 logger.error(
-                    "Judge call to %s failed (attempt 2): %s. Storing null.",
+                    "Judge %s returned unparseable JSON after %d attempt(s): "
+                    "%s. Storing null.",
                     model_id,
+                    parse_attempts,
                     exc,
                 )
                 return None, last_model_version
+            logger.warning(
+                "Judge %s returned unparseable JSON (attempt %d/%d): %s. "
+                "Re-asking...",
+                model_id,
+                attempt + 1,
+                parse_attempts,
+                exc,
+            )
     return None, last_model_version  # pragma: no cover
 
 
