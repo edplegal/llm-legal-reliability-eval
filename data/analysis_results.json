@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "analyze_version": 2,
-    "generated_at": "2026-06-18T17:49:05.770436+00:00",
+    "analyze_version": 3,
+    "generated_at": "2026-07-02T01:20:11.946802+00:00",
     "n_prompts": 60,
     "n_responder_models": 3,
     "n_judge_models": 3,
@@ -11408,42 +11408,60 @@
         "other_avg": 2.51,
         "diff": 0.13,
         "self_premium_vs_median_of_others": 0.628,
-        "n_self_responses": 180
+        "premium_ci_low": 0.469,
+        "premium_ci_high": 0.783,
+        "n_self_responses": 180,
+        "n_premium_prompts": 60
       },
       "escalation": {
         "self_avg": 3.45,
         "other_avg": 3.41,
         "diff": 0.04,
         "self_premium_vs_median_of_others": 1.142,
-        "n_self_responses": 180
+        "premium_ci_low": 0.967,
+        "premium_ci_high": 1.314,
+        "n_self_responses": 180,
+        "n_premium_prompts": 60
       },
       "confidence": {
         "self_avg": 3.37,
         "other_avg": 3.49,
         "diff": -0.12,
         "self_premium_vs_median_of_others": 0.0,
-        "n_self_responses": 180
+        "premium_ci_low": -0.15,
+        "premium_ci_high": 0.139,
+        "n_self_responses": 180,
+        "n_premium_prompts": 60
       },
       "jurisdiction": {
         "self_avg": 3.05,
         "other_avg": 3.21,
         "diff": -0.16,
         "self_premium_vs_median_of_others": 0.344,
-        "n_self_responses": 180
+        "premium_ci_low": 0.225,
+        "premium_ci_high": 0.45,
+        "n_self_responses": 180,
+        "n_premium_prompts": 60
       },
       "guardrail": {
         "self_avg": 3.43,
         "other_avg": 4.13,
         "diff": -0.7,
         "self_premium_vs_median_of_others": 1.478,
-        "n_self_responses": 23
+        "premium_ci_low": 1.093,
+        "premium_ci_high": 2.241,
+        "n_self_responses": 23,
+        "n_premium_prompts": 9
       },
       "regulatory": {
         "self_avg": 3.82,
         "other_avg": 4.24,
         "diff": -0.42,
         "self_premium_vs_median_of_others": 0.107,
-        "n_self_responses": 28
+        "premium_ci_low": -0.017,
+        "premium_ci_high": 0.283,
+        "n_self_responses": 28,
+        "n_premium_prompts": 10
       }
     },
     "claude": {
@@ -11452,42 +11470,60 @@
         "other_avg": 1.89,
         "diff": -0.26,
         "self_premium_vs_median_of_others": -0.651,
-        "n_self_responses": 179
+        "premium_ci_low": -0.783,
+        "premium_ci_high": -0.522,
+        "n_self_responses": 179,
+        "n_premium_prompts": 60
       },
       "escalation": {
         "self_avg": 2.47,
         "other_avg": 2.16,
         "diff": 0.31,
         "self_premium_vs_median_of_others": -0.888,
-        "n_self_responses": 179
+        "premium_ci_low": -1.028,
+        "premium_ci_high": -0.74,
+        "n_self_responses": 179,
+        "n_premium_prompts": 60
       },
       "confidence": {
         "self_avg": 3.4,
         "other_avg": 3.26,
         "diff": 0.14,
         "self_premium_vs_median_of_others": -0.358,
-        "n_self_responses": 179
+        "premium_ci_low": -0.508,
+        "premium_ci_high": -0.182,
+        "n_self_responses": 179,
+        "n_premium_prompts": 60
       },
       "jurisdiction": {
         "self_avg": 2.67,
         "other_avg": 2.43,
         "diff": 0.24,
         "self_premium_vs_median_of_others": -0.718,
-        "n_self_responses": 179
+        "premium_ci_low": -0.822,
+        "premium_ci_high": -0.603,
+        "n_self_responses": 179,
+        "n_premium_prompts": 60
       },
       "guardrail": {
         "self_avg": 2.51,
         "other_avg": 2.42,
         "diff": 0.09,
         "self_premium_vs_median_of_others": -0.716,
-        "n_self_responses": 37
+        "premium_ci_low": -1.128,
+        "premium_ci_high": -0.128,
+        "n_self_responses": 37,
+        "n_premium_prompts": 13
       },
       "regulatory": {
         "self_avg": 3.4,
         "other_avg": 3.26,
         "diff": 0.14,
         "self_premium_vs_median_of_others": -0.69,
-        "n_self_responses": 29
+        "premium_ci_low": -0.833,
+        "premium_ci_high": -0.485,
+        "n_self_responses": 29,
+        "n_premium_prompts": 11
       }
     },
     "gemini": {
@@ -11496,42 +11532,60 @@
         "other_avg": 2.27,
         "diff": 0.29,
         "self_premium_vs_median_of_others": 0.206,
-        "n_self_responses": 177
+        "premium_ci_low": 0.071,
+        "premium_ci_high": 0.357,
+        "n_self_responses": 177,
+        "n_premium_prompts": 60
       },
       "escalation": {
         "self_avg": 2.93,
         "other_avg": 2.85,
         "diff": 0.08,
         "self_premium_vs_median_of_others": 0.203,
-        "n_self_responses": 177
+        "premium_ci_low": 0.086,
+        "premium_ci_high": 0.358,
+        "n_self_responses": 177,
+        "n_premium_prompts": 60
       },
       "confidence": {
         "self_avg": 3.92,
         "other_avg": 3.8,
         "diff": 0.12,
         "self_premium_vs_median_of_others": 0.486,
-        "n_self_responses": 177
+        "premium_ci_low": 0.337,
+        "premium_ci_high": 0.651,
+        "n_self_responses": 177,
+        "n_premium_prompts": 60
       },
       "jurisdiction": {
         "self_avg": 3.34,
         "other_avg": 3.32,
         "diff": 0.02,
         "self_premium_vs_median_of_others": 0.494,
-        "n_self_responses": 177
+        "premium_ci_low": 0.4,
+        "premium_ci_high": 0.608,
+        "n_self_responses": 177,
+        "n_premium_prompts": 60
       },
       "guardrail": {
         "self_avg": 3.97,
         "other_avg": 3.12,
         "diff": 0.85,
         "self_premium_vs_median_of_others": 0.36,
-        "n_self_responses": 43
+        "premium_ci_low": 0.167,
+        "premium_ci_high": 0.667,
+        "n_self_responses": 43,
+        "n_premium_prompts": 16
       },
       "regulatory": {
         "self_avg": 4.34,
         "other_avg": 4.28,
         "diff": 0.06,
         "self_premium_vs_median_of_others": 0.647,
-        "n_self_responses": 34
+        "premium_ci_low": 0.486,
+        "premium_ci_high": 0.889,
+        "n_self_responses": 34,
+        "n_premium_prompts": 12
       }
     }
   },
@@ -27893,37 +27947,43 @@
           "mean_shift": 0.83,
           "ci_low": 0.252,
           "ci_high": 1.378,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "escalation": {
           "mean_shift": 1.207,
           "ci_low": 0.593,
           "ci_high": 1.778,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "confidence": {
           "mean_shift": -0.037,
           "ci_low": -0.43,
           "ci_high": 0.341,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "jurisdiction": {
           "mean_shift": -0.089,
           "ci_low": -0.556,
           "ci_high": 0.348,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "guardrail": {
           "mean_shift": 0.0,
           "ci_low": 0.0,
           "ci_high": 0.0,
-          "n_pairs": 0
+          "n_pairs": 0,
+          "low_n": true
         },
         "regulatory": {
           "mean_shift": -0.5,
           "ci_low": -0.5,
           "ci_high": -0.5,
-          "n_pairs": 1
+          "n_pairs": 1,
+          "low_n": true
         }
       },
       "claude": {
@@ -27931,37 +27991,43 @@
           "mean_shift": -0.119,
           "ci_low": -0.63,
           "ci_high": 0.4,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "escalation": {
           "mean_shift": 1.176,
           "ci_low": 0.593,
           "ci_high": 1.78,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "confidence": {
           "mean_shift": -0.29,
           "ci_low": -0.638,
           "ci_high": 0.022,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "jurisdiction": {
           "mean_shift": -0.36,
           "ci_low": -0.765,
           "ci_high": 0.022,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "guardrail": {
           "mean_shift": 0.0,
           "ci_low": 0.0,
           "ci_high": 0.0,
-          "n_pairs": 0
+          "n_pairs": 0,
+          "low_n": true
         },
         "regulatory": {
           "mean_shift": -1.0,
           "ci_low": -1.667,
           "ci_high": -0.333,
-          "n_pairs": 3
+          "n_pairs": 3,
+          "low_n": false
         }
       },
       "gemini": {
@@ -27969,37 +28035,43 @@
           "mean_shift": 1.311,
           "ci_low": 0.6,
           "ci_high": 2.03,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "escalation": {
           "mean_shift": 1.681,
           "ci_low": 0.978,
           "ci_high": 2.385,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "confidence": {
           "mean_shift": -0.207,
           "ci_low": -0.659,
           "ci_high": 0.23,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "jurisdiction": {
           "mean_shift": -0.193,
           "ci_low": -0.652,
           "ci_high": 0.207,
-          "n_pairs": 15
+          "n_pairs": 15,
+          "low_n": false
         },
         "guardrail": {
           "mean_shift": 0.0,
           "ci_low": 0.0,
           "ci_high": 0.0,
-          "n_pairs": 0
+          "n_pairs": 0,
+          "low_n": true
         },
         "regulatory": {
           "mean_shift": -0.089,
           "ci_low": -0.6,
           "ci_high": 0.833,
-          "n_pairs": 3
+          "n_pairs": 3,
+          "low_n": false
         }
       }
     }
@@ -28548,37 +28620,73 @@
           "mean_drift": 0.354,
           "ci_low": -0.224,
           "ci_high": 0.756,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            2.134,
+            3.146,
+            2.488
+          ]
         },
         "escalation": {
           "mean_drift": -0.356,
           "ci_low": -1.152,
           "ci_high": 0.486,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            2.644,
+            3.094,
+            2.288
+          ]
         },
         "confidence": {
           "mean_drift": -1.11,
           "ci_low": -1.644,
           "ci_high": -0.642,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            3.556,
+            3.306,
+            2.446
+          ]
         },
         "jurisdiction": {
           "mean_drift": -0.62,
           "ci_low": -1.11,
           "ci_high": -0.106,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            2.954,
+            2.442,
+            2.334
+          ]
         },
         "guardrail": {
           "mean_drift": 0.0,
           "ci_low": 0.0,
           "ci_high": 0.0,
-          "n_sequences": 0
+          "n_sequences": 0,
+          "low_n": true,
+          "turn_means": [
+            null,
+            2.657,
+            1.952
+          ]
         },
         "regulatory": {
           "mean_drift": 0.0,
           "ci_low": 0.0,
           "ci_high": 0.0,
-          "n_sequences": 0
+          "n_sequences": 0,
+          "low_n": true,
+          "turn_means": [
+            3.0,
+            null,
+            null
+          ]
         }
       },
       "claude": {
@@ -28586,37 +28694,73 @@
           "mean_drift": -0.002,
           "ci_low": -0.824,
           "ci_high": 0.82,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            2.312,
+            3.068,
+            2.31
+          ]
         },
         "escalation": {
           "mean_drift": -0.266,
           "ci_low": -1.556,
           "ci_high": 1.024,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            3.332,
+            3.644,
+            3.066
+          ]
         },
         "confidence": {
           "mean_drift": -0.6,
           "ci_low": -1.78,
           "ci_high": 0.378,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            3.976,
+            4.11,
+            3.376
+          ]
         },
         "jurisdiction": {
           "mean_drift": -0.356,
           "ci_low": -1.224,
           "ci_high": 0.378,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            3.332,
+            3.312,
+            2.976
+          ]
         },
         "guardrail": {
           "mean_drift": -0.775,
           "ci_low": -2.11,
           "ci_high": 0.56,
-          "n_sequences": 2
+          "n_sequences": 2,
+          "low_n": true,
+          "turn_means": [
+            4.0,
+            3.667,
+            3.09
+          ]
         },
         "regulatory": {
           "mean_drift": 0.0,
           "ci_low": 0.0,
           "ci_high": 0.0,
-          "n_sequences": 0
+          "n_sequences": 0,
+          "low_n": true,
+          "turn_means": [
+            3.0,
+            3.0,
+            null
+          ]
         }
       },
       "gemini": {
@@ -28624,39 +28768,223 @@
           "mean_drift": 2.724,
           "ci_low": 2.102,
           "ci_high": 3.334,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            1.744,
+            4.306,
+            4.468
+          ]
         },
         "escalation": {
           "mean_drift": 1.902,
           "ci_low": 1.122,
           "ci_high": 2.76,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            2.076,
+            4.188,
+            3.978
+          ]
         },
         "confidence": {
           "mean_drift": 0.582,
           "ci_low": 0.204,
           "ci_high": 0.96,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            3.484,
+            4.268,
+            4.066
+          ]
         },
         "jurisdiction": {
           "mean_drift": 0.636,
           "ci_low": 0.236,
           "ci_high": 1.07,
-          "n_sequences": 5
+          "n_sequences": 5,
+          "low_n": false,
+          "turn_means": [
+            2.988,
+            3.168,
+            3.624
+          ]
         },
         "guardrail": {
           "mean_drift": 0.5,
           "ci_low": 0.5,
           "ci_high": 0.5,
-          "n_sequences": 1
+          "n_sequences": 1,
+          "low_n": true,
+          "turn_means": [
+            4.5,
+            4.687,
+            3.956
+          ]
         },
         "regulatory": {
           "mean_drift": 0.0,
           "ci_low": 0.0,
           "ci_high": 0.0,
-          "n_sequences": 0
+          "n_sequences": 0,
+          "low_n": true,
+          "turn_means": [
+            3.0,
+            3.0,
+            5.0
+          ]
         }
       }
+    }
+  },
+  "variance_components": {
+    "per_model_dim": {
+      "chatgpt": {
+        "confidence": {
+          "s2_prompt": 0.4824,
+          "s2_response": 0.0,
+          "s2_judge": 0.5389,
+          "pct_prompt": 47.2,
+          "pct_response": 0.0,
+          "pct_judge": 52.8,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 538
+        },
+        "disclaimer": {
+          "s2_prompt": 0.5772,
+          "s2_response": 0.0114,
+          "s2_judge": 0.6583,
+          "pct_prompt": 46.3,
+          "pct_response": 0.9,
+          "pct_judge": 52.8,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 538
+        },
+        "escalation": {
+          "s2_prompt": 0.759,
+          "s2_response": 0.0,
+          "s2_judge": 0.8231,
+          "pct_prompt": 48.0,
+          "pct_response": 0.0,
+          "pct_judge": 52.0,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 538
+        },
+        "jurisdiction": {
+          "s2_prompt": 0.718,
+          "s2_response": 0.0,
+          "s2_judge": 0.5306,
+          "pct_prompt": 57.5,
+          "pct_response": 0.0,
+          "pct_judge": 42.5,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 538
+        }
+      },
+      "claude": {
+        "confidence": {
+          "s2_prompt": 0.7263,
+          "s2_response": 0.0,
+          "s2_judge": 0.463,
+          "pct_prompt": 61.1,
+          "pct_response": 0.0,
+          "pct_judge": 38.9,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 538
+        },
+        "disclaimer": {
+          "s2_prompt": 0.6422,
+          "s2_response": 0.0844,
+          "s2_judge": 0.4972,
+          "pct_prompt": 52.5,
+          "pct_response": 6.9,
+          "pct_judge": 40.6,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 538
+        },
+        "escalation": {
+          "s2_prompt": 1.2782,
+          "s2_response": 0.0,
+          "s2_judge": 0.65,
+          "pct_prompt": 66.3,
+          "pct_response": 0.0,
+          "pct_judge": 33.7,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 538
+        },
+        "jurisdiction": {
+          "s2_prompt": 0.8707,
+          "s2_response": 0.0686,
+          "s2_judge": 0.4537,
+          "pct_prompt": 62.5,
+          "pct_response": 4.9,
+          "pct_judge": 32.6,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 538
+        }
+      },
+      "gemini": {
+        "confidence": {
+          "s2_prompt": 0.6127,
+          "s2_response": 0.0678,
+          "s2_judge": 0.4731,
+          "pct_prompt": 53.1,
+          "pct_response": 5.9,
+          "pct_judge": 41.0,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 537
+        },
+        "disclaimer": {
+          "s2_prompt": 2.0591,
+          "s2_response": 0.4724,
+          "s2_judge": 0.4241,
+          "pct_prompt": 69.7,
+          "pct_response": 16.0,
+          "pct_judge": 14.3,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 537
+        },
+        "escalation": {
+          "s2_prompt": 1.7917,
+          "s2_response": 0.1832,
+          "s2_judge": 0.7537,
+          "pct_prompt": 65.7,
+          "pct_response": 6.7,
+          "pct_judge": 27.6,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 537
+        },
+        "jurisdiction": {
+          "s2_prompt": 0.7727,
+          "s2_response": 0.0875,
+          "s2_judge": 0.4204,
+          "pct_prompt": 60.3,
+          "pct_response": 6.8,
+          "pct_judge": 32.8,
+          "n_prompts": 60,
+          "n_responses": 180,
+          "n_judgments": 537
+        }
+      }
+    },
+    "pooled": {
+      "pct_prompt": 59.6,
+      "pct_response": 5.1,
+      "pct_judge": 35.3,
+      "n_cells": 12
     }
   }
 }
