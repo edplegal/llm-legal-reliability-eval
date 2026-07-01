@@ -60,7 +60,8 @@ uv venv && uv pip install -e ".[dev]"   # one-time setup
 export OPENAI_API_KEY=... ANTHROPIC_API_KEY=... GOOGLE_API_KEY=...
 
 ./run_all.sh                  # full pipeline, 1 sample per (prompt, model)
-./run_all.sh --samples 3      # 3 samples per cell (separates response from judge variance)
+./run_all.sh --samples 3      # 3 samples per cell (feeds the variance_components
+                              # stat: prompt vs response vs judge variance shares)
 ./run_all.sh --resume         # skip already-collected/judged work after an interruption
 ./run_all.sh --dry-run        # print the plan without API calls
 ```

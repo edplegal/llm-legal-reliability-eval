@@ -3,7 +3,7 @@
 The analysis is structured around three principles that drive most of the
 non-obvious code:
 
-1. The unit of analysis is the prompt, not the judgment. The same 30 prompts
+1. The unit of analysis is the prompt, not the judgment. The same prompts
    are answered by every model, so paired (per-prompt) bootstraps give tighter
    intervals than naive pooled means.
 
@@ -35,9 +35,13 @@ from ai_eval.schema import APPLICABLE_DIMENSIONS, DIMENSIONS
 
 logger = logging.getLogger(__name__)
 
-ANALYZE_VERSION = 2
+ANALYZE_VERSION = 3
 BOOTSTRAP_ITERATIONS = 2000
 BOOTSTRAP_SEED = 20260521
+# Aggregates over fewer than this many pairs/sequences are marked low_n; the
+# report suppresses their point estimates (a bootstrap CI over n<3 values is
+# not meaningful).
+LOW_N_THRESHOLD = 3
 
 
 def load_judge_scores() -> list[dict[str, Any]]:
@@ -64,6 +68,15 @@ def std_dev(values: list[float]) -> float:
     avg = mean(values)
     variance = sum((v - avg) ** 2 for v in values) / len(values)
     return math.sqrt(variance)
+
+
+def sample_variance(values: list[float]) -> float:
+    """Unbiased (n-1) sample variance. Returns 0.0 for fewer than two values."""
+    n = len(values)
+    if n < 2:
+        return 0.0
+    avg = mean(values)
+    return sum((v - avg) ** 2 for v in values) / (n - 1)
 
 
 def median(values: list[float]) -> float:
@@ -413,8 +426,14 @@ def compute_self_favoritism(
         {judge: {dim: {
             self_avg, other_avg, diff,            # legacy naive metric
             self_premium_vs_median_of_others,     # new median-of-others bias
+            premium_ci_low, premium_ci_high,      # bootstrap CI over prompts
             n_self_responses,                     # n responses J judged self on
+            n_premium_prompts,                    # n prompts behind the CI
         }}}
+
+    The CI resamples prompt-level premium means (the pipeline's unit of
+    analysis), so a flag can be read against whether its CI excludes zero
+    rather than only the |premium| > threshold heuristic.
     """
     # Legacy bucket: judge -> "self"/"other" -> dim -> scores
     legacy: dict[str, dict[str, dict[str, list[float]]]] = defaultdict(
@@ -426,6 +445,7 @@ def compute_self_favoritism(
         lambda: defaultdict(dict)
     )
     response_meta: dict[str, str] = {}  # response_id -> responding_model
+    response_prompt: dict[str, int] = {}  # response_id -> prompt_id
 
     for entry in unblinded_scores:
         if entry["scores"] is None:
@@ -434,6 +454,7 @@ def compute_self_favoritism(
         judge = entry["judge_model"]
         responding = entry["responding_model"]
         response_meta[rid] = responding
+        response_prompt[rid] = entry["prompt_id"]
         bucket = "self" if judge == responding else "other"
         for dim in DIMENSIONS:
             val = get_score_value(entry["scores"], dim)
@@ -446,6 +467,10 @@ def compute_self_favoritism(
     # judged its own model, compute judge_score - median(other_judges' scores).
     premium: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
     premium_n: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+    # judge -> dim -> prompt_id -> premiums (for the prompt-level bootstrap)
+    premium_by_prompt: dict[str, dict[str, dict[int, list[float]]]] = defaultdict(
+        lambda: defaultdict(lambda: defaultdict(list))
+    )
     for rid, by_judge in response_scores.items():
         responding = response_meta.get(rid)
         if responding is None or responding not in by_judge:
@@ -463,8 +488,10 @@ def compute_self_favoritism(
             ]
             if not other_scores:
                 continue
-            premium[self_judge][dim].append(self_score - median(other_scores))
+            value = self_score - median(other_scores)
+            premium[self_judge][dim].append(value)
             premium_n[self_judge][dim] += 1
+            premium_by_prompt[self_judge][dim][response_prompt[rid]].append(value)
 
     result: dict[str, dict[str, dict[str, float]]] = {}
     for judge_model, bucket_data in legacy.items():
@@ -476,12 +503,21 @@ def compute_self_favoritism(
             other_avg = round(mean(other_vals), 2) if other_vals else 0.0
             prem_vals = premium.get(judge_model, {}).get(dim, [])
             prem_avg = round(mean(prem_vals), 3) if prem_vals else 0.0
+            by_prompt = premium_by_prompt.get(judge_model, {}).get(dim, {})
+            prompt_means = [mean(vals) for vals in by_prompt.values()]
+            if prompt_means:
+                ci_low, ci_high = bootstrap_ci(prompt_means)
+            else:
+                ci_low, ci_high = 0.0, 0.0
             result[judge_model][dim] = {
                 "self_avg": self_avg,
                 "other_avg": other_avg,
                 "diff": round(self_avg - other_avg, 2),
                 "self_premium_vs_median_of_others": prem_avg,
+                "premium_ci_low": round(ci_low, 3),
+                "premium_ci_high": round(ci_high, 3),
                 "n_self_responses": premium_n.get(judge_model, {}).get(dim, 0),
+                "n_premium_prompts": len(prompt_means),
             }
     return result
 
@@ -786,7 +822,8 @@ def compute_contextual_calibration(
             row["by_model"][model] = dim_shifts
         per_pair_rows.append(row)
 
-    model_aggregate: dict[str, dict[str, dict[str, float]]] = {}
+    # Cells are heterogeneous (floats, counts, low_n flag), hence Any.
+    model_aggregate: dict[str, dict[str, dict[str, Any]]] = {}
     for model in models:
         model_aggregate[model] = {}
         for dim in DIMENSIONS:
@@ -798,6 +835,7 @@ def compute_contextual_calibration(
                     "ci_low": 0.0,
                     "ci_high": 0.0,
                     "n_pairs": 0,
+                    "low_n": True,
                 }
                 continue
             m_shift = mean(values)
@@ -807,6 +845,7 @@ def compute_contextual_calibration(
                 "ci_low": round(ci_low, 3),
                 "ci_high": round(ci_high, 3),
                 "n_pairs": n,
+                "low_n": n < LOW_N_THRESHOLD,
             }
 
     return {
@@ -830,8 +869,13 @@ def compute_pressure_drift(
     Returns:
         {
           "per_sequence": [{seq_id, turns:[...], by_model: {model: {dim: [s1,s2,s3]}}}],
-          "model_aggregate": {model: {dim: {mean_drift, n_sequences}}},
+          "model_aggregate": {model: {dim: {mean_drift, ci_low, ci_high,
+                                            n_sequences, low_n,
+                                            turn_means: [t1, t2, t3]}}},
         }
+
+    turn_means exposes the per-turn trajectory the t3 - t1 drift metric
+    hides (several sequences spike at turn 2 and fall back at turn 3).
     """
     sequences: dict[str, dict[str, int]] = defaultdict(dict)
     for pid, info in prompts_by_id.items():
@@ -845,6 +889,10 @@ def compute_pressure_drift(
 
     per_sequence_rows: list[dict[str, Any]] = []
     drifts: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
+    # model -> dim -> [values at turn 1, at turn 2, at turn 3]
+    turn_values: dict[str, dict[str, list[list[float]]]] = defaultdict(
+        lambda: defaultdict(lambda: [[], [], []])
+    )
 
     for seq_id in sorted(sequences.keys()):
         roles = sequences[seq_id]
@@ -865,23 +913,34 @@ def compute_pressure_drift(
                     score = per_prompt.get((pid, model, dim))
                     triplet.append(round(score, 2) if score is not None else None)
                 dim_turns[dim] = triplet
+                for turn_idx, turn_val in enumerate(triplet):
+                    if turn_val is not None:
+                        turn_values[model][dim][turn_idx].append(turn_val)
                 if triplet[0] is not None and triplet[2] is not None:
                     drifts[model][dim].append(triplet[2] - triplet[0])
             row["by_model"][model] = dim_turns
         per_sequence_rows.append(row)
 
-    model_aggregate: dict[str, dict[str, dict[str, float]]] = {}
+    # Cells are heterogeneous (floats, counts, low_n flag, turn_means list),
+    # hence Any.
+    model_aggregate: dict[str, dict[str, dict[str, Any]]] = {}
     for model in models:
         model_aggregate[model] = {}
         for dim in DIMENSIONS:
             values = drifts.get(model, {}).get(dim, [])
             n = len(values)
+            per_turn = turn_values.get(model, {}).get(dim, [[], [], []])
+            turn_means: list[float | None] = [
+                round(mean(vals), 3) if vals else None for vals in per_turn
+            ]
             if n == 0:
                 model_aggregate[model][dim] = {
                     "mean_drift": 0.0,
                     "ci_low": 0.0,
                     "ci_high": 0.0,
                     "n_sequences": 0,
+                    "low_n": True,
+                    "turn_means": turn_means,
                 }
                 continue
             m_drift = mean(values)
@@ -891,12 +950,143 @@ def compute_pressure_drift(
                 "ci_low": round(ci_low, 3),
                 "ci_high": round(ci_high, 3),
                 "n_sequences": n,
+                "low_n": n < LOW_N_THRESHOLD,
+                "turn_means": turn_means,
             }
 
     return {
         "per_sequence": per_sequence_rows,
         "model_aggregate": model_aggregate,
     }
+
+
+def compute_variance_components(
+    unblinded_scores: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Nested variance decomposition: prompt / response / judge shares.
+
+    Judgments nest as judges within responses (samples) within prompts.
+    Method-of-moments on that hierarchy, per (model, dim) over the
+    always-applicable dimensions:
+
+        mean within-response variance                 -> s2_judge
+        mean within-prompt variance of response means -> s2_response
+                                                         + s2_judge / n_j
+        variance of prompt means                      -> s2_prompt
+                                                         + s2_response / n_s
+                                                         + s2_judge / (n_s * n_j)
+
+    with n_j / n_s the average judges-per-response and samples-per-prompt.
+    Negative component estimates are clipped to zero (standard method-of-
+    moments practice). A cell needs >= 2 prompts, >= 1 multi-judge response,
+    and >= 1 multi-sample prompt; otherwise it is reported as
+    insufficient_data — a single-sample run cannot separate response
+    variance from prompt variance.
+
+    Returns:
+        {
+          "per_model_dim": {model: {dim: {s2_*, pct_*, n_*} | insufficient}},
+          "pooled": {pct_prompt, pct_response, pct_judge, n_cells},
+        }
+    """
+    # (model, dim) -> prompt_id -> sample_idx -> [judge scores]
+    nest: dict[tuple[str, str], dict[int, dict[int, list[float]]]] = defaultdict(
+        lambda: defaultdict(lambda: defaultdict(list))
+    )
+    for entry in unblinded_scores:
+        if entry["scores"] is None:
+            continue
+        model = entry["responding_model"]
+        pid = entry["prompt_id"]
+        sample_idx = entry.get("sample_idx", 0)
+        for dim in APPLICABLE_DIMENSIONS:
+            val = get_score_value(entry["scores"], dim)
+            if val is not None:
+                nest[(model, dim)][pid][sample_idx].append(val)
+
+    per_model_dim: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
+    pooled_components: dict[str, list[float]] = defaultdict(list)
+    for (model, dim), by_prompt in sorted(nest.items()):
+        within_response_vars: list[float] = []
+        response_mean_vars: list[float] = []
+        prompt_means: list[float] = []
+        judges_per_response: list[float] = []
+        samples_per_prompt: list[float] = []
+        n_judgments = 0
+        n_responses = 0
+        for by_sample in by_prompt.values():
+            sample_means: list[float] = []
+            for vals in by_sample.values():
+                n_responses += 1
+                n_judgments += len(vals)
+                if len(vals) >= 2:
+                    within_response_vars.append(sample_variance(vals))
+                    judges_per_response.append(float(len(vals)))
+                sample_means.append(mean(vals))
+            if len(sample_means) >= 2:
+                response_mean_vars.append(sample_variance(sample_means))
+                samples_per_prompt.append(float(len(sample_means)))
+            prompt_means.append(mean(sample_means))
+
+        insufficient = (
+            len(prompt_means) < 2 or not within_response_vars or not response_mean_vars
+        )
+        if not insufficient:
+            n_j = mean(judges_per_response)
+            n_s = mean(samples_per_prompt)
+            s2_judge = mean(within_response_vars)
+            s2_response = max(0.0, mean(response_mean_vars) - s2_judge / n_j)
+            s2_prompt = max(
+                0.0,
+                sample_variance(prompt_means)
+                - s2_response / n_s
+                - s2_judge / (n_s * n_j),
+            )
+            total = s2_prompt + s2_response + s2_judge
+            insufficient = total == 0
+        if insufficient:
+            per_model_dim[model][dim] = {
+                "insufficient_data": True,
+                "n_prompts": len(prompt_means),
+                "n_responses": n_responses,
+                "n_judgments": n_judgments,
+            }
+            continue
+        per_model_dim[model][dim] = {
+            "s2_prompt": round(s2_prompt, 4),
+            "s2_response": round(s2_response, 4),
+            "s2_judge": round(s2_judge, 4),
+            "pct_prompt": round(100 * s2_prompt / total, 1),
+            "pct_response": round(100 * s2_response / total, 1),
+            "pct_judge": round(100 * s2_judge / total, 1),
+            "n_prompts": len(prompt_means),
+            "n_responses": n_responses,
+            "n_judgments": n_judgments,
+        }
+        pooled_components["prompt"].append(s2_prompt)
+        pooled_components["response"].append(s2_response)
+        pooled_components["judge"].append(s2_judge)
+
+    n_cells = len(pooled_components["prompt"])
+    if n_cells:
+        pool_prompt = mean(pooled_components["prompt"])
+        pool_response = mean(pooled_components["response"])
+        pool_judge = mean(pooled_components["judge"])
+        pool_total = pool_prompt + pool_response + pool_judge
+        pooled: dict[str, Any] = {
+            "pct_prompt": round(100 * pool_prompt / pool_total, 1),
+            "pct_response": round(100 * pool_response / pool_total, 1),
+            "pct_judge": round(100 * pool_judge / pool_total, 1),
+            "n_cells": n_cells,
+        }
+    else:
+        pooled = {
+            "pct_prompt": 0.0,
+            "pct_response": 0.0,
+            "pct_judge": 0.0,
+            "n_cells": 0,
+        }
+    return {"per_model_dim": dict(per_model_dim), "pooled": pooled}
 
 
 def compute_run_metadata(
@@ -1056,14 +1246,16 @@ def print_summary(results: dict[str, Any]) -> None:
                 stats = cal_agg[model].get(dim, {})
                 if stats.get("n_pairs", 0) == 0:
                     continue
+                low_n = " [LOW N — do not report]" if stats.get("low_n") else ""
                 print(
                     f"    {dim:<14} shift = {stats['mean_shift']:+.2f} "
                     f"[{stats['ci_low']:+.2f}, {stats['ci_high']:+.2f}] "
-                    f"(n_pairs={stats['n_pairs']})"
+                    f"(n_pairs={stats['n_pairs']}){low_n}"
                 )
 
     drift = results.get("pressure_drift", {})
-    drift_agg: dict[str, dict[str, dict[str, float]]] = drift.get("model_aggregate", {})
+    # Cells are heterogeneous since v3 (floats, low_n flag, turn_means list).
+    drift_agg: dict[str, dict[str, dict[str, Any]]] = drift.get("model_aggregate", {})
     if drift_agg:
         print("\n--- PRESSURE DRIFT (turn_3 - turn_1, averaged over sequences) ---")
         print(
@@ -1073,14 +1265,31 @@ def print_summary(results: dict[str, Any]) -> None:
         for model in sorted(drift_agg.keys()):
             print(f"  {model}:")
             for dim in DIMENSIONS:
-                stats = drift_agg[model].get(dim, {})
-                if stats.get("n_sequences", 0) == 0:
+                drift_stats = drift_agg[model].get(dim, {})
+                if drift_stats.get("n_sequences", 0) == 0:
                     continue
-                print(
-                    f"    {dim:<14} drift = {stats['mean_drift']:+.2f} "
-                    f"[{stats['ci_low']:+.2f}, {stats['ci_high']:+.2f}] "
-                    f"(n_sequences={stats['n_sequences']})"
+                low_n = " [LOW N — do not report]" if drift_stats.get("low_n") else ""
+                turn_means: list[float | None] = drift_stats.get("turn_means") or []
+                turns = " -> ".join(
+                    "n/a" if v is None else f"{v:.2f}" for v in turn_means
                 )
+                print(
+                    f"    {dim:<14} drift = {drift_stats['mean_drift']:+.2f} "
+                    f"[{drift_stats['ci_low']:+.2f}, {drift_stats['ci_high']:+.2f}] "
+                    f"(n_sequences={drift_stats['n_sequences']}, "
+                    f"turns {turns}){low_n}"
+                )
+
+    variance = results.get("variance_components", {})
+    pooled = variance.get("pooled", {})
+    if pooled.get("n_cells"):
+        print("\n--- VARIANCE COMPONENTS (share of judgment variance) ---")
+        print(
+            f"  pooled over {pooled['n_cells']} model x dim cells: "
+            f"prompt {pooled['pct_prompt']:.1f}% | "
+            f"response {pooled['pct_response']:.1f}% | "
+            f"judge {pooled['pct_judge']:.1f}%"
+        )
 
     h2h: list[dict[str, Any]] = results["head_to_head_divergence"]
     print(f"\n--- HEAD-TO-HEAD DIVERGENCE ({len(h2h)}) ---")
@@ -1123,6 +1332,7 @@ def analyze() -> None:
     h2h_divergence = find_head_to_head_divergence(unblinded)
     contextual_calibration = compute_contextual_calibration(unblinded, prompts_by_id)
     pressure_drift = compute_pressure_drift(unblinded, prompts_by_id)
+    variance_components = compute_variance_components(unblinded)
     run_metadata = compute_run_metadata(scores, lookup, prompts_by_id)
 
     results: dict[str, Any] = {
@@ -1141,6 +1351,7 @@ def analyze() -> None:
         "head_to_head_divergence": h2h_divergence,
         "contextual_calibration": contextual_calibration,
         "pressure_drift": pressure_drift,
+        "variance_components": variance_components,
     }
 
     output_path = data_dir() / "analysis_results.json"

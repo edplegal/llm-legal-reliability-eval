@@ -12,6 +12,7 @@ from ai_eval.analyze import (
     compute_paired_model_diffs,
     compute_pressure_drift,
     compute_self_favoritism,
+    compute_variance_components,
     find_critical_failures,
     find_head_to_head_divergence,
     find_high_disagreement,
@@ -20,6 +21,7 @@ from ai_eval.analyze import (
     krippendorff_alpha_ordinal,
     mean,
     median,
+    sample_variance,
     std_dev,
 )
 
@@ -42,6 +44,7 @@ def _entry(
     judge: str,
     responder: str,
     scores: dict[str, dict[str, Any]] | None,
+    sample_idx: int = 0,
 ) -> dict[str, Any]:
     return {
         "response_id": rid,
@@ -49,6 +52,7 @@ def _entry(
         "judge_model": judge,
         "responding_model": responder,
         "scores": scores,
+        "sample_idx": sample_idx,
     }
 
 
@@ -76,6 +80,12 @@ class TestMathHelpers:
 
     def test_median_empty(self) -> None:
         assert median([]) == 0.0
+
+    def test_sample_variance_known_values(self) -> None:
+        assert sample_variance([2.0, 4.0]) == 2.0
+
+    def test_sample_variance_single_value_is_zero(self) -> None:
+        assert sample_variance([3.0]) == 0.0
 
 
 class TestGetScoreValue:
@@ -282,6 +292,29 @@ class TestSelfFavoritism:
         fav = compute_self_favoritism(entries)
         assert flag_self_favoritism(fav, threshold=0.5) == []
 
+    def test_premium_ci_degenerate_for_single_prompt(self) -> None:
+        # One prompt's premium (2.0) → CI collapses to the point estimate.
+        entries = [
+            _entry("R-A", 1, "chatgpt", "chatgpt", _scores_for(5)),
+            _entry("R-A", 1, "claude", "chatgpt", _scores_for(3)),
+            _entry("R-A", 1, "gemini", "chatgpt", _scores_for(3)),
+        ]
+        fav = compute_self_favoritism(entries)
+        stats = fav["chatgpt"]["disclaimer"]
+        assert stats["premium_ci_low"] == 2.0
+        assert stats["premium_ci_high"] == 2.0
+        assert stats["n_premium_prompts"] == 1
+
+    def test_premium_ci_zero_when_no_self_judgments(self) -> None:
+        entries = [
+            _entry("R-B", 1, "chatgpt", "claude", _scores_for(2)),
+        ]
+        fav = compute_self_favoritism(entries)
+        stats = fav["chatgpt"]["disclaimer"]
+        assert stats["n_premium_prompts"] == 0
+        assert stats["premium_ci_low"] == 0.0
+        assert stats["premium_ci_high"] == 0.0
+
 
 class TestJudgeResponderMatrix:
     """Tests for the 3x3 judge × responder matrix."""
@@ -360,6 +393,46 @@ class TestContextualCalibration:
         result = compute_contextual_calibration(entries, prompts_by_id)
         assert result["per_pair"] == []
 
+    def test_low_n_flag_set_for_single_pair(self) -> None:
+        entries = [
+            _entry("R-info", 1, "judge1", "modelA", _scores_for(3)),
+            _entry("R-crisis", 2, "judge1", "modelA", _scores_for(5)),
+        ]
+        prompts_by_id = {
+            1: {"id": 1, "pair_id": "P01", "pair_role": "info"},
+            2: {"id": 2, "pair_id": "P01", "pair_role": "crisis"},
+        }
+        result = compute_contextual_calibration(entries, prompts_by_id)
+        agg = result["model_aggregate"]["modelA"]["disclaimer"]
+        assert agg["n_pairs"] == 1
+        assert agg["low_n"] is True
+
+    def test_low_n_flag_clear_with_enough_pairs(self) -> None:
+        entries: list[dict[str, Any]] = []
+        prompts_by_id: dict[int, dict[str, Any]] = {}
+        for k in range(3):
+            info_id, crisis_id = 10 + 2 * k, 11 + 2 * k
+            prompts_by_id[info_id] = {
+                "id": info_id,
+                "pair_id": f"P0{k}",
+                "pair_role": "info",
+            }
+            prompts_by_id[crisis_id] = {
+                "id": crisis_id,
+                "pair_id": f"P0{k}",
+                "pair_role": "crisis",
+            }
+            entries.append(
+                _entry(f"R-i{k}", info_id, "judge1", "modelA", _scores_for(3))
+            )
+            entries.append(
+                _entry(f"R-c{k}", crisis_id, "judge1", "modelA", _scores_for(4))
+            )
+        result = compute_contextual_calibration(entries, prompts_by_id)
+        agg = result["model_aggregate"]["modelA"]["disclaimer"]
+        assert agg["n_pairs"] == 3
+        assert agg["low_n"] is False
+
 
 class TestPressureDrift:
     """Tests for the multi-turn pressure-drift metric."""
@@ -393,3 +466,71 @@ class TestPressureDrift:
         }
         result = compute_pressure_drift(entries, prompts_by_id)
         assert result["per_sequence"] == []
+
+    def test_turn_means_and_low_n_exposed(self) -> None:
+        # The t3 - t1 metric hides the trajectory; turn_means must carry it,
+        # and a single sequence must be marked low_n.
+        entries = [
+            _entry("R-T1", 1, "judge1", "modelA", _scores_for(5)),
+            _entry("R-T2", 2, "judge1", "modelA", _scores_for(3)),
+            _entry("R-T3", 3, "judge1", "modelA", _scores_for(1)),
+        ]
+        prompts_by_id = {
+            1: {"id": 1, "pair_id": "S01", "pair_role": "turn_1"},
+            2: {"id": 2, "pair_id": "S01", "pair_role": "turn_2"},
+            3: {"id": 3, "pair_id": "S01", "pair_role": "turn_3"},
+        }
+        result = compute_pressure_drift(entries, prompts_by_id)
+        agg = result["model_aggregate"]["modelA"]["disclaimer"]
+        assert agg["turn_means"] == [5.0, 3.0, 1.0]
+        assert agg["low_n"] is True
+
+
+class TestVarianceComponents:
+    """Tests for the prompt/response/judge variance decomposition."""
+
+    def test_decomposes_known_structure(self) -> None:
+        # 2 prompts x 2 samples x 2 judges. Judges disagree within every
+        # response (var 2), samples are identical within each prompt
+        # (response var 0), and the prompts differ (prompt variance).
+        entries: list[dict[str, Any]] = []
+        for pid, (score_a, score_b) in ((1, (3, 5)), (2, (1, 3))):
+            for sample in (0, 1):
+                rid = f"R{pid}-{sample}"
+                entries.append(
+                    _entry(rid, pid, "j1", "modelA", _scores_for(score_a), sample)
+                )
+                entries.append(
+                    _entry(rid, pid, "j2", "modelA", _scores_for(score_b), sample)
+                )
+        result = compute_variance_components(entries)
+        cell = result["per_model_dim"]["modelA"]["disclaimer"]
+        assert cell["s2_judge"] == 2.0
+        assert cell["s2_response"] == 0.0
+        assert cell["s2_prompt"] == 1.5
+        assert cell["pct_judge"] == 57.1
+        assert cell["n_prompts"] == 2
+        assert cell["n_responses"] == 4
+        assert cell["n_judgments"] == 8
+        # All four applicable dims share the same structure.
+        assert result["pooled"]["n_cells"] == 4
+        assert result["pooled"]["pct_judge"] == 57.1
+
+    def test_single_sample_marks_insufficient(self) -> None:
+        # One sample per prompt: response variance is inseparable from
+        # prompt variance, so the cell must be marked, not guessed.
+        entries = [
+            _entry("R1", 1, "j1", "modelA", _scores_for(3)),
+            _entry("R1", 1, "j2", "modelA", _scores_for(5)),
+            _entry("R2", 2, "j1", "modelA", _scores_for(2)),
+            _entry("R2", 2, "j2", "modelA", _scores_for(4)),
+        ]
+        result = compute_variance_components(entries)
+        cell = result["per_model_dim"]["modelA"]["disclaimer"]
+        assert cell.get("insufficient_data") is True
+        assert result["pooled"]["n_cells"] == 0
+
+    def test_empty_input_returns_zero_cells(self) -> None:
+        result = compute_variance_components([])
+        assert result["per_model_dim"] == {}
+        assert result["pooled"]["n_cells"] == 0

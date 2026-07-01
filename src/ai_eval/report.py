@@ -357,12 +357,21 @@ def build_self_favoritism_section(analysis: dict[str, Any]) -> str:
             n_self = int(stats.get("n_self_responses", 0))
             flag_class = ' class="flagged"' if n_self and abs(premium) > 0.5 else ""
             premium_disp = f"{premium:+.2f}" if n_self else "<em>n=0</em>"
+            ci_low = stats.get("premium_ci_low")
+            ci_high = stats.get("premium_ci_high")
+            if n_self and ci_low is not None and ci_high is not None:
+                excludes_zero = ci_low > 0 or ci_high < 0
+                marker = " *" if excludes_zero else ""
+                ci_disp = f"[{ci_low:+.2f}, {ci_high:+.2f}]{marker}"
+            else:
+                ci_disp = "<em>&mdash;</em>"
             rows += f"""<tr{flag_class}>
                 <td>{esc(dim)}</td>
                 <td>{stats['self_avg']:.2f}</td>
                 <td>{stats['other_avg']:.2f}</td>
                 <td>{stats['diff']:+.2f}</td>
                 <td>{premium_disp}</td>
+                <td>{ci_disp}</td>
                 <td>{n_self}</td>
             </tr>"""
         tables += f"""
@@ -372,6 +381,7 @@ def build_self_favoritism_section(analysis: dict[str, Any]) -> str:
             <th>Dimension</th><th>Self Avg</th><th>Other Avg</th>
             <th>Naive Diff</th>
             <th>Premium vs Median<br>(controls for quality)</th>
+            <th>Premium 95% CI<br>(bootstrap over prompts; * excludes 0)</th>
             <th>n Self Responses</th>
         </tr></thead>
         <tbody>{rows}</tbody>
@@ -621,7 +631,8 @@ def build_contextual_calibration_section(
     """The headline-insight section: do models elevate safety on crisis framings?"""
     calibration = analysis.get("contextual_calibration", {})
     per_pair: list[dict[str, Any]] = calibration.get("per_pair", [])
-    agg: dict[str, dict[str, dict[str, float]]] = calibration.get("model_aggregate", {})
+    # Cells are heterogeneous since analyze v3 (floats, counts, low_n flag).
+    agg: dict[str, dict[str, dict[str, Any]]] = calibration.get("model_aggregate", {})
     if not per_pair and not agg:
         return ""
 
@@ -635,6 +646,13 @@ def build_contextual_calibration_section(
             n = int(stats.get("n_pairs", 0))
             if n == 0:
                 cells += '<td><span class="badge na">N/A</span></td>'
+                continue
+            if stats.get("low_n"):
+                # Point estimates over n<3 pairs are suppressed, not shown.
+                cells += (
+                    '<td><span class="badge na">low n</span>'
+                    f'<div class="badge-n">n={n} &mdash; suppressed</div></td>'
+                )
                 continue
             shift = float(stats.get("mean_shift", 0.0))
             ci_low = float(stats.get("ci_low", 0.0))
@@ -725,7 +743,8 @@ def build_pressure_drift_section(
     """Multi-turn pressure: does rigor decay across turns 1→2→3?"""
     drift = analysis.get("pressure_drift", {})
     per_seq: list[dict[str, Any]] = drift.get("per_sequence", [])
-    agg: dict[str, dict[str, dict[str, float]]] = drift.get("model_aggregate", {})
+    # Cells are heterogeneous since analyze v3 (floats, low_n, turn_means).
+    agg: dict[str, dict[str, dict[str, Any]]] = drift.get("model_aggregate", {})
     if not per_seq and not agg:
         return ""
 
@@ -739,6 +758,13 @@ def build_pressure_drift_section(
             if n == 0:
                 cells += '<td><span class="badge na">N/A</span></td>'
                 continue
+            if stats.get("low_n"):
+                # Point estimates over n<3 sequences are suppressed, not shown.
+                cells += (
+                    '<td><span class="badge na">low n</span>'
+                    f'<div class="badge-n">n={n} &mdash; suppressed</div></td>'
+                )
+                continue
             d_val = float(stats.get("mean_drift", 0.0))
             ci_low = float(stats.get("ci_low", 0.0))
             ci_high = float(stats.get("ci_high", 0.0))
@@ -747,10 +773,17 @@ def build_pressure_drift_section(
             badge = _shift_badge(d_val, desirable_positive=True)
             crosses_zero = ci_low <= 0 <= ci_high
             note = " (CI crosses 0)" if crosses_zero else ""
+            turn_means = stats.get("turn_means") or []
+            turns_html = ""
+            if any(v is not None for v in turn_means):
+                turns = " &rarr; ".join(
+                    "&mdash;" if v is None else f"{v:.1f}" for v in turn_means
+                )
+                turns_html = f'<div class="badge-n">turns {turns}</div>'
             cells += (
                 f"<td>{badge}"
                 f'<div class="badge-ci">[{ci_low:+.2f}, {ci_high:+.2f}]{note}</div>'
-                f'<div class="badge-n">n={n}</div></td>'
+                f'<div class="badge-n">n={n}</div>{turns_html}</td>'
             )
         agg_rows += f"<tr><td><strong>{esc(model)}</strong></td>{cells}</tr>\n"
     headers = "".join(f"<th>{esc(d)}</th>" for d in DIMENSIONS)
