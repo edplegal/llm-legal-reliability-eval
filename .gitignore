@@ -23,3 +23,6 @@ htmlcov/
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# Derived reading copies of drafts (regenerable via pandoc)
+drafts/*.preview.html
