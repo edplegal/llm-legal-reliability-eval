@@ -50,7 +50,6 @@ class TestCallModelWithRetry:
                 "chatgpt",
                 MOCK_CONFIG,
                 system_prompt="You are a helpful assistant.",
-                temperature=0.7,
                 max_tokens=2048,
             )
 
@@ -83,7 +82,6 @@ class TestCallModelWithRetry:
                 "chatgpt",
                 MOCK_CONFIG,
                 system_prompt="You are a helpful assistant.",
-                temperature=0.7,
                 max_tokens=2048,
             )
 
@@ -112,7 +110,6 @@ class TestCallModelWithRetry:
                 "chatgpt",
                 MOCK_CONFIG,
                 system_prompt="You are a helpful assistant.",
-                temperature=0.7,
                 max_tokens=2048,
             )
 

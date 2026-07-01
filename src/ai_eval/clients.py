@@ -4,6 +4,11 @@ Each caller normalizes one provider's chat API to a :class:`ProviderResult`.
 ``call_model_with_retry`` adds exponential-backoff retry on top, for callers
 that want all-or-nothing semantics (the judge phase layers its own
 parse-aware retry instead).
+
+Sampling runs at provider defaults: current-generation models (GPT-5.x,
+Claude Sonnet 5) reject explicit ``temperature``/``top_p`` values, so no
+sampling parameters are sent to any provider — every model behaves as it
+does for a default deployed user.
 """
 
 from __future__ import annotations
@@ -32,7 +37,6 @@ class ProviderCaller(Protocol):
         model_config: ModelConfig,
         *,
         system_prompt: str,
-        temperature: float,
         max_tokens: int,
     ) -> ProviderResult: ...
 
@@ -42,10 +46,13 @@ def call_openai(
     model_config: ModelConfig,
     *,
     system_prompt: str,
-    temperature: float,
     max_tokens: int,
 ) -> ProviderResult:
-    """Send a prompt to the OpenAI chat completions API."""
+    """Send a prompt to the OpenAI chat completions API.
+
+    Uses ``max_completion_tokens`` (the universal replacement for
+    ``max_tokens``): GPT-5.x models reject the legacy parameter name.
+    """
     api_key = os.environ[model_config["api_key_env"]]
     resp = requests.post(
         model_config["base_url"],
@@ -55,8 +62,7 @@ def call_openai(
         },
         json={
             "model": model_config["model"],
-            "temperature": temperature,
-            "max_tokens": max_tokens,
+            "max_completion_tokens": max_tokens,
             "messages": [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": prompt_text},
@@ -78,10 +84,14 @@ def call_anthropic(
     model_config: ModelConfig,
     *,
     system_prompt: str,
-    temperature: float,
     max_tokens: int,
 ) -> ProviderResult:
-    """Send a prompt to the Anthropic messages API."""
+    """Send a prompt to the Anthropic messages API.
+
+    Claude 5-family models run adaptive thinking by default, so the response
+    ``content`` list may begin with thinking blocks — the answer is the first
+    ``text`` block, not ``content[0]``.
+    """
     api_key = os.environ[model_config["api_key_env"]]
     resp = requests.post(
         model_config["base_url"],
@@ -93,7 +103,6 @@ def call_anthropic(
         json={
             "model": model_config["model"],
             "max_tokens": max_tokens,
-            "temperature": temperature,
             "system": system_prompt,
             "messages": [{"role": "user", "content": prompt_text}],
         },
@@ -101,8 +110,17 @@ def call_anthropic(
     )
     resp.raise_for_status()
     data = resp.json()
+    text: str | None = None
+    for block in data["content"]:
+        if "text" in block and block.get("type", "text") == "text":
+            text = block["text"]
+            break
+    if text is None:
+        # Raise KeyError (not StopIteration) so call_model_with_retry's
+        # retry net catches it like any other malformed-payload failure.
+        raise KeyError(f"no text block in response content: {data['content']!r}")
     return {
-        "text": data["content"][0]["text"],
+        "text": text,
         "model_version": data.get("model", model_config["model"]),
         "tokens_used": data["usage"]["input_tokens"] + data["usage"]["output_tokens"],
     }
@@ -113,7 +131,6 @@ def call_google(
     model_config: ModelConfig,
     *,
     system_prompt: str,
-    temperature: float,
     max_tokens: int,
 ) -> ProviderResult:
     """Send a prompt to the Google Gemini generateContent API.
@@ -133,7 +150,6 @@ def call_google(
         json={
             "contents": [{"parts": [{"text": prompt_text}]}],
             "generationConfig": {
-                "temperature": temperature,
                 "maxOutputTokens": max_tokens,
             },
             "systemInstruction": {"parts": [{"text": system_prompt}]},
@@ -165,7 +181,6 @@ def call_model_with_retry(
     model_config: ModelConfig,
     *,
     system_prompt: str,
-    temperature: float,
     max_tokens: int,
     max_retries: int = 5,
 ) -> ProviderResult:
@@ -184,7 +199,6 @@ def call_model_with_retry(
                 prompt_text,
                 model_config,
                 system_prompt=system_prompt,
-                temperature=temperature,
                 max_tokens=max_tokens,
             )
         except (requests.RequestException, KeyError, IndexError) as exc:

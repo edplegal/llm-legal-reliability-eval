@@ -85,7 +85,6 @@ def call_judge_with_retry(
     judge_prompt: str,
     model_id: str,
     model_config: ModelConfig,
-    temperature: float,
     max_tokens: int,
     *,
     parse_attempts: int = 2,
@@ -96,8 +95,8 @@ def call_judge_with_retry(
     endpoint) are absorbed by :func:`call_model_with_retry`'s exponential
     backoff, so a flaky provider no longer drops a judgment on the first
     hiccup. Layered on top, a call that succeeds but returns unparseable JSON
-    is re-asked up to ``parse_attempts`` times, since judge JSON validity is
-    not fully deterministic even at temperature 0.
+    is re-asked up to ``parse_attempts`` times — judges sample at provider
+    defaults, so JSON validity is not deterministic.
 
     Returns ``(parsed_scores, model_version)``. ``model_version`` captures the
     actual snapshot the API returned (e.g. 'gpt-4o-2024-08-06') so
@@ -114,7 +113,6 @@ def call_judge_with_retry(
                 model_id,
                 model_config,
                 system_prompt=JUDGE_SYSTEM_PROMPT,
-                temperature=temperature,
                 max_tokens=max_tokens,
             )
         except (requests.RequestException, KeyError, IndexError) as exc:
@@ -177,7 +175,6 @@ def judge(
     blinded = load_blinded_responses()
     prompts_by_id = load_prompts_by_id()
     models = config["models"]
-    temperature: float = config["judge_temperature"]
     max_tokens: int = config["judge_max_tokens"]
 
     output_path = data_dir() / "judge_scores.json"
@@ -221,7 +218,6 @@ def judge(
                 judge_prompt,
                 model_id,
                 model_config,
-                temperature,
                 max_tokens,
             )
 

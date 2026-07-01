@@ -2,19 +2,19 @@
   "models": {
     "chatgpt": {
       "provider": "openai",
-      "model": "gpt-4o",
+      "model": "gpt-5.5",
       "api_key_env": "OPENAI_API_KEY",
       "base_url": "https://api.openai.com/v1/chat/completions"
     },
     "chatgpt_mini": {
       "provider": "openai",
-      "model": "gpt-4o-mini",
+      "model": "gpt-5.4-mini",
       "api_key_env": "OPENAI_API_KEY",
       "base_url": "https://api.openai.com/v1/chat/completions"
     },
     "claude": {
       "provider": "anthropic",
-      "model": "claude-sonnet-4-6",
+      "model": "claude-sonnet-5",
       "api_key_env": "ANTHROPIC_API_KEY",
       "base_url": "https://api.anthropic.com/v1/messages"
     },
@@ -26,19 +26,17 @@
     },
     "gemini": {
       "provider": "google",
-      "model": "gemini-2.5-flash",
+      "model": "gemini-3.5-flash",
       "api_key_env": "GOOGLE_API_KEY",
       "base_url": "https://generativelanguage.googleapis.com/v1beta/models"
     },
-    "gemini_pro": {
+    "gemini_lite": {
       "provider": "google",
-      "model": "gemini-2.5-pro",
+      "model": "gemini-3.1-flash-lite",
       "api_key_env": "GOOGLE_API_KEY",
       "base_url": "https://generativelanguage.googleapis.com/v1beta/models"
     }
   },
-  "judge_temperature": 0.0,
-  "response_temperature": 0.7,
   "response_max_tokens": 8192,
   "judge_max_tokens": 8192
 }

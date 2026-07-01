@@ -50,7 +50,6 @@ class TestCallOpenai:
                 "Q?",
                 self.CONFIG,
                 system_prompt="sys",
-                temperature=0.7,
                 max_tokens=100,
             )
 
@@ -61,6 +60,10 @@ class TestCallOpenai:
         }
         body = post.call_args.kwargs["json"]
         assert body["messages"][0] == {"role": "system", "content": "sys"}
+        # GPT-5.x contract: max_completion_tokens, and no sampling params.
+        assert body["max_completion_tokens"] == 100
+        assert "max_tokens" not in body
+        assert "temperature" not in body
         auth = post.call_args.kwargs["headers"]["Authorization"]
         assert auth == "Bearer sk-openai-test"
 
@@ -88,7 +91,6 @@ class TestCallAnthropic:
                 "Q?",
                 self.CONFIG,
                 system_prompt="sys",
-                temperature=0.0,
                 max_tokens=100,
             )
 
@@ -96,7 +98,55 @@ class TestCallAnthropic:
         assert result["tokens_used"] == 42
         headers = post.call_args.kwargs["headers"]
         assert headers["x-api-key"] == "sk-ant-test"
-        assert post.call_args.kwargs["json"]["system"] == "sys"
+        body = post.call_args.kwargs["json"]
+        assert body["system"] == "sys"
+        # Claude 5 contract: no sampling params sent.
+        assert "temperature" not in body
+
+    def test_skips_thinking_blocks(self) -> None:
+        """Claude 5 adaptive thinking prepends thinking blocks; the answer
+        is the first text block, not content[0]."""
+        payload = {
+            "content": [
+                {"type": "thinking", "thinking": ""},
+                {"type": "text", "text": "Answer."},
+            ],
+            "model": "claude-sonnet-5",
+            "usage": {"input_tokens": 30, "output_tokens": 12},
+        }
+        with patch(
+            "ai_eval.clients.requests.post",
+            return_value=_mock_response(payload),
+        ):
+            result = call_anthropic(
+                "Q?",
+                self.CONFIG,
+                system_prompt="sys",
+                max_tokens=100,
+            )
+        assert result["text"] == "Answer."
+
+    def test_no_text_block_raises_key_error(self) -> None:
+        """A content list with no text block raises KeyError so the retry
+        wrapper treats it like any other malformed payload."""
+        payload = {
+            "content": [{"type": "thinking", "thinking": ""}],
+            "model": "claude-sonnet-5",
+            "usage": {"input_tokens": 30, "output_tokens": 12},
+        }
+        with (
+            patch(
+                "ai_eval.clients.requests.post",
+                return_value=_mock_response(payload),
+            ),
+            pytest.raises(KeyError, match="no text block"),
+        ):
+            call_anthropic(
+                "Q?",
+                self.CONFIG,
+                system_prompt="sys",
+                max_tokens=100,
+            )
 
 
 @pytest.mark.usefixtures("api_keys")
@@ -122,7 +172,6 @@ class TestCallGoogle:
                 "Q?",
                 self.CONFIG,
                 system_prompt="sys",
-                temperature=0.7,
                 max_tokens=100,
             )
 
@@ -133,6 +182,8 @@ class TestCallGoogle:
         }
         url = post.call_args.args[0]
         assert url.endswith("gemini-2.5-flash:generateContent")
+        gen_config = post.call_args.kwargs["json"]["generationConfig"]
+        assert "temperature" not in gen_config
 
     def test_api_key_in_header_never_in_url(self) -> None:
         """The Gemini key must travel via x-goog-api-key, not the query
@@ -148,7 +199,6 @@ class TestCallGoogle:
                 "Q?",
                 self.CONFIG,
                 system_prompt="sys",
-                temperature=0.7,
                 max_tokens=100,
             )
 

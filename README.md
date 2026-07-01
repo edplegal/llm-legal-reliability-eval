@@ -30,7 +30,7 @@ CIs, Krippendorff's α, and a provenance-stamped pipeline.
 | path | role |
 |------|------|
 | `prompts.json` | 60 evaluation prompts (paired info/crisis, 3-turn pressure sequences, adversarial, AI-deployment) |
-| `config.json` | Model endpoints, model IDs, temperatures, token limits |
+| `config.json` | Model endpoints, model IDs, token limits (sampling runs at provider defaults) |
 | `judge_prompt_template.txt` | Judge prompt; rubric inlined, placeholders for prompt/response |
 | `rubric.md` | Human-readable scoring rubric (source of truth mirrored in the template) |
 

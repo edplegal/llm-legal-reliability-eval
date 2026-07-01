@@ -93,7 +93,7 @@ class TestCallJudgeWithRetry:
         monkeypatch.setattr("ai_eval.judge.call_model_with_retry", mock)
 
         scores, version = call_judge_with_retry(
-            "judge prompt", "claude", judge_config, 0.0, 4096
+            "judge prompt", "claude", judge_config, 4096
         )
 
         assert scores is not None
@@ -109,9 +109,7 @@ class TestCallJudgeWithRetry:
         mock = Mock(side_effect=[_provider_result("not json"), _provider_result(valid)])
         monkeypatch.setattr("ai_eval.judge.call_model_with_retry", mock)
 
-        scores, _ = call_judge_with_retry(
-            "judge prompt", "claude", judge_config, 0.0, 4096
-        )
+        scores, _ = call_judge_with_retry("judge prompt", "claude", judge_config, 4096)
 
         assert scores is not None
         assert scores["disclaimer"]["score"] == 3
@@ -130,7 +128,7 @@ class TestCallJudgeWithRetry:
         monkeypatch.setattr("ai_eval.judge.call_model_with_retry", mock)
 
         scores, version = call_judge_with_retry(
-            "judge prompt", "gemini", judge_config, 0.0, 4096
+            "judge prompt", "gemini", judge_config, 4096
         )
 
         assert scores is None
@@ -145,7 +143,7 @@ class TestCallJudgeWithRetry:
         monkeypatch.setattr("ai_eval.judge.call_model_with_retry", mock)
 
         scores, version = call_judge_with_retry(
-            "judge prompt", "gemini", judge_config, 0.0, 4096
+            "judge prompt", "gemini", judge_config, 4096
         )
 
         assert scores is None

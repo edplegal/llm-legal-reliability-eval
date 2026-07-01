@@ -52,8 +52,8 @@ def config_hash(config: dict[str, Any], samples: int) -> str:
                 k: {kk: vv for kk, vv in v.items() if kk != "api_key_env"}
                 for k, v in config.get("models", {}).items()
             },
-            "response_temperature": config.get("response_temperature"),
             "response_max_tokens": config.get("response_max_tokens"),
+            "sampling": "provider_defaults",
             "system_prompt": SYSTEM_PROMPT,
             "samples_per_cell": samples,
         },
@@ -105,7 +105,6 @@ def collect(
     config = load_config()
     prompts = load_prompts()
     models = config["models"]
-    temperature: float = config["response_temperature"]
     max_tokens: int = config["response_max_tokens"]
     cfg_hash = config_hash(config, samples)
     prompts_h = prompts_file_hash()
@@ -152,7 +151,6 @@ def collect(
                         model_id,
                         model_config,
                         system_prompt=SYSTEM_PROMPT,
-                        temperature=temperature,
                         max_tokens=max_tokens,
                     )
                 except (requests.RequestException, KeyError, IndexError) as exc:

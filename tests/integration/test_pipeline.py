@@ -44,8 +44,6 @@ CONFIG: dict[str, Any] = {
             "base_url": "https://google.test/v1beta/models",
         },
     },
-    "judge_temperature": 0.0,
-    "response_temperature": 0.7,
     "response_max_tokens": 256,
     "judge_max_tokens": 512,
 }
