@@ -8,9 +8,11 @@ ID reshuffle. Determinism does not weaken the blinding: judges are shown
 only the response text, never the ID, and the hash is not invertible without
 already knowing the model identity.
 
-If raw responses *have* changed (fresh collection), any existing judge
-scores that no longer join to the new lookup are rotated to ``data/legacy/``
-rather than left to mis-join downstream.
+If some raw responses have changed (an arm re-collected, the model grid
+extended), the prior judge_scores.json is rotated to ``data/legacy/`` intact
+and only the rows that still join to the new lookup are written back:
+surviving judgments are never re-bought, and orphans can never mis-join
+downstream.
 """
 
 from __future__ import annotations
@@ -26,6 +28,7 @@ from ai_eval.paths import (
     data_dir,
     read_json,
     rotate_to_legacy,
+    write_json_atomic,
     write_json_with_rotation,
 )
 
@@ -130,8 +133,10 @@ def blind(*, seed: int = DEFAULT_SHUFFLE_SEED) -> None:
     """Run Phase 2: blind and shuffle all collected responses.
 
     ``seed`` controls only the presentation shuffle of the blinded file.
-    Prior differing outputs are rotated to ``data/legacy/``, as are any
-    existing judge scores orphaned by changed raw responses.
+    Prior differing outputs are rotated to ``data/legacy/``. If any existing
+    judge scores are orphaned by changed raw responses, the prior score file
+    is rotated to legacy intact and the still-joining rows are written back,
+    so ``judge --resume`` re-buys nothing that survived.
     """
     raw_path = data_dir() / "raw_responses.json"
     raw_responses: list[ResponseRecord] = read_json(raw_path)
@@ -180,12 +185,18 @@ def blind(*, seed: int = DEFAULT_SHUFFLE_SEED) -> None:
     orphaned = find_orphaned_judge_scores(lookup)
     if orphaned:
         scores_path = data_dir() / "judge_scores.json"
+        scores: list[JudgeScoreRecord] = read_json(scores_path)
+        surviving = [s for s in scores if s["response_id"] in lookup]
         dest = rotate_to_legacy(scores_path)
+        if surviving:
+            write_json_atomic(scores_path, surviving)
         logger.warning(
-            "%d existing judge scores reference response IDs not present in "
-            "the new blind lookup (raw responses changed). Rotated %s -> %s; "
-            "re-run `python -m ai_eval.judge`.",
+            "%d judge scores reference response IDs absent from the new "
+            "lookup (raw responses changed); kept %d still-joining scores. "
+            "Prior file rotated %s -> %s; run `python -m ai_eval.judge "
+            "--resume` to fill the gaps.",
             len(orphaned),
+            len(surviving),
             scores_path.name,
             dest,
         )

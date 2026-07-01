@@ -232,3 +232,47 @@ class TestBlindPipeline:
         )
         blind()
         assert (data / "judge_scores.json").exists()
+
+    def test_partial_orphan_keeps_joining_scores(
+        self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """When only some scores orphan (one arm re-collected), the surviving
+        rows are written back and the prior full file is rotated to legacy —
+        surviving judgments are never re-bought."""
+        monkeypatch.setenv("AI_EVAL_BASE_DIR", str(tmp_path))
+        self._write_raw(
+            tmp_path,
+            [
+                self._raw_entry(1, "chatgpt", 0, "Kept answer."),
+                self._raw_entry(1, "gemini", 0, "Re-collected answer."),
+            ],
+        )
+        kept_rid = deterministic_response_id(1, "chatgpt", 0, "Kept answer.")
+        data = tmp_path / "data"
+        data.mkdir(exist_ok=True)
+        (data / "judge_scores.json").write_text(
+            json.dumps(
+                [
+                    {
+                        "response_id": kept_rid,
+                        "prompt_id": 1,
+                        "judge_model": "claude",
+                        "scores": None,
+                    },
+                    {
+                        "response_id": "R-deadbeef0000",  # old gemini response
+                        "prompt_id": 1,
+                        "judge_model": "claude",
+                        "scores": None,
+                    },
+                ]
+            )
+        )
+        blind()
+        surviving = json.loads((data / "judge_scores.json").read_text())
+        assert [s["response_id"] for s in surviving] == [kept_rid]
+        rotated = list((data / "legacy").glob("judge_scores_*.json"))
+        assert len(rotated) == 1
+        # The rotated file preserves the full prior state, orphans included.
+        prior = json.loads(rotated[0].read_text())
+        assert len(prior) == 2
