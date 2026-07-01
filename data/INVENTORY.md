@@ -12,14 +12,16 @@ that adds, regenerates, or moves any artifact in this folder.
 | analysis_results.json | processed | 2026-07-02 | `ai_eval.analyze` (analyze_version 3, bootstrap seed 20260521) | authoritative | legacy/analysis_results_2026-07-02.json | Statistics for the 3-sample Sonnet-4.6 run: 1620 judgments, 3 samples/cell; v3 adds variance_components, self-favoritism premium CIs, pressure-drift turn_means, low_n flags |
 | report.html | report | 2026-07-02 | `ai_eval.report` on analysis_results.json | authoritative | legacy/report_2026-07-02.html | Self-contained interactive report incl. manual tie-breaking UI; v3 adds premium CI column, per-turn drift trajectories, low-n suppression |
 
-**Current state (2026-07-02):** a 6-model tier-expansion run is mid-flight.
-raw_responses.json holds only the two kept arms (GPT-4o, Claude); the Gemini
-Flash arm was dropped because 62.8% of its responses were silently truncated
-by the old 2048 output cap (Flash spends output budget on thinking), and it
-will be re-collected under the raised 8192 cap together with the three new
-arms (gpt-4o-mini, claude-haiku-4.5, gemini-2.5-pro). Until
-`./run_all.sh --resume --samples 3` completes, blinded_responses.json,
-blind_lookup.json, judge_scores.json, analysis_results.json, and report.html
-all still describe the superseded 3-model run (with the truncated Flash
-arm). The blind phase preserves the 1,080 still-valid judgments of the kept
-arms; judge --resume re-buys nothing that survived.
+**Current state (2026-07-02):** the grid has been upgraded to six
+current-generation models (gpt-5.5 + gpt-5.4-mini, claude-sonnet-5 +
+claude-haiku-4.5, gemini-3.5-flash + gemini-3.1-flash-lite), all sampling at
+provider defaults (GPT-5.5 and Sonnet 5 reject explicit temperature; no
+model receives sampling parameters). This supersedes both the earlier
+tier-expansion plan and every artifact currently in `data/`: a FRESH
+`./run_all.sh --samples 3` run (1080 responses, config_hash
+`d64f7b847f91`, output caps 8192) will rotate the current raw (the two
+4-era arms), the blinded set, all 1620 judge scores (fully orphaned by the
+new collection), and the analysis/report to `legacy/`. Until that run
+completes, everything in this folder describes the superseded
+3-model/4-era dataset. If the run is interrupted, resume with
+`./run_all.sh --resume --samples 3`.
