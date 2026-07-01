@@ -14,48 +14,60 @@
 
 ---
 
-## Title candidates `[YOU]`
+## Title candidates `[YOU]` — two-beat structure per your pick
 
-1. Every LLM judge has a fingerprint: GPT-4o inflates its own work, Claude tears its own apart
-2. I made three frontier models grade each other's legal advice, blind. The graders had opinions about themselves.
-3. Blinded cross-examination: measuring the judges while they judge
+1. I made three frontier models grade each other's legal advice, blind. The graders had opinions about themselves.
+2. I had GPT, Claude, and Gemini grade each other's legal advice, blind. Each one recognized itself anyway.
+3. Three AI models graded each other's legal advice without knowing whose was whose. Their self-reviews say otherwise.
+4. I blinded three AI models and had them grade each other's legal advice. One inflated itself; one tore itself apart.
+5. Three models grade each other's legal advice, blind. Somehow, it still got personal.
 
 ---
 
-`[LW-ONLY]` **Epistemic status:** Empirical eval, one run, n = 60
-author-written prompts across four categories; three responder models that
-also serve as the three blinded judges. The self-favoritism and
-crisis-framing findings carry prompt-level bootstrap CIs and survived an
-adversarial robustness pass; the pressure-sequence findings are n = 5 and
-explicitly exploratory. Rubric and prompts are author-written (JD, but this
-is not legal advice about legal advice). Code, scored data, and analysis
-are public; the full prompt set is deliberately held out (contamination —
-see Limitations). I'd bet on the sign of the headline effects, not their
-third decimal.
+`[LW-ONLY]` **Epistemic status:** One run of an eval I built myself: 60
+legal questions, three models answering, the same three models grading —
+blind. The two headline results (the self-grading bias and the
+crisis-framing gap) come with error bars and survived every stress test I
+threw at them, including adversarially filling in the handful of failed
+grades. The three-turn pressure results rest on five scenarios — read
+those as leads, not conclusions. I wrote the questions and the rubric
+myself; I have a law degree, but this is a study of AI behavior, not legal
+advice. The code and all 1,620 grades are public. Most of the questions
+are not — anything posted online ends up in training data, and I want to
+re-run this test on next year's models. Bottom line: I'd bet on the
+direction of the main findings, not on any particular decimal.
 
 ## TL;DR
 
-- I ran 60 legal-domain safety prompts through GPT-4o, Claude Sonnet 4.6,
-  and Gemini 2.5 Flash (3 samples each), blinded and shuffled all 540
-  responses, and had **the same three models judge every response** against
-  a six-dimension rubric — 1,620 judgments.
+- I wrote 60 legal questions designed to test **safety behavior, not legal
+  knowledge** — does the model say it isn't a lawyer, steer a person in
+  real trouble toward one, resist sounding more certain than it should,
+  and flag that the answer depends on where you live? GPT-4o, Claude
+  Sonnet 4.6, and Gemini 2.5 Flash each answered every question 3 times;
+  all 540 answers were stripped of identity and shuffled; then **the same
+  three models graded every answer** against a six-part rubric — 1,620
+  grades.
 - **Every judge has a statistically significant self-scoring fingerprint**
   (16 of 18 judge × dimension cells exclude zero, bootstrapped over
   prompts): GPT-4o inflates its own responses by up to +1.1 points on a
   5-point scale, **Claude penalizes its own responses on all six
   dimensions**, Gemini mildly inflates across the board.
-- Under **crisis framing** (same legal question, desperate user), all three
-  models correctly escalate ("see a lawyer": +1.2 to +1.7) — but **only
-  GPT-4o and Gemini add disclaimers; Claude's disclaimer behavior doesn't
-  respond to the user's stakes at all** (−0.12, CI spans 0). No model
-  modulates its confidence.
+- When the same legal question comes from a **user in visible trouble**
+  ("my landlord just locked me out and I'm panicking") instead of an
+  idly curious one, all three models correctly push harder toward a real
+  lawyer (+1.2 to +1.7 on a 5-point scale) — but **only GPT-4o and Gemini
+  add more disclaimers; Claude disclaims at the same low rate whether the
+  user is curious or desperate** (−0.12, error bar spans 0). And no model
+  dials its confidence up or down.
 - In simulated 3-turn **pressure sequences** (exploratory, n = 5), GPT-4o's
   confidence calibration degrades in 5 of 5 sequences (−1.11 [−1.64,
   −0.64]); Gemini starts at the disclaimer floor and ramps to near-ceiling.
-- **Where the noise lives:** decomposing judgment variance gives prompt
-  59.6% / **judge 35.3%** / response sampling **5.1%**. If you build
-  LLM-judge evals: marginal budget goes to more/better judges, not more
-  samples.
+- **Re-asking barely matters; re-judging matters a lot.** Because every
+  question was answered 3× and every answer graded by 3 judges, I can
+  split the disagreement between grades into three sources: which question
+  it was (~60%), which judge graded it (~35%), and which of the model's
+  three answers happened to come out of the dice roll (~5%). If you build
+  evals like this, spend your budget on more judges, not more re-runs.
 
 ## Why legal questions `[YOU — 2-3 paragraphs in your voice]`
 
@@ -83,23 +95,39 @@ interesting variation is in *when* they bother.
 - 540 responses × 3 judges = **1,620 judgments**; 7 nulls (0.43%, judge
   JSON failures) — adversarially filling them moves no reported statistic
   by more than 0.03 and flips no ranking.
-- Unit of analysis is the **prompt**: every CI below is a bootstrap over
-  prompts (or pairs/sequences), not over judgments.
 
-`[LW-ONLY]` Inter-judge agreement: Krippendorff's α (ordinal) runs
-0.56–0.71 by dimension (confidence weakest, disclaimer strongest). Moderate
-— which is itself part of the story (§variance), and why the self-scoring
-analysis uses a median-of-others control rather than trusting any single
-judge.
+One stats note, in plain terms: those 1,620 grades are not 1,620
+independent facts — grades of the same question rise and fall together.
+So every error bar in this post answers one question: *if I'd written a
+different-but-similar set of 60 questions, how much would this number
+move?* (Mechanically, that's a bootstrap: re-draw the 60 questions with
+replacement a few thousand times and watch how much the average wobbles.)
+It's the honest way to compute uncertainty here, and it makes my error
+bars wider, not narrower.
+
+`[LW-ONLY]` How often do the judges even agree with each other?
+Krippendorff's α — a standard inter-rater agreement score, where 1.0
+means the judges always agree and 0 means their agreement is no better
+than chance — runs 0.56–0.71 depending on the dimension (confidence is
+the noisiest, disclaimers the most agreed-on). Moderate at best. That's
+itself part of the story (see the variance finding), and it's why the
+self-grading analysis below never trusts any single judge.
 
 ## Finding 1: every judge has a fingerprint
 
-For each judgment a model passes on *its own* (blinded) response, compare
-its score to the **median of the other two judges on the exact same
-response**. That controls for "my responses really are better": we're not
-asking whether Claude's responses score high, we're asking whether Claude
-the judge scores Claude the responder differently than the other judges
-score that same text.
+For each grade a model gives to *its own* (blinded) answer, I compare it
+to the **median of what the other two judges gave the exact same answer**.
+Two design choices are packed in there, and both matter.
+
+*Why compare on the same answer?* Because maybe Claude's answers really
+are better — in that case every judge scores them high, and no bias is
+implied. Bias only shows up when Claude-the-judge scores a Claude answer
+differently than the other judges score the *identical text*.
+
+*Why the median instead of the average?* Robustness: a median can't be
+dragged around by one judge having a weird day. (With only two other
+judges, the median works out to their midpoint anyway — the choice
+matters more as judge panels grow.)
 
 Self-premium (points on a 5-point scale; 95% CI bootstrapped over 60
 prompts; **bold** = CI excludes zero):
@@ -132,7 +160,7 @@ Blinding does not fix this (these judgments were blind — the fingerprint
 survives blinding, presumably via style recognition). Multi-judge medians
 and explicit self-premium measurement should be table stakes.
 
-## Finding 2: crisis framing — who notices the stakes?
+## Finding 2: crisis framing — who notices the user is in trouble?
 
 Each info/crisis pair holds the legal topic constant and varies only the
 user's framing. Shift = crisis score − info score, n = 15 pairs; positive
@@ -150,10 +178,12 @@ Three observations:
 1. **Escalation works everywhere.** All three models reliably shift toward
    "you need an actual lawyer / go to court / call the hotline" when the
    user signals crisis. This is the trained-in behavior, and it shows.
-2. **Claude's disclaimers don't respond to stakes** (−0.12, CI spans
-   zero, vs. +0.83 and +1.31 for the others). Claude disclaims at roughly
-   the same (low) rate whether the user is curious or desperate. That's
-   the specific insensitivity this metric was designed to catch.
+2. **Claude's disclaimers don't respond to the user's situation** (−0.12,
+   error bar spans zero, vs. +0.83 and +1.31 for the others). Whether the
+   asker sounds idly curious or one bad day from losing their apartment,
+   Claude adds disclaimers at the same (low) rate. The prompt pairs were
+   built to catch exactly this: same legal topic, only the desperation
+   changes.
 3. **Nobody modulates confidence.** All three models hedge the same amount
    regardless of user stakes — slightly *negative* point estimates, all NS.
    The dimension where miscalibration hurts a panicking user most is the
@@ -166,12 +196,16 @@ response excerpt per framing.
 
 ## Finding 3 (exploratory): three turns of pressure
 
-**Methodology disclosure, non-negotiable:** the "turns" are simulated.
-Each turn is sent as an independent single-shot prompt whose text implies
-the earlier conversation ("You already said it could be harassment. Now
-tell me how to file with the EEOC step by step…"). The model never sees
-actual history. This measures response to *escalating framing*, not true
-multi-turn drift. n = 5 sequences — read directions, not magnitudes.
+**One honest caveat before the numbers.** A real pressure test would be
+one continuous conversation: the model answers, the user pushes back, the
+model answers again. That's not what I ran. Each "turn" here is a
+separate, standalone prompt *written as if* the conversation had already
+happened — the turn-3 prompt literally opens "You already said it could
+be harassment…" even though the model said no such thing (it never saw
+turn 1). So this measures how a model reacts to a user who *sounds*
+progressively pushier — not how a model actually drifts over a real
+conversation. And with only five scenarios, trust the direction of these
+results, not the size.
 
 Per-turn mean scores (turn 1 → 2 → 3):
 
@@ -198,16 +232,22 @@ EEOC) — the turn texts are vivid and the per-model trajectories diverge.
 
 ## Finding 4: the noise is in the judges, not the sampling
 
-Because every (prompt, model) cell was sampled 3× and judged 3×, judgment
-variance decomposes into nested components:
+Language models are dice rolls: ask the same question twice and you get
+different words (that's what temperature 0.7 means — a normal amount of
+randomness). So each model answered every question three times, and every
+answer was graded by all three judges. That structure lets me ask: when
+two grades disagree, *whose fault is it?* There are three suspects — the
+question (some questions just invite worse behavior), the judge (graders
+have taste), and the dice (maybe the model's second answer was simply
+different from its first). The split:
 
-> **prompt identity 59.6% | judge disagreement 35.3% | response sampling 5.1%**
+> **the question 59.6% | the judge 35.3% | the dice 5.1%**
 
-At temperature 0.7, regenerating a response barely changes its safety
-scores (5%); asking a different judge changes them a lot (35%). One
-exception worth naming: Gemini's disclaimer behavior is genuinely erratic
-response-to-response (16% response share — consistent with its
-floor-to-ceiling pattern in Finding 3).
+The dice barely matter: a model's safety behavior on a given question is
+remarkably stable across re-rolls. The judge you ask matters roughly
+seven times more. One exception worth naming: whether Gemini bothers to
+disclaim genuinely varies from roll to roll (16% dice share) — the same
+instability you can see in its floor-to-ceiling trajectories in Finding 3.
 
 **Design lesson for anyone building LLM-judge evals: the marginal dollar
 goes to more (or better-calibrated) judges, not more samples.**
@@ -242,9 +282,12 @@ stay out of the quantitative claims entirely.)
    on one person's judgment of what "safe legal-question behavior" means —
    informed by a JD, but still one person. CIs resample prompts, so they
    quantify prompt-sampling noise, not construct error.
-3. **Model-tier mismatch.** Gemini 2.5 **Flash** vs. two mid-tier models —
-   chosen deliberately as the deployed-default tier `[YOU — confirm your
-   actual rationale]`, but "Gemini" results here are Flash results.
+3. **Model-tier mismatch — fix in progress.** This run compares Gemini 2.5
+   **Flash** (a fast/cheap tier) against two mid-tier models, so "Gemini"
+   results here are Flash results. `[PENDING — tier-expansion run: the
+   grid extends to matched tiers across providers, reusing every existing
+   response and grade; this limitation becomes a tier-vs-tier finding and
+   most tables in this post gain columns.]`
 4. **Mixed collection vintage.** claude-sonnet-4-20250514 was retired
    mid-project (2026-06-15); the Claude arm was re-collected on
    claude-sonnet-4-6 while GPT-4o/Gemini responses are from four days
