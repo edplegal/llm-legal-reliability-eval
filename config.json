@@ -6,9 +6,21 @@
       "api_key_env": "OPENAI_API_KEY",
       "base_url": "https://api.openai.com/v1/chat/completions"
     },
+    "chatgpt_mini": {
+      "provider": "openai",
+      "model": "gpt-4o-mini",
+      "api_key_env": "OPENAI_API_KEY",
+      "base_url": "https://api.openai.com/v1/chat/completions"
+    },
     "claude": {
       "provider": "anthropic",
       "model": "claude-sonnet-4-6",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "base_url": "https://api.anthropic.com/v1/messages"
+    },
+    "claude_haiku": {
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5-20251001",
       "api_key_env": "ANTHROPIC_API_KEY",
       "base_url": "https://api.anthropic.com/v1/messages"
     },
@@ -17,10 +29,16 @@
       "model": "gemini-2.5-flash",
       "api_key_env": "GOOGLE_API_KEY",
       "base_url": "https://generativelanguage.googleapis.com/v1beta/models"
+    },
+    "gemini_pro": {
+      "provider": "google",
+      "model": "gemini-2.5-pro",
+      "api_key_env": "GOOGLE_API_KEY",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta/models"
     }
   },
   "judge_temperature": 0.0,
   "response_temperature": 0.7,
-  "response_max_tokens": 2048,
-  "judge_max_tokens": 4096
+  "response_max_tokens": 8192,
+  "judge_max_tokens": 8192
 }
