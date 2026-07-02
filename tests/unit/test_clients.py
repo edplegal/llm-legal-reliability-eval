@@ -6,8 +6,14 @@ from typing import TYPE_CHECKING, Any, ClassVar
 from unittest.mock import MagicMock, patch
 
 import pytest
+import requests
 
-from ai_eval.clients import call_anthropic, call_google, call_openai
+from ai_eval.clients import (
+    _http_error_detail,
+    call_anthropic,
+    call_google,
+    call_openai,
+)
 
 if TYPE_CHECKING:
     from ai_eval.schema import ModelConfig
@@ -206,3 +212,22 @@ class TestCallGoogle:
         headers = post.call_args.kwargs["headers"]
         assert "goog-test" not in url
         assert headers["x-goog-api-key"] == "goog-test"
+
+
+class TestHttpErrorDetail:
+    """Tests for the 429-diagnosability helper on retry warnings."""
+
+    def test_includes_body_and_retry_after(self) -> None:
+        resp = MagicMock()
+        resp.headers = {"retry-after": "17"}
+        resp.text = '{"error": {"type": "insufficient_quota"}}'
+        exc = requests.HTTPError(response=resp)
+        detail = _http_error_detail(exc)
+        assert "retry-after=17s" in detail
+        assert "insufficient_quota" in detail
+
+    def test_non_http_error_yields_empty_string(self) -> None:
+        assert _http_error_detail(KeyError("parts")) == ""
+
+    def test_http_error_without_response_yields_empty_string(self) -> None:
+        assert _http_error_detail(requests.HTTPError()) == ""

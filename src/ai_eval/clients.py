@@ -206,12 +206,35 @@ def call_model_with_retry(
                 raise
             wait = min(2 ** (attempt + 1), MAX_RETRY_WAIT)
             logger.warning(
-                "Attempt %d/%d for %s failed: %s. Retrying in %ds...",
+                "Attempt %d/%d for %s failed: %s%s. Retrying in %ds...",
                 attempt + 1,
                 max_retries,
                 model_id,
                 exc,
+                _http_error_detail(exc),
                 wait,
             )
             time.sleep(wait)
     raise RuntimeError("Unreachable")  # pragma: no cover
+
+
+def _http_error_detail(exc: Exception) -> str:
+    """Extract the response body and retry-after from an HTTPError, if any.
+
+    A bare status line ("429 Too Many Requests") cannot distinguish a
+    per-minute rate limit from an exhausted quota or budget cap; the JSON
+    error body can. Appended to retry warnings so limit failures are
+    diagnosable from the log alone.
+    """
+    if not isinstance(exc, requests.HTTPError) or exc.response is None:
+        return ""
+    parts: list[str] = []
+    retry_after = exc.response.headers.get("retry-after")
+    if retry_after:
+        parts.append(f"retry-after={retry_after}s")
+    body = exc.response.text.strip().replace("\n", " ")
+    if body:
+        parts.append(f"body: {body[:300]}")
+    if not parts:
+        return ""
+    return " [" + " | ".join(parts) + "]"
