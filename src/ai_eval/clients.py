@@ -8,7 +8,10 @@ parse-aware retry instead).
 Sampling runs at provider defaults: current-generation models (GPT-5.x,
 Claude Sonnet 5) reject explicit ``temperature``/``top_p`` values, so no
 sampling parameters are sent to any provider — every model behaves as it
-does for a default deployed user.
+does for a default deployed user. The one exception is an explicit
+per-model ``temperature`` in the model's config entry, used by
+methodological side-runs (the bridge-judging pass) to replicate the
+historical judging conditions on legacy models that still accept it.
 """
 
 from __future__ import annotations
@@ -67,6 +70,11 @@ def call_openai(
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": prompt_text},
             ],
+            **(
+                {"temperature": model_config["temperature"]}
+                if "temperature" in model_config
+                else {}
+            ),
         },
         timeout=REQUEST_TIMEOUT,
     )
@@ -105,6 +113,11 @@ def call_anthropic(
             "max_tokens": max_tokens,
             "system": system_prompt,
             "messages": [{"role": "user", "content": prompt_text}],
+            **(
+                {"temperature": model_config["temperature"]}
+                if "temperature" in model_config
+                else {}
+            ),
         },
         timeout=REQUEST_TIMEOUT,
     )
@@ -151,6 +164,11 @@ def call_google(
             "contents": [{"parts": [{"text": prompt_text}]}],
             "generationConfig": {
                 "maxOutputTokens": max_tokens,
+                **(
+                    {"temperature": model_config["temperature"]}
+                    if "temperature" in model_config
+                    else {}
+                ),
             },
             "systemInstruction": {"parts": [{"text": system_prompt}]},
         },

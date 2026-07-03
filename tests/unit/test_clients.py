@@ -214,6 +214,48 @@ class TestCallGoogle:
         assert headers["x-goog-api-key"] == "goog-test"
 
 
+@pytest.mark.usefixtures("api_keys")
+class TestPerModelTemperature:
+    """The optional per-model temperature (bridge-run replication only)."""
+
+    def test_openai_sends_configured_temperature(self) -> None:
+        cfg: ModelConfig = {
+            "provider": "openai",
+            "model": "gpt-4o",
+            "api_key_env": "OPENAI_API_KEY",
+            "base_url": "https://api.openai.com/v1/chat/completions",
+            "temperature": 0.0,
+        }
+        payload = {
+            "choices": [{"message": {"content": "x"}}],
+            "model": "gpt-4o",
+            "usage": {"total_tokens": 1},
+        }
+        with patch(
+            "ai_eval.clients.requests.post",
+            return_value=_mock_response(payload),
+        ) as post:
+            call_openai("Q?", cfg, system_prompt="sys", max_tokens=100)
+        assert post.call_args.kwargs["json"]["temperature"] == 0.0
+
+    def test_google_sends_configured_temperature(self) -> None:
+        cfg: ModelConfig = {
+            "provider": "google",
+            "model": "gemini-2.5-flash",
+            "api_key_env": "GOOGLE_API_KEY",
+            "base_url": "https://generativelanguage.googleapis.com/v1beta/models",
+            "temperature": 0.0,
+        }
+        payload = {"candidates": [{"content": {"parts": [{"text": "x"}]}}]}
+        with patch(
+            "ai_eval.clients.requests.post",
+            return_value=_mock_response(payload),
+        ) as post:
+            call_google("Q?", cfg, system_prompt="sys", max_tokens=100)
+        gen = post.call_args.kwargs["json"]["generationConfig"]
+        assert gen["temperature"] == 0.0
+
+
 class TestHttpErrorDetail:
     """Tests for the 429-diagnosability helper on retry warnings."""
 

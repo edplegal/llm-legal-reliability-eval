@@ -27,12 +27,20 @@ APPLICABLE_DIMENSIONS: list[str] = [
 
 
 class ModelConfig(TypedDict):
-    """One model endpoint definition from config.json."""
+    """One model endpoint definition from config.json.
+
+    ``temperature`` is optional and normally absent: the main grid runs at
+    provider defaults (current-generation models reject the parameter).
+    It exists for methodological side-runs that must replicate historical
+    conditions — e.g. the bridge-judging pass, where legacy judges re-run
+    at the temperature 0.0 used in the original judging eras.
+    """
 
     provider: str
     model: str
     api_key_env: str
     base_url: str
+    temperature: NotRequired[float]
 
 
 class PromptRecord(TypedDict):

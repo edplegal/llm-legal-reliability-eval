@@ -26,3 +26,6 @@ htmlcov/
 
 # Derived reading copies of drafts (regenerable via pandoc)
 drafts/*.preview.html
+
+# Bridge-judging working directory (output promoted to data/bridge_scores.json)
+bridge_run/
