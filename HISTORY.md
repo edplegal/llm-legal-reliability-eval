@@ -61,6 +61,9 @@ Commit hashes are given so every event is traceable in git.
 | 2026-07-02 04:14–05:32+ | **OpenAI budget cap hit:** both OpenAI arms stall at exactly 60/180 (prompts 1–20) and 429 continuously for 75+ minutes; the four other arms complete 180/180; the pipeline skips the dead cells and halts before blinding (by design). Root cause confirmed by user: monthly budget cap. Diagnosability fix: retry warnings now log the error body + retry-after (`ccc2c02`). |
 | 2026-07-02 | Cap raised; `--resume` fills exactly the 240 missing cells. Collection completes (1080), blind runs (the fix from `eeb05ba` correctly rotates the fully-orphaned 4.6-era judgments to legacy intact), judging begins (6 × 1080 = 6480). Completed collection + blind outputs + archived 4.6-era dataset committed (`9bfc988`); the in-flight judge file deliberately excluded. |
 | 2026-07-02 | **Cross-generation analysis** (Part IV below): Sonnet 4 → 4.6 compared under stable judges; gen-5 lexical preview over all 1080 responses. |
+| 2026-07-03 | **Shape incident** (registry #8): 4 Sonnet-5 judgments arrived with flat guardrail/regulatory fields and crashed analysis. Shape validation added at judge time, crash-proof reader in analysis, the 4 records re-judged (`ca82db5`). Six-model dataset landed complete: 6480 judgments, 25 null (`66ef8eb`); post-flight verified (zero truncation, null-robust); FINDINGS v2 (`c573747`). User re-ran the pipeline tail independently: byte-identical statistics (`813468b`). |
+| 2026-07-03 | **Bridge pass** (Part IV.4): frozen legacy judges over all 1080 gen-5 responses (`b75cbf1`, `c4149a3`). It corrected the monotonic-decline claim (V-shape on levels) and confirmed Sonnet 5's backwards crisis calibration under both panels (`e8e88a9`). |
+| 2026-07-03 | **Draft rebuilt** on the six-model dataset and bridge chain (v2, `f6bffe7`), then v3 applying the third prose round: chosen title, no appositives, no empty sentences, correction stated explicitly, sidebar pointer to the 15 guardrail disputes. README and this document brought current for session handoff. |
 
 ---
 
@@ -433,15 +436,22 @@ significantly negative** (−0.66* — it disclaims less for a user in
 trouble); confidence-under-pressure decay generalized to effectively the
 whole grid; Google's tier ordering inverted (lite beats flash).
 
-**Open items:**
-1. Bridge-judging decision (Part IV.4): gpt-4o + gemini-2.5-flash over the
-   1,080 gen-5 responses (~2,160 calls) to make the generational chain
-   judge-controlled.
-2. Author review of high-disagreement transcripts (report UI) — the
-   qualitative sidebar.
-3. Draft rebuild on gen-5 numbers + the second-round prose feedback.
-4. Release repo build (code + shape-validated scores + examples; prompts
-   held out).
+**Open items (all writing/curation; no data work remains):**
+1. Author's `[YOU]` sections in the draft: the "Why legal questions"
+   passage, one worked crisis pair for Finding 2, the closing note.
+   Title is chosen.
+2. Author review of the 15 high-disagreement transcripts — all guardrail
+   disputes — in `data/report.html` (High Judge Disagreement section +
+   review cards); produces the qualitative sidebar.
+3. Release repo build: fresh init containing pipeline code, rubric,
+   judge template, blinding lookup, all 8,640 grades with justification
+   text stripped, analysis output, and a worked-examples folder; the 60
+   prompts stay held out. Resolves the draft's `[REPO LINK]` marker.
+4. Final variant split: emit lesswrong.md (full) and substack.md (drop
+   `[LW-ONLY]`, apply approved `[CUT-OK]` cuts) from the master draft.
+5. LessWrong compliance at posting time: author's editing pass satisfies
+   the significant-value and vouch-for-accuracy requirements; disclosure
+   block already in the draft.
 
 **Standing decisions of record:** examples-only prompt publication
 (contamination/holdout); public repo as fresh-init with justification-text
