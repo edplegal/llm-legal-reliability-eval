@@ -390,33 +390,46 @@ must be disclosed; the judge confound would be eliminated.
 7. **Partial-orphan hazard** (fixed `eeb05ba`): rotating an entire judgment
    file because *some* rows orphaned would have re-bought 1,080 valid
    judgments during the Flash re-collection.
+8. **Schema-valid is not shape-valid** (2026-07-03, fixed `ca82db5`).
+   Sonnet 5 emitted 4/1,080 judgments with flat guardrail/regulatory
+   fields (`"guardrail": 3` instead of an object) — always the two
+   N/A-prone dimensions. `extract_json` checked JSON validity only, so the
+   records entered the dataset and the first one crashed analysis with
+   `AttributeError: 'int' object has no attribute 'get'`. Fix: rubric-shape
+   validation at judge time (wrong shape → the same re-ask path as invalid
+   JSON), a crash-proof score reader in analysis, and surgical re-judging
+   of the 4 records (pre-repair snapshot at
+   `legacy/judge_scores_2026-07-03.json`). Lesson: validate the *shape*
+   of model-generated JSON at ingestion, not just its syntax — and never
+   let one malformed record kill an aggregate over 6,479 good ones.
 
 ---
 
-## Part VI — Current state & open items (as of 2026-07-02)
+## Part VI — Current state & open items (as of 2026-07-03)
 
-**Running:** gen-5 judging (6 judges × 1,080 responses = 6,480; passed
-2,842 at last check). Auto-continues to analyze + report.
+**Complete:** the six-model gen-5 dataset, end to end — 1,080 responses
+(single config `d64f7b847f91`), 6,480 judgments (25 null, 0.39%), v3
+analysis and report, all committed through `66ef8eb`. Post-flight passed:
+zero truncation at the 8,192 caps (max total 3,586), perfect joins,
+adversarial null fills move nothing beyond 0.021 with zero rank flips.
+Headline gen-5 results are verified in FINDINGS.md v2 — most notably:
+Claude's self-deprecating judge fingerprint replicated on the new panel
+(all four core dims negative and significant against a 5-judge median);
+GPT's fingerprint flipped from inflation to near-neutral; the budget tiers
+self-inflate more than the mids; **Sonnet 5's crisis disclaimer shift is
+significantly negative** (−0.66* — it disclaims less for a user in
+trouble); confidence-under-pressure decay generalized to effectively the
+whole grid; Google's tier ordering inverted (lite beats flash).
 
-**Committed and stable:** complete gen-5 collection (1,080, single config
-`d64f7b847f91`), blind outputs, the archived 4.6-era dataset (the
-permanent basis of the published 4.6-era numbers and the 4→4.6
-comparison), all code through `ccc2c02`.
-
-**When judging completes:**
-1. Post-flight verification: truncation scan on the thinking arms at the
-   8192 cap; 6,480-judgment join check; null-rate by judge.
-2. Re-run the hardening suite on 6-model data (premiums now vs a 5-judge
-   median; tier-vs-tier comparison; variance decomposition under
-   provider-default sampling).
-3. Commit judge_scores + regenerated analysis/report + INVENTORY.
-4. FINDINGS v2; draft rebuild (tables, model names, and the
-   generational-change section).
-5. Decide: bridge-judging pass (IV.4) — makes the generational story
-   judge-controlled end-to-end.
-6. Outstanding from earlier: the author's qualitative review of
-   high-disagreement transcripts; release-repo build (code + scores +
-   examples, prompts held out).
+**Open items:**
+1. Bridge-judging decision (Part IV.4): gpt-4o + gemini-2.5-flash over the
+   1,080 gen-5 responses (~2,160 calls) to make the generational chain
+   judge-controlled.
+2. Author review of high-disagreement transcripts (report UI) — the
+   qualitative sidebar.
+3. Draft rebuild on gen-5 numbers + the second-round prose feedback.
+4. Release repo build (code + shape-validated scores + examples; prompts
+   held out).
 
 **Standing decisions of record:** examples-only prompt publication
 (contamination/holdout); public repo as fresh-init with justification-text
