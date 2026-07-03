@@ -344,16 +344,28 @@ the 4-era and gen-5 datasets**: the models, the sampling regime
 comparison in IV.2 does **not** carry these confounds (both runs: same
 sampling config, same caps, same judges).
 
-### IV.4 The bridge-judging option
+### IV.4 The bridge-judging pass (run 2026-07-03)
 
-The gen-5 run's judge panel is entirely new models, so judged 4.6→5
-comparisons are judge-confounded. Fix, if desired after the main run: have
-the two old stable judges (gpt-4o and gemini-2.5-flash — both still
-served) judge the 1,080 new responses (~2,160 calls). That creates a
-stable-judge chain across three generations: Sonnet 4 → 4.6 → 5 and
-gpt-4o → gpt-5.5, all under identical judges. The sampling-regime and
-cap confounds from IV.3 would still apply to the responses themselves and
-must be disclosed; the judge confound would be eliminated.
+Executed: gpt-4o (served as gpt-4o-2024-08-06 — the identical snapshot of
+both prior judging eras) and gemini-2.5-flash, at temperature 0.0 and the
+historical 4096 judge cap, over all 1,080 gen-5 responses (2,160
+judgments, 9 nulls, zero malformed). Run in an isolated AI_EVAL_BASE_DIR
+workspace; promoted to `data/bridge_scores.json`, kept separate from the
+six-judge panel data. Full results in FINDINGS.md §7. Two headlines:
+
+1. **It corrected our own claim.** "Claude's disclaimer behavior declined
+   monotonically across three generations" was wrong on levels — the true
+   shape is a V (S4 2.73 → S4.6 2.28 → S5 2.49; the recovery step +0.22
+   just misses significance; the full span −0.23 is not significant).
+   The claim survives only in its calibration form.
+2. **It confirmed the calibration regression as a model property.**
+   Sonnet 5's backwards crisis-disclaimer shift appears under both the
+   all-new 6-judge panel (−0.66*) and the frozen legacy judges (−0.73*).
+   And a cross-vendor pattern emerged: crisis calibration weakened
+   generation-over-generation for OpenAI (+1.07* → +0.24 NS) and Claude
+   (flat → −0.73*), while baseline confidence/jurisdiction levels rose
+   for every chain — better average answers, less attention to who is
+   asking.
 
 ---
 

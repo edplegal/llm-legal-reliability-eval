@@ -120,19 +120,52 @@ strict) over 1,080 responses. **Do not compare this rate to the 4.6-era
 0.86/response:** the threshold is ≥2 judges scoring 1, and a 6-judge panel
 reaches that bar far more easily than a 3-judge panel.
 
-## 7. Cross-generation story (with confound discipline)
+## 7. Cross-generation story — now judge-controlled end-to-end (bridge pass)
 
-- **Judge-controlled (clean):** Sonnet 4 → 4.6 disclaimer regression
-  (−0.45 [−0.67, −0.22] under identical judges; controls flat). See
-  HISTORY.md Part IV.
-- **Same-dataset (clean):** everything in §§1–5 above.
-- **4-era → 5-era comparisons (three confounds: models + sampling regime +
-  output caps):** directional only, pending the bridge-judging pass. The
-  through-line that survives even this caveat: **Claude's disclaimer
-  behavior has declined monotonically across three generations** (stable-
-  judge 4→4.6 drop; 4.6 flat-crisis-shift → 5 significantly-negative
-  crisis shift on an all-new panel), while its self-deprecating judge
-  fingerprint persisted.
+The bridge pass (data/bridge_scores.json: gpt-4o-2024-08-06 +
+gemini-2.5-flash at temperature 0.0 — the identical judge conditions of
+both prior eras — over all 1,080 gen-5 responses) makes every step below
+judge-controlled. Remaining response-side confounds for any →gen-5 step:
+sampling regime (configured 0.7 → provider defaults) and output caps
+(2048 → 8192); these are each era's deployed conditions and are disclosed.
+
+**Levels under identical judges (60 prompts, paired):**
+
+| chain | disclaimer | escalation | confidence | jurisdiction |
+|---|---|---|---|---|
+| Claude S4 → S4.6 → S5 | 2.73 → 2.28 → 2.49 | 3.60 → 3.35 → 3.45 | 3.78 → 3.75 → 3.97 | 3.31 → 3.38 → 3.70 |
+| gpt-4o → gpt-5.5 | 2.58 → 2.58 | 2.98 → 3.32* | 3.50 → 3.95* | 3.10 → 3.51* |
+| 2.5-flash† → 3.5-flash | 2.62 → 3.85* | 3.12 → 3.64* | 3.69 → 3.84 | 3.24 → 3.62* |
+
+† old-side truncation inflates the Gemini step.
+
+**Crisis-disclaimer calibration by generation (identical judges):**
+
+| arm | gen-4 | gen-4.6 | gen-5 |
+|---|---|---|---|
+| Claude | −0.40 (NS) | −0.08 (NS) | **−0.73*** [−1.26, −0.20] |
+| OpenAI | **+1.07*** | **+1.06*** | +0.24 (NS) |
+| Gemini | **+1.17*** | **+1.46*** | **+0.95*** |
+
+**Corrected and confirmed claims:**
+1. **CORRECTION (v2 §7 overclaimed):** Claude's disclaimer *level* did not
+   decline monotonically. It is V-shaped: the 4.6 dip (−0.45*) partially
+   recovered at Sonnet 5 (+0.22, CI [−0.02, +0.44]); the full S4→S5 span
+   is −0.23 [−0.51, +0.04], not significant. The bridge exists precisely
+   to test such claims, and it trimmed this one.
+2. **CONFIRMED, now judge-controlled:** Sonnet 5's backwards crisis
+   calibration (−0.73* under the legacy judges, −0.66* under the new
+   panel) is a property of the model, not of either judge panel. Claude
+   recovered disclaimer *volume* at S5 but distributes it backwards —
+   fewest disclaimers exactly when the user is in trouble.
+3. **New cross-vendor pattern:** crisis-disclaimer calibration weakened
+   from the 4-era to gen-5 for the two mainline non-Google arms — OpenAI
+   collapsed from +1.07* to +0.24 (NS), Claude from ~flat to
+   significantly negative; only Gemini retained calibration. Meanwhile
+   **baseline quality rose generation-over-generation for every chain**
+   (confidence/jurisdiction levels up, all steps positive, most
+   significant). The generational thesis the data supports: *newer models
+   give better average answers while attending less to who is asking.*
 
 ## 8. Do-not-publish list (v2)
 
@@ -146,9 +179,9 @@ reaches that bar far more easily than a 3-judge panel.
 
 ## 9. Open items
 
-1. Bridge-judging pass (gpt-4o + gemini-2.5-flash over the 1,080 gen-5
-   responses, ~2,160 calls) — would make the generational chain
-   judge-controlled end-to-end. Decision pending.
+1. ~~Bridge-judging pass~~ — DONE (see §7; data/bridge_scores.json).
 2. Author review of high-disagreement transcripts (report UI) — sidebar.
-3. Draft rebuild on these numbers + second-round prose fixes.
-4. Release repo build (code + shape-validated scores + examples).
+3. Draft rebuild on these numbers + second-round prose fixes + the
+   generational section per §7.
+4. Release repo build (code + shape-validated scores incl. bridge +
+   examples).
