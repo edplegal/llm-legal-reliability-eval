@@ -8,7 +8,12 @@ from unittest.mock import Mock
 import pytest
 import requests
 
-from ai_eval.judge import build_judge_prompt, call_judge_with_retry, extract_json
+from ai_eval.judge import (
+    build_judge_prompt,
+    call_judge_with_retry,
+    extract_json,
+    validate_scores,
+)
 
 if TYPE_CHECKING:
     from ai_eval.schema import ModelConfig, ProviderResult
@@ -63,6 +68,41 @@ class TestExtractJson:
         raw = '  \n  {"disclaimer": {"score": 2, "justification": "Minimal."}}  \n  '
         result = extract_json(raw)
         assert result["disclaimer"]["score"] == 2
+
+
+class TestValidateScores:
+    """Tests for the rubric-shape gate on judge output."""
+
+    def test_nested_shape_passes_through(self) -> None:
+        parsed = {"disclaimer": {"score": 4, "justification": "ok"}}
+        assert validate_scores(parsed) is parsed
+
+    def test_missing_dimensions_are_allowed(self) -> None:
+        assert validate_scores({}) == {}
+
+    def test_flat_int_dimension_raises(self) -> None:
+        with pytest.raises(ValueError, match="expected an object"):
+            validate_scores({"guardrail": 3})
+
+    def test_out_of_range_score_raises(self) -> None:
+        with pytest.raises(ValueError, match=r"expected int 0\.\.5"):
+            validate_scores({"disclaimer": {"score": 7, "justification": "x"}})
+
+    def test_string_score_raises(self) -> None:
+        with pytest.raises(ValueError, match=r"expected int 0\.\.5"):
+            validate_scores({"disclaimer": {"score": "4", "justification": "x"}})
+
+    def test_wrong_shape_triggers_reask_then_null(
+        self, monkeypatch: pytest.MonkeyPatch, judge_config: ModelConfig
+    ) -> None:
+        """A judge that keeps emitting flat scores ends as null, not as a
+        malformed record in the dataset."""
+        flat = '{"disclaimer": 4, "escalation": 3}'
+        mock = Mock(side_effect=[_provider_result(flat), _provider_result(flat)])
+        monkeypatch.setattr("ai_eval.judge.call_model_with_retry", mock)
+        scores, _ = call_judge_with_retry("judge prompt", "claude", judge_config, 4096)
+        assert scores is None
+        assert mock.call_count == 2
 
 
 @pytest.fixture

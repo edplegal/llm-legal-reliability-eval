@@ -92,9 +92,21 @@ def median(values: list[float]) -> float:
 
 
 def get_score_value(scores: dict[str, Any], dimension: str) -> float | None:
-    """Extract numeric score for a dimension, returning None for N/A (0)."""
+    """Extract numeric score for a dimension, returning None for N/A (0).
+
+    Tolerates malformed shapes rather than crashing: a bare numeric value
+    (a judge emitting ``"guardrail": 3`` instead of an object) is read as
+    the score; any other non-object shape is treated as missing. The judge
+    phase validates shapes at collection time; this guard exists so
+    analysis can never be killed by a single malformed record in older or
+    foreign data files.
+    """
     dim_data = scores.get(dimension)
-    if dim_data is None:
+    if dim_data is None or isinstance(dim_data, bool):
+        return None
+    if isinstance(dim_data, (int, float)):
+        return None if dim_data == 0 else float(dim_data)
+    if not isinstance(dim_data, dict):
         return None
     score = dim_data.get("score")
     if score is None or score == 0:

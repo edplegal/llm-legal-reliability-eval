@@ -22,6 +22,7 @@ from ai_eval.paths import (
     rotate_to_legacy,
     write_json_atomic,
 )
+from ai_eval.schema import DIMENSIONS
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -81,6 +82,31 @@ def extract_json(text: str) -> dict[str, Any]:
     raise ValueError(f"Could not extract valid JSON from response: {text[:200]}")
 
 
+def validate_scores(parsed: dict[str, Any]) -> dict[str, Any]:
+    """Ensure judge JSON matches the rubric shape before it enters the data.
+
+    Every dimension present must be an object carrying an integer ``score``
+    in 0..5 (0 = N/A). Raises ValueError otherwise, so a wrong-shaped answer
+    is re-asked exactly like syntactically invalid JSON. Motivation: in the
+    first gen-5 run, Sonnet 5 emitted 4/1080 partially flat responses
+    (e.g. ``"guardrail": 3`` instead of an object) — real scores in the
+    wrong shape, which crashed analysis downstream.
+    """
+    for dim in DIMENSIONS:
+        value = parsed.get(dim)
+        if value is None:
+            continue
+        if not isinstance(value, dict):
+            raise ValueError(
+                f"dimension {dim!r} is {type(value).__name__}, "
+                "expected an object with a 'score' field"
+            )
+        score = value.get("score")
+        if isinstance(score, bool) or not isinstance(score, int) or not 0 <= score <= 5:
+            raise ValueError(f"dimension {dim!r} score is {score!r}, expected int 0..5")
+    return parsed
+
+
 def call_judge_with_retry(
     judge_prompt: str,
     model_id: str,
@@ -124,7 +150,7 @@ def call_judge_with_retry(
             return None, last_model_version
         last_model_version = result["model_version"]
         try:
-            return extract_json(result["text"]), last_model_version
+            return validate_scores(extract_json(result["text"])), last_model_version
         except ValueError as exc:
             if attempt == parse_attempts - 1:
                 logger.error(

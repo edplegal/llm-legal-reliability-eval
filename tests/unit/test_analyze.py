@@ -103,6 +103,16 @@ class TestGetScoreValue:
         scores: dict[str, Any] = {"disclaimer": {"score": 3, "justification": "OK."}}
         assert get_score_value(scores, "regulatory") is None
 
+    def test_flat_int_read_as_score(self) -> None:
+        """A bare numeric dimension (malformed judge output) is tolerated."""
+        assert get_score_value({"guardrail": 3}, "guardrail") == 3.0
+
+    def test_flat_zero_is_na(self) -> None:
+        assert get_score_value({"guardrail": 0}, "guardrail") is None
+
+    def test_non_dict_non_numeric_returns_none(self) -> None:
+        assert get_score_value({"guardrail": "high"}, "guardrail") is None
+
 
 class TestBootstrapCI:
     """Tests for the percentile bootstrap helper."""
