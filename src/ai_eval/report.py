@@ -355,7 +355,10 @@ def build_self_favoritism_section(analysis: dict[str, Any]) -> str:
             )
             premium = stats.get("self_premium_vs_median_of_others", 0.0)
             n_self = int(stats.get("n_self_responses", 0))
-            flag_class = ' class="flagged"' if n_self and abs(premium) > 0.5 else ""
+            n_net = int(stats.get("n_net_prompts", 0))
+            net = stats.get("net_self_premium", 0.0)
+            flag_metric = net if n_net else premium
+            flag_class = ' class="flagged"' if n_self and abs(flag_metric) > 0.5 else ""
             premium_disp = f"{premium:+.2f}" if n_self else "<em>n=0</em>"
             ci_low = stats.get("premium_ci_low")
             ci_high = stats.get("premium_ci_high")
@@ -365,6 +368,15 @@ def build_self_favoritism_section(analysis: dict[str, Any]) -> str:
                 ci_disp = f"[{ci_low:+.2f}, {ci_high:+.2f}]{marker}"
             else:
                 ci_disp = "<em>&mdash;</em>"
+            style = stats.get("style_deviation", 0.0)
+            style_disp = f"{style:+.2f}" if n_net else "<em>&mdash;</em>"
+            net_lo = stats.get("net_ci_low")
+            net_hi = stats.get("net_ci_high")
+            if n_net and net_lo is not None and net_hi is not None:
+                net_marker = " *" if (net_lo > 0 or net_hi < 0) else ""
+                net_disp = f"{net:+.2f} [{net_lo:+.2f}, {net_hi:+.2f}]{net_marker}"
+            else:
+                net_disp = "<em>&mdash;</em>"
             rows += f"""<tr{flag_class}>
                 <td>{esc(dim)}</td>
                 <td>{stats['self_avg']:.2f}</td>
@@ -372,6 +384,8 @@ def build_self_favoritism_section(analysis: dict[str, Any]) -> str:
                 <td>{stats['diff']:+.2f}</td>
                 <td>{premium_disp}</td>
                 <td>{ci_disp}</td>
+                <td>{style_disp}</td>
+                <td>{net_disp}</td>
                 <td>{n_self}</td>
             </tr>"""
         tables += f"""
@@ -382,6 +396,8 @@ def build_self_favoritism_section(analysis: dict[str, Any]) -> str:
             <th>Naive Diff</th>
             <th>Premium vs Median<br>(controls for quality)</th>
             <th>Premium 95% CI<br>(bootstrap over prompts; * excludes 0)</th>
+            <th>Style Dev<br>(on others' responses)</th>
+            <th>Net Self-Premium + 95% CI<br>(premium minus style; * excludes 0)</th>
             <th>n Self Responses</th>
         </tr></thead>
         <tbody>{rows}</tbody>

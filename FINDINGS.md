@@ -167,7 +167,7 @@ sampling regime (configured 0.7 → provider defaults) and output caps
    significant). The generational thesis the data supports: *newer models
    give better average answers while attending less to who is asking.*
 
-## 8. Do-not-publish list (v2)
+## 8. Do-not-publish list (v3)
 
 1. Cross-panel critical-failure rate comparisons (threshold changes with
    panel size).
@@ -176,12 +176,53 @@ sampling regime (configured 0.7 → provider defaults) and output caps
    preview and directional language only, three confounds disclosed.
 4. The 4.6-era cross-run critical-failure trend (three-way confounded; v1
    ruling stands).
+5. **Raw self-premiums presented as self-bias** (added 2026-07-08; see
+   §10). The raw median-of-others premium confounds judge grading style
+   with self-treatment. Publish net premiums; raw premiums may appear
+   only alongside the style deviation that explains them.
 
 ## 9. Open items
 
 1. ~~Bridge-judging pass~~ — DONE (see §7; data/bridge_scores.json).
-2. Author review of high-disagreement transcripts (report UI) — sidebar.
-3. Draft rebuild on these numbers + second-round prose fixes + the
-   generational section per §7.
+2. ~~Author review of high-disagreement transcripts~~ — DONE 2026-07-03
+   (drafts/disagreement_review.md; sidebar drafted).
+3. Draft rebuild on the corrected Finding 1 per §10.
 4. Release repo build (code + shape-validated scores incl. bridge +
    examples).
+
+## 10. Style-corrected self-favoritism (analyze v4, 2026-07-08)
+
+**The catch.** An external-reviewer prompt questioned the title claim
+("recognized itself"). Follow-up analysis showed the raw self-premium
+(judge minus median-of-others on OWN responses) never subtracted the
+judge's deviation on OTHERS' responses — its general grading style. A
+uniformly harsh or generous judge shows a large raw premium with zero
+self-specific treatment. analyze v4 adds `style_deviation` and
+`net_self_premium` (self minus style, per prompt, bootstrap CI over
+prompts).
+
+**Corrected gen-5 results (core dims):**
+
+- **Claude Sonnet 5's "self-deprecation" is dead.** Nets: disclaimer
+  −0.08, escalation +0.02, confidence +0.05, jurisdiction +0.03 — no CI
+  excludes zero. Claude is the panel's harshest judge on everyone
+  (style −0.27 to −0.72). Same result in the 4.6 era (nets |≤0.04| on
+  all four dims): the "replicated trait" was style both times.
+- **GPT-5.4-mini's +0.99 disclaimer premium is style (+0.94).** Real
+  nets survive on escalation +0.20* and confidence +0.22*; guardrail
+  net +1.29 (low-n, n_self=20).
+- **14 of 24 core cells have significant nets, and every one is
+  positive.** No judge favors others over itself. The Gemini family is
+  the standout: all 8 of its cells significant (up to lite escalation
+  +0.45*).
+- **GPT-4o (4.6 era) splits:** style +0.39/+0.71 on
+  disclaimer/escalation with genuine net self-favoritism +0.23/+0.43.
+
+**The two-layer replacement finding:** (1) judge style offsets are
+large (up to ±0.9 points) and are a first-order hazard for
+LLM-as-judge panels regardless of blinding; (2) after removing style, a
+smaller, uniformly positive self-preference remains for most judges.
+Headline retirements: "Claude is its own harshest critic" (it is the
+harshest judge, period), "the budget tiers flatter themselves" (they
+flatter everyone), and any "recognized itself" framing on the raw
+numbers.

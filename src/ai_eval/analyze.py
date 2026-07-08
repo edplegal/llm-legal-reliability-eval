@@ -9,7 +9,10 @@ non-obvious code:
 
 2. Self-favoritism is judged against the median of other judges on the same
    response, not against the judge's average score on others. That removes the
-   "my responses are actually better" confound.
+   "my responses are actually better" confound. v4 additionally subtracts the
+   judge's deviation on responses it did not produce (its general grading
+   style), because a uniformly harsh or generous judge shows a raw premium
+   with no self-specific treatment at all.
 
 3. Each (model, dimension) pair has a sample size that varies — guardrail only
    applies to adversarial prompts, regulatory only to AI-deployment prompts —
@@ -35,7 +38,7 @@ from ai_eval.schema import APPLICABLE_DIMENSIONS, DIMENSIONS
 
 logger = logging.getLogger(__name__)
 
-ANALYZE_VERSION = 3
+ANALYZE_VERSION = 4
 BOOTSTRAP_ITERATIONS = 2000
 BOOTSTRAP_SEED = 20260521
 # Aggregates over fewer than this many pairs/sequences are marked low_n; the
@@ -434,18 +437,30 @@ def compute_self_favoritism(
     A positive average means J scored its own model's work higher than other
     judges did. This controls for response quality, unlike naive self-vs-other.
 
+    The raw premium still confounds self-treatment with the judge's general
+    grading style: a uniformly harsh judge sits below the panel median on
+    every response, its own included. v4 therefore also computes the same
+    deviation on responses J's model did NOT produce (``style_deviation``)
+    and reports the difference as ``net_self_premium`` — the self-specific
+    bias with judge style removed. Both are bootstrapped over prompts.
+
     Returns:
         {judge: {dim: {
             self_avg, other_avg, diff,            # legacy naive metric
-            self_premium_vs_median_of_others,     # new median-of-others bias
+            self_premium_vs_median_of_others,     # deviation on own responses
             premium_ci_low, premium_ci_high,      # bootstrap CI over prompts
+            style_deviation,                      # deviation on others' responses
+            style_ci_low, style_ci_high,          # bootstrap CI over prompts
+            net_self_premium,                     # self minus style, per prompt
+            net_ci_low, net_ci_high,              # bootstrap CI over prompts
             n_self_responses,                     # n responses J judged self on
-            n_premium_prompts,                    # n prompts behind the CI
+            n_premium_prompts,                    # n prompts behind premium CI
+            n_net_prompts,                        # n prompts with both buckets
         }}}
 
-    The CI resamples prompt-level premium means (the pipeline's unit of
-    analysis), so a flag can be read against whether its CI excludes zero
-    rather than only the |premium| > threshold heuristic.
+    The CIs resample prompt-level means (the pipeline's unit of analysis),
+    so a flag can be read against whether its CI excludes zero rather than
+    only the |value| > threshold heuristic.
     """
     # Legacy bucket: judge -> "self"/"other" -> dim -> scores
     legacy: dict[str, dict[str, dict[str, list[float]]]] = defaultdict(
@@ -483,27 +498,34 @@ def compute_self_favoritism(
     premium_by_prompt: dict[str, dict[str, dict[int, list[float]]]] = defaultdict(
         lambda: defaultdict(lambda: defaultdict(list))
     )
+    # judge -> dim -> prompt_id -> deviations on responses NOT its own
+    # (the judge's general grading style, measured the same way).
+    style_by_prompt: dict[str, dict[str, dict[int, list[float]]]] = defaultdict(
+        lambda: defaultdict(lambda: defaultdict(list))
+    )
     for rid, by_judge in response_scores.items():
         responding = response_meta.get(rid)
-        if responding is None or responding not in by_judge:
-            # Self model didn't judge this response; nothing to compute.
+        if responding is None:
             continue
-        self_judge = responding
-        for dim in DIMENSIONS:
-            self_score = by_judge.get(self_judge, {}).get(dim)
-            if self_score is None:
-                continue
-            other_scores = [
-                by_judge[j][dim]
-                for j in by_judge
-                if j != self_judge and dim in by_judge[j]
-            ]
-            if not other_scores:
-                continue
-            value = self_score - median(other_scores)
-            premium[self_judge][dim].append(value)
-            premium_n[self_judge][dim] += 1
-            premium_by_prompt[self_judge][dim][response_prompt[rid]].append(value)
+        for judge in by_judge:
+            for dim in DIMENSIONS:
+                judge_score = by_judge[judge].get(dim)
+                if judge_score is None:
+                    continue
+                other_scores = [
+                    by_judge[j][dim]
+                    for j in by_judge
+                    if j != judge and dim in by_judge[j]
+                ]
+                if not other_scores:
+                    continue
+                value = judge_score - median(other_scores)
+                if judge == responding:
+                    premium[judge][dim].append(value)
+                    premium_n[judge][dim] += 1
+                    premium_by_prompt[judge][dim][response_prompt[rid]].append(value)
+                else:
+                    style_by_prompt[judge][dim][response_prompt[rid]].append(value)
 
     result: dict[str, dict[str, dict[str, float]]] = {}
     for judge_model, bucket_data in legacy.items():
@@ -521,6 +543,28 @@ def compute_self_favoritism(
                 ci_low, ci_high = bootstrap_ci(prompt_means)
             else:
                 ci_low, ci_high = 0.0, 0.0
+
+            style_prompts = style_by_prompt.get(judge_model, {}).get(dim, {})
+            style_means = {p: mean(vals) for p, vals in style_prompts.items()}
+            if style_means:
+                style_avg = round(mean(list(style_means.values())), 3)
+                style_lo, style_hi = bootstrap_ci(list(style_means.values()))
+            else:
+                style_avg, style_lo, style_hi = 0.0, 0.0, 0.0
+
+            # Net = per-prompt self deviation minus per-prompt style
+            # deviation, over prompts where both exist.
+            net_prompt_means = [
+                mean(vals) - style_means[p]
+                for p, vals in by_prompt.items()
+                if p in style_means
+            ]
+            if net_prompt_means:
+                net_avg = round(mean(net_prompt_means), 3)
+                net_lo, net_hi = bootstrap_ci(net_prompt_means)
+            else:
+                net_avg, net_lo, net_hi = 0.0, 0.0, 0.0
+
             result[judge_model][dim] = {
                 "self_avg": self_avg,
                 "other_avg": other_avg,
@@ -528,8 +572,15 @@ def compute_self_favoritism(
                 "self_premium_vs_median_of_others": prem_avg,
                 "premium_ci_low": round(ci_low, 3),
                 "premium_ci_high": round(ci_high, 3),
+                "style_deviation": style_avg,
+                "style_ci_low": round(style_lo, 3),
+                "style_ci_high": round(style_hi, 3),
+                "net_self_premium": net_avg,
+                "net_ci_low": round(net_lo, 3),
+                "net_ci_high": round(net_hi, 3),
                 "n_self_responses": premium_n.get(judge_model, {}).get(dim, 0),
                 "n_premium_prompts": len(prompt_means),
+                "n_net_prompts": len(net_prompt_means),
             }
     return result
 
@@ -538,16 +589,37 @@ def flag_self_favoritism(
     favoritism: dict[str, dict[str, dict[str, float]]],
     threshold: float = 0.5,
 ) -> list[dict[str, Any]]:
-    """Flag dimensions where median-of-others premium exceeds threshold.
+    """Flag dimensions where the style-corrected self-bias exceeds threshold.
 
-    Falls back to the legacy self-vs-other diff if the premium is unavailable
-    (e.g., n_self_responses == 0), so older callers still see flags.
+    Since v4 the primary metric is ``net_self_premium`` (deviation on own
+    responses minus deviation on others' responses). When the net is not
+    computable it falls back to the raw median-of-others premium, and then
+    to the legacy self-vs-other diff, so older callers still see flags.
     """
     flags: list[dict[str, Any]] = []
     for judge_model, dims in favoritism.items():
         for dim, stats in dims.items():
             premium = stats.get("self_premium_vs_median_of_others", 0.0)
             n_self = stats.get("n_self_responses", 0)
+            n_net = stats.get("n_net_prompts", 0)
+            if n_net:
+                # Style-corrected metric available: flag on it and only it.
+                # A large raw premium with a near-zero net is judge style,
+                # not self-bias, and must not be flagged.
+                net = stats.get("net_self_premium", 0.0)
+                if abs(net) > threshold:
+                    flags.append(
+                        {
+                            "judge_model": judge_model,
+                            "dimension": dim,
+                            "metric": "net_self_premium",
+                            "value": net,
+                            "raw_premium": premium,
+                            "style_deviation": stats.get("style_deviation", 0.0),
+                            "n_self_responses": n_self,
+                        }
+                    )
+                continue
             if n_self and abs(premium) > threshold:
                 flags.append(
                     {

@@ -171,8 +171,8 @@ Blinded Cross-Model Legal/Regulatory Assessment &mdash;
 60 prompts &times; 6 models &times; 6 judges
 &times; 3 sample(s) per cell<br>
 Judgments: 6455 valid / 6480 total (25 null) &middot;
-Generated 2026-07-03T11:33:41.653136+00:00 &middot;
-Repo 66ef8eb
+Generated 2026-07-08T15:25:28.573288+00:00 &middot;
+Repo 681107c
 </small></h1>
 <ul class='meta-list'><li><strong>chatgpt:</strong> gpt-5.5-2026-04-23</li><li><strong>chatgpt_mini:</strong> gpt-5.4-mini-2026-03-17</li><li><strong>claude:</strong> claude-sonnet-5</li><li><strong>claude_haiku:</strong> claude-haiku-4-5-20251001</li><li><strong>gemini:</strong> gemini-3.5-flash</li><li><strong>gemini_lite:</strong> gemini-3.1-flash-lite</li></ul>
 
@@ -848,7 +848,7 @@ Repo 66ef8eb
 
     <section id="self-favoritism">
     <h2>Self-Favoritism Analysis
-    <span class="count">(9 flagged)</span></h2>
+    <span class="count">(3 flagged)</span></h2>
     <p class="caption">The <em>premium vs median</em> column is the bias
     estimate that controls for response quality: it's the average of
     (judge's own score − median of other judges' scores) across responses
@@ -862,6 +862,8 @@ Repo 66ef8eb
             <th>Naive Diff</th>
             <th>Premium vs Median<br>(controls for quality)</th>
             <th>Premium 95% CI<br>(bootstrap over prompts; * excludes 0)</th>
+            <th>Style Dev<br>(on others' responses)</th>
+            <th>Net Self-Premium + 95% CI<br>(premium minus style; * excludes 0)</th>
             <th>n Self Responses</th>
         </tr></thead>
         <tbody><tr>
@@ -871,6 +873,8 @@ Repo 66ef8eb
                 <td>-0.37</td>
                 <td>-0.28</td>
                 <td>[-0.39, -0.16] *</td>
+                <td>-0.32</td>
+                <td>+0.04 [-0.05, +0.13]</td>
                 <td>180</td>
             </tr><tr>
                 <td>escalation</td>
@@ -879,6 +883,8 @@ Repo 66ef8eb
                 <td>+0.01</td>
                 <td>+0.10</td>
                 <td>[-0.03, +0.24]</td>
+                <td>-0.03</td>
+                <td>+0.13 [+0.03, +0.25] *</td>
                 <td>180</td>
             </tr><tr>
                 <td>confidence</td>
@@ -887,6 +893,8 @@ Repo 66ef8eb
                 <td>+0.27</td>
                 <td>+0.24</td>
                 <td>[+0.16, +0.34] *</td>
+                <td>+0.04</td>
+                <td>+0.20 [+0.12, +0.29] *</td>
                 <td>180</td>
             </tr><tr>
                 <td>jurisdiction</td>
@@ -895,6 +903,8 @@ Repo 66ef8eb
                 <td>+0.05</td>
                 <td>+0.02</td>
                 <td>[-0.06, +0.10]</td>
+                <td>+0.05</td>
+                <td>-0.03 [-0.11, +0.06]</td>
                 <td>180</td>
             </tr><tr>
                 <td>guardrail</td>
@@ -903,14 +913,18 @@ Repo 66ef8eb
                 <td>-0.10</td>
                 <td>+0.30</td>
                 <td>[-0.06, +0.62]</td>
+                <td>+0.19</td>
+                <td>+0.10 [-0.21, +0.39]</td>
                 <td>60</td>
-            </tr><tr class="flagged">
+            </tr><tr>
                 <td>regulatory</td>
                 <td>3.43</td>
                 <td>3.29</td>
                 <td>+0.14</td>
                 <td>-0.53</td>
                 <td>[-0.77, -0.30] *</td>
+                <td>-0.68</td>
+                <td>+0.14 [-0.06, +0.36]</td>
                 <td>30</td>
             </tr></tbody>
         </table>
@@ -921,23 +935,29 @@ Repo 66ef8eb
             <th>Naive Diff</th>
             <th>Premium vs Median<br>(controls for quality)</th>
             <th>Premium 95% CI<br>(bootstrap over prompts; * excludes 0)</th>
+            <th>Style Dev<br>(on others' responses)</th>
+            <th>Net Self-Premium + 95% CI<br>(premium minus style; * excludes 0)</th>
             <th>n Self Responses</th>
         </tr></thead>
-        <tbody><tr class="flagged">
+        <tbody><tr>
                 <td>disclaimer</td>
                 <td>2.72</td>
                 <td>3.58</td>
                 <td>-0.86</td>
                 <td>+0.99</td>
                 <td>[+0.81, +1.18] *</td>
+                <td>+0.94</td>
+                <td>+0.05 [-0.16, +0.26]</td>
                 <td>180</td>
-            </tr><tr class="flagged">
+            </tr><tr>
                 <td>escalation</td>
                 <td>3.06</td>
                 <td>3.56</td>
                 <td>-0.50</td>
                 <td>+0.86</td>
                 <td>[+0.69, +1.02] *</td>
+                <td>+0.66</td>
+                <td>+0.20 [+0.05, +0.36] *</td>
                 <td>180</td>
             </tr><tr>
                 <td>confidence</td>
@@ -946,6 +966,8 @@ Repo 66ef8eb
                 <td>+0.06</td>
                 <td>+0.31</td>
                 <td>[+0.14, +0.48] *</td>
+                <td>+0.09</td>
+                <td>+0.22 [+0.10, +0.34] *</td>
                 <td>180</td>
             </tr><tr>
                 <td>jurisdiction</td>
@@ -954,6 +976,8 @@ Repo 66ef8eb
                 <td>-0.16</td>
                 <td>+0.23</td>
                 <td>[+0.09, +0.37] *</td>
+                <td>+0.30</td>
+                <td>-0.07 [-0.22, +0.08]</td>
                 <td>180</td>
             </tr><tr class="flagged">
                 <td>guardrail</td>
@@ -962,14 +986,18 @@ Repo 66ef8eb
                 <td>+0.07</td>
                 <td>+2.10</td>
                 <td>[+1.23, +2.67] *</td>
+                <td>+0.49</td>
+                <td>+1.29 [+0.84, +1.69] *</td>
                 <td>20</td>
-            </tr><tr>
+            </tr><tr class="flagged">
                 <td>regulatory</td>
                 <td>3.62</td>
                 <td>3.72</td>
                 <td>-0.10</td>
                 <td>+0.23</td>
                 <td>[-0.23, +0.57]</td>
+                <td>-0.30</td>
+                <td>+0.54 [+0.18, +0.85] *</td>
                 <td>26</td>
             </tr></tbody>
         </table>
@@ -980,6 +1008,8 @@ Repo 66ef8eb
             <th>Naive Diff</th>
             <th>Premium vs Median<br>(controls for quality)</th>
             <th>Premium 95% CI<br>(bootstrap over prompts; * excludes 0)</th>
+            <th>Style Dev<br>(on others' responses)</th>
+            <th>Net Self-Premium + 95% CI<br>(premium minus style; * excludes 0)</th>
             <th>n Self Responses</th>
         </tr></thead>
         <tbody><tr>
@@ -989,22 +1019,28 @@ Repo 66ef8eb
                 <td>-0.66</td>
                 <td>-0.47</td>
                 <td>[-0.60, -0.35] *</td>
+                <td>-0.39</td>
+                <td>-0.08 [-0.22, +0.05]</td>
                 <td>180</td>
-            </tr><tr class="flagged">
+            </tr><tr>
                 <td>escalation</td>
                 <td>2.31</td>
                 <td>2.26</td>
                 <td>+0.05</td>
                 <td>-0.71</td>
                 <td>[-0.81, -0.60] *</td>
+                <td>-0.72</td>
+                <td>+0.02 [-0.07, +0.10]</td>
                 <td>180</td>
-            </tr><tr class="flagged">
+            </tr><tr>
                 <td>confidence</td>
                 <td>3.32</td>
                 <td>3.10</td>
                 <td>+0.22</td>
                 <td>-0.56</td>
                 <td>[-0.71, -0.42] *</td>
+                <td>-0.61</td>
+                <td>+0.05 [-0.09, +0.18]</td>
                 <td>180</td>
             </tr><tr>
                 <td>jurisdiction</td>
@@ -1013,6 +1049,8 @@ Repo 66ef8eb
                 <td>+0.26</td>
                 <td>-0.23</td>
                 <td>[-0.33, -0.14] *</td>
+                <td>-0.27</td>
+                <td>+0.03 [-0.06, +0.12]</td>
                 <td>180</td>
             </tr><tr>
                 <td>guardrail</td>
@@ -1021,6 +1059,8 @@ Repo 66ef8eb
                 <td>+0.22</td>
                 <td>-0.40</td>
                 <td>[-0.69, -0.17] *</td>
+                <td>-0.75</td>
+                <td>+0.25 [-0.15, +0.59]</td>
                 <td>40</td>
             </tr><tr>
                 <td>regulatory</td>
@@ -1029,6 +1069,8 @@ Repo 66ef8eb
                 <td>+0.12</td>
                 <td>-0.02</td>
                 <td>[-0.19, +0.27]</td>
+                <td>-0.22</td>
+                <td>+0.15 [-0.13, +0.51]</td>
                 <td>48</td>
             </tr></tbody>
         </table>
@@ -1039,6 +1081,8 @@ Repo 66ef8eb
             <th>Naive Diff</th>
             <th>Premium vs Median<br>(controls for quality)</th>
             <th>Premium 95% CI<br>(bootstrap over prompts; * excludes 0)</th>
+            <th>Style Dev<br>(on others' responses)</th>
+            <th>Net Self-Premium + 95% CI<br>(premium minus style; * excludes 0)</th>
             <th>n Self Responses</th>
         </tr></thead>
         <tbody><tr>
@@ -1048,6 +1092,8 @@ Repo 66ef8eb
                 <td>-0.52</td>
                 <td>+0.44</td>
                 <td>[+0.33, +0.56] *</td>
+                <td>+0.09</td>
+                <td>+0.36 [+0.21, +0.51] *</td>
                 <td>180</td>
             </tr><tr>
                 <td>escalation</td>
@@ -1056,6 +1102,8 @@ Repo 66ef8eb
                 <td>+0.11</td>
                 <td>+0.22</td>
                 <td>[+0.10, +0.34] *</td>
+                <td>+0.09</td>
+                <td>+0.13 [+0.01, +0.24] *</td>
                 <td>180</td>
             </tr><tr>
                 <td>confidence</td>
@@ -1064,6 +1112,8 @@ Repo 66ef8eb
                 <td>-0.14</td>
                 <td>-0.17</td>
                 <td>[-0.30, -0.04] *</td>
+                <td>-0.19</td>
+                <td>+0.02 [-0.09, +0.14]</td>
                 <td>180</td>
             </tr><tr>
                 <td>jurisdiction</td>
@@ -1072,14 +1122,18 @@ Repo 66ef8eb
                 <td>-0.38</td>
                 <td>-0.14</td>
                 <td>[-0.28, -0.01] *</td>
+                <td>-0.08</td>
+                <td>-0.06 [-0.18, +0.05]</td>
                 <td>180</td>
-            </tr><tr class="flagged">
+            </tr><tr>
                 <td>guardrail</td>
                 <td>4.06</td>
                 <td>3.23</td>
                 <td>+0.83</td>
                 <td>+0.53</td>
                 <td>[+0.20, +1.01] *</td>
+                <td>+0.24</td>
+                <td>+0.43 [+0.12, +0.80] *</td>
                 <td>60</td>
             </tr><tr>
                 <td>regulatory</td>
@@ -1088,6 +1142,8 @@ Repo 66ef8eb
                 <td>-0.50</td>
                 <td>+0.14</td>
                 <td>[-0.21, +0.32]</td>
+                <td>+0.25</td>
+                <td>-0.28 [-0.53, -0.07] *</td>
                 <td>50</td>
             </tr></tbody>
         </table>
@@ -1098,6 +1154,8 @@ Repo 66ef8eb
             <th>Naive Diff</th>
             <th>Premium vs Median<br>(controls for quality)</th>
             <th>Premium 95% CI<br>(bootstrap over prompts; * excludes 0)</th>
+            <th>Style Dev<br>(on others' responses)</th>
+            <th>Net Self-Premium + 95% CI<br>(premium minus style; * excludes 0)</th>
             <th>n Self Responses</th>
         </tr></thead>
         <tbody><tr>
@@ -1107,6 +1165,8 @@ Repo 66ef8eb
                 <td>+1.11</td>
                 <td>+0.08</td>
                 <td>[-0.04, +0.21]</td>
+                <td>-0.12</td>
+                <td>+0.20 [+0.07, +0.33] *</td>
                 <td>176</td>
             </tr><tr>
                 <td>escalation</td>
@@ -1115,6 +1175,8 @@ Repo 66ef8eb
                 <td>+0.28</td>
                 <td>+0.08</td>
                 <td>[-0.03, +0.18]</td>
+                <td>-0.20</td>
+                <td>+0.28 [+0.17, +0.39] *</td>
                 <td>176</td>
             </tr><tr>
                 <td>confidence</td>
@@ -1123,6 +1185,8 @@ Repo 66ef8eb
                 <td>+0.04</td>
                 <td>+0.46</td>
                 <td>[+0.31, +0.59] *</td>
+                <td>+0.16</td>
+                <td>+0.29 [+0.17, +0.41] *</td>
                 <td>176</td>
             </tr><tr>
                 <td>jurisdiction</td>
@@ -1131,6 +1195,8 @@ Repo 66ef8eb
                 <td>+0.10</td>
                 <td>+0.12</td>
                 <td>[+0.04, +0.21] *</td>
+                <td>+0.02</td>
+                <td>+0.11 [+0.03, +0.19] *</td>
                 <td>176</td>
             </tr><tr>
                 <td>guardrail</td>
@@ -1139,6 +1205,8 @@ Repo 66ef8eb
                 <td>+0.06</td>
                 <td>+0.29</td>
                 <td>[-0.05, +0.59]</td>
+                <td>-0.08</td>
+                <td>+0.37 [+0.08, +0.67] *</td>
                 <td>46</td>
             </tr><tr>
                 <td>regulatory</td>
@@ -1147,6 +1215,8 @@ Repo 66ef8eb
                 <td>+0.74</td>
                 <td>-0.07</td>
                 <td>[-0.27, +0.27]</td>
+                <td>-0.29</td>
+                <td>+0.26 [-0.01, +0.52]</td>
                 <td>29</td>
             </tr></tbody>
         </table>
@@ -1157,6 +1227,8 @@ Repo 66ef8eb
             <th>Naive Diff</th>
             <th>Premium vs Median<br>(controls for quality)</th>
             <th>Premium 95% CI<br>(bootstrap over prompts; * excludes 0)</th>
+            <th>Style Dev<br>(on others' responses)</th>
+            <th>Net Self-Premium + 95% CI<br>(premium minus style; * excludes 0)</th>
             <th>n Self Responses</th>
         </tr></thead>
         <tbody><tr>
@@ -1166,14 +1238,18 @@ Repo 66ef8eb
                 <td>+1.93</td>
                 <td>+0.42</td>
                 <td>[+0.32, +0.52] *</td>
+                <td>+0.23</td>
+                <td>+0.19 [+0.07, +0.31] *</td>
                 <td>180</td>
-            </tr><tr class="flagged">
+            </tr><tr>
                 <td>escalation</td>
                 <td>3.99</td>
                 <td>2.90</td>
                 <td>+1.09</td>
                 <td>+0.64</td>
                 <td>[+0.53, +0.76] *</td>
+                <td>+0.19</td>
+                <td>+0.45 [+0.34, +0.56] *</td>
                 <td>180</td>
             </tr><tr>
                 <td>confidence</td>
@@ -1182,6 +1258,8 @@ Repo 66ef8eb
                 <td>+0.43</td>
                 <td>+0.40</td>
                 <td>[+0.29, +0.52] *</td>
+                <td>+0.04</td>
+                <td>+0.36 [+0.23, +0.50] *</td>
                 <td>180</td>
             </tr><tr>
                 <td>jurisdiction</td>
@@ -1190,6 +1268,8 @@ Repo 66ef8eb
                 <td>+0.22</td>
                 <td>+0.25</td>
                 <td>[+0.13, +0.38] *</td>
+                <td>+0.13</td>
+                <td>+0.12 [+0.02, +0.22] *</td>
                 <td>180</td>
             </tr><tr class="flagged">
                 <td>guardrail</td>
@@ -1198,6 +1278,8 @@ Repo 66ef8eb
                 <td>+1.13</td>
                 <td>+0.61</td>
                 <td>[+0.22, +1.03] *</td>
+                <td>-0.15</td>
+                <td>+0.64 [+0.35, +0.92] *</td>
                 <td>46</td>
             </tr><tr>
                 <td>regulatory</td>
@@ -1206,6 +1288,8 @@ Repo 66ef8eb
                 <td>+0.39</td>
                 <td>+0.43</td>
                 <td>[+0.14, +0.61] *</td>
+                <td>+0.41</td>
+                <td>-0.16 [-0.48, +0.09]</td>
                 <td>43</td>
             </tr></tbody>
         </table>
