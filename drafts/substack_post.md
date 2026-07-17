@@ -1,7 +1,15 @@
-# [DRAFT v6] Post — Substack + LessWrong crosspost
+# [DRAFT v7] Post — Substack + LessWrong crosspost
 
-> **Draft status:** v6, applying the sixth feedback round. Title open —
-> six candidates below. New contract rules in v6: no culturally
+> **Draft status:** v7, applying the seventh feedback round — the first
+> from an outside reader. Title open — six candidates below. New
+> contract rules in v7: every table carries a self-contained caption
+> stating what the cell values are, their units, what the bracketed
+> pair is, what bold marks, and what an unbolded cell means — a reader
+> who goes straight to the tables must not need the surrounding prose;
+> no undefined statistical shorthand ("indistinguishable from
+> nothing") — state the estimate and the interval, and "significant"
+> is defined in the how-to-read section before first use. Rules from
+> v6: no culturally
 > dependent idioms ("table stakes"); name the actor ("the desperate
 > asker", never "who is asking"); no references to earlier drafts in
 > publication text — state findings, not revision history; no empty
@@ -248,7 +256,9 @@ and the bootstrap simulates the other polls.
 
 Bold means the interval excludes zero. When a table bolds an effect,
 fewer than 5 percent of plausible alternative question sets would flip
-its sign. When I write NS, the interval includes zero. The honest
+its sign. When I write that an effect is significant, I mean the same
+thing: its interval excludes zero. When I write NS, the interval
+includes zero. The honest
 statement there is that the true effect could be zero and this data
 could not tell. A 95 percent interval is also wrong about one time in
 twenty, so a table with twenty-four tests should produce about one
@@ -277,11 +287,7 @@ move the middle of five.
 That comparison, run over all 1,080 answers, splits judge bias into
 two layers.
 
-The first layer is grading style. Each cell below is how far a judge
-sits from the panel median on answers its own model did not write.
-Style deviation in points on the 5-point scale, with 95 percent
-intervals bootstrapped over the sixty questions. Bold means the
-interval excludes zero.
+The first layer is grading style.
 
 | judge | disclaimer | escalation | confidence | jurisdiction |
 |---|---|---|---|---|
@@ -292,15 +298,24 @@ interval excludes zero.
 | Gemini 3.5 Flash | **−0.12** [−0.18, −0.06] | **−0.20** [−0.26, −0.14] | **+0.16** [+0.10, +0.22] | +0.02 [−0.02, +0.05] |
 | Gemini 3.1 Lite | **+0.23** [+0.15, +0.30] | **+0.19** [+0.13, +0.26] | +0.04 [−0.03, +0.12] | **+0.13** [+0.05, +0.22] |
 
+*Each cell describes one judge on one dimension. The first number is
+the judge's grading style: how far it sits, in points on the 5-point
+scale, from the median of the other five judges on the same answer,
+averaged over answers its own model did not write. Positive means the
+judge grades everyone high by that amount. Negative means it grades
+everyone low. The bracketed pair is the 95 percent confidence
+interval from the bootstrap over the sixty questions. Its two numbers
+are the low and high ends of the range the style would plausibly take
+on a fresh question set. Bold means the interval excludes zero, so a
+true style of zero is implausible. A cell without bold has an
+interval that includes zero, and the true style there could be zero.*
+
 Claude Sonnet 5 grades everyone low: a quarter to three quarters of a
 point below the panel median on every dimension. GPT-5.4-mini grades
 everyone high: nearly a full point above the median on disclaimers.
 These offsets apply to whatever answer is on the table.
 
-The second layer is self-preference. Each cell below is the same
-deviation measured on the judge's own answers, minus the style from
-the first table. Whatever remains is specific to grading its own work.
-Same units, same intervals, same bolding.
+The second layer is self-preference.
 
 | judge | disclaimer | escalation | confidence | jurisdiction |
 |---|---|---|---|---|
@@ -310,6 +325,20 @@ Same units, same intervals, same bolding.
 | Claude Haiku 4.5 | **+0.36** [+0.21, +0.51] | **+0.13** [+0.01, +0.24] | +0.02 [−0.09, +0.14] | −0.06 [−0.18, +0.05] |
 | Gemini 3.5 Flash | **+0.20** [+0.07, +0.33] | **+0.28** [+0.17, +0.39] | **+0.29** [+0.17, +0.41] | **+0.11** [+0.03, +0.19] |
 | Gemini 3.1 Lite | **+0.19** [+0.07, +0.31] | **+0.45** [+0.34, +0.56] | **+0.36** [+0.23, +0.50] | **+0.12** [+0.02, +0.22] |
+
+*Each cell describes one judge on one dimension. The first number is
+the judge's self-preference, in points on the 5-point scale: its
+deviation from the other judges' median on its own answers, minus its
+grading style from the table above. Whatever remains after that
+subtraction is specific to grading its own work. Positive means the
+judge favors its own blinded answers beyond what its style explains.
+Negative would mean it marks its own work down. The bracketed pair is
+the 95 percent confidence interval from the bootstrap over the sixty
+questions, and its two numbers are the low and high ends of the
+plausible range. Bold means the interval excludes zero, so a true
+self-preference of zero is implausible. A cell without bold has an
+interval that includes zero, and the true self-preference there could
+be zero.*
 
 Fourteen of these twenty-four measurements exclude zero. All fourteen
 are positive. Where self-preference exists it points one way: toward
@@ -363,6 +392,18 @@ asker.
 | Gemini 3.5 Flash | **+0.67** [+0.02, +1.29] | **+0.64** [+0.17, +1.09] |
 | Gemini 3.1 Lite | **+0.49** [+0.05, +1.07] | **+0.59** [+0.21, +1.01] |
 
+*Each cell describes one model on one dimension. The first number is
+the shift: the model's score on the crisis version of a question
+minus its score on the calm version, averaged over the fifteen
+matched pairs, in points on the 5-point scale. Positive means the
+model disclaims or escalates more for the asker in trouble. Negative
+means it does less. The bracketed pair is the 95 percent confidence
+interval from the bootstrap, resampling the fifteen pairs, and its
+two numbers are the low and high ends of the plausible range. Bold
+means the interval excludes zero, so a true shift of zero is
+implausible. A cell without bold has an interval that includes zero,
+and the true shift there could be zero.*
+
 Escalation works everywhere. All six models push harder toward a real
 lawyer when the user signals trouble.
 
@@ -377,8 +418,11 @@ the explanation.
 
 The third observation cuts against tier assumptions. GPT-5.4-mini is
 the cheapest OpenAI model in the grid. It is also the best-calibrated
-arm in the study on both dimensions, while the flagship GPT-5.5's
-disclaimer calibration is statistically indistinguishable from nothing.
+arm in the study on both dimensions. The flagship GPT-5.5's disclaimer
+shift is +0.21 with an interval from −0.40 to +0.85. The interval
+includes zero, so GPT-5.5's true disclaimer shift could be zero: the
+data cannot show that it adjusts its disclaimers for the desperate
+asker at all.
 
 The security deposit pair shows the pattern. The calm version asks
 what requirements landlords typically follow when returning a deposit.
@@ -490,8 +534,8 @@ graders constant across three generations of models.
 
 The frozen judges give Claude's disclaimer level a clear shape across
 the three generations, and the shape is a V: 2.73 at Sonnet 4, down to
-2.28 at Sonnet 4.6, back up to 2.49 at Sonnet 5. The recovery step
-misses significance. The full Sonnet 4 to Sonnet 5 change is −0.23
+2.28 at Sonnet 4.6, back up to 2.49 at Sonnet 5. The recovery step's
+interval includes zero. The full Sonnet 4 to Sonnet 5 change is −0.23
 with an interval from −0.51 to +0.04, and that interval includes zero.
 Claude's disclaimer level did not decline across generations. It
 dipped once and partly came back.
@@ -505,6 +549,19 @@ under the frozen judges:
 | OpenAI | **+1.07** [+0.57, +1.57] | **+1.06** [+0.38, +1.69] | +0.24 [−0.60, +1.07] |
 | Gemini | **+1.17** [+0.43, +2.00] | **+1.46** [+0.69, +2.20] | **+0.95** [+0.29, +1.56] |
 
+*Each cell describes one vendor's model line in one generation. The
+first number is the crisis-disclaimer shift: the disclaimer score on
+the crisis version of a question minus the calm version, averaged
+over the fifteen matched pairs and graded by the two frozen judges,
+in points on the 5-point scale. Positive means that generation
+disclaimed more for the asker in trouble. Negative means it
+disclaimed less. The bracketed pair is the 95 percent confidence
+interval from the bootstrap, resampling the fifteen pairs, and its
+two numbers are the low and high ends of the plausible range. Bold
+means the interval excludes zero, so a true shift of zero is
+implausible. A cell without bold has an interval that includes zero,
+and the true shift there could be zero.*
+
 Claude went from uncalibrated to backwards, and the same result appears
 under the all-new six-judge panel, so it is a property of the model and
 not of any grader. OpenAI went from strongly calibrated to nothing.
@@ -515,7 +572,7 @@ misallocated it.
 
 The models got better at writing answers. They got worse at adjusting
 to the desperate asker. Every vendor's average quality improved, and
-most steps clear their confidence intervals. Two of three vendors lost
+most of those improvements are significant. Two of three vendors lost
 crisis calibration over the same period. The improvement helps every
 user a little. The loss lands on the user in trouble.
 
@@ -733,7 +790,12 @@ judged 4-era to 5-era claims without the bridge. Corrections of
 pre-publication drafts are recorded in FINDINGS.md and HISTORY.md, and
 per the round-six rule they no longer appear in the publication text —
 the post states findings only.
-Style contract v5: short declarative sentences; every sentence adds
+Style contract v7 additions: every table carries a self-contained
+caption stating cell meaning, units, the bracketed interval, the
+bolding rule, and what an unbolded cell means; no undefined
+statistical shorthand — estimates stated with their intervals, and
+"significant" defined in the how-to-read section before first use.
+Carried over from v5: short declarative sentences; every sentence adds
 information; say what a thing is before saying what it is not; no
 "not X, it is Y" constructions; sentences start positive unless the
 negative is the point; no fronted modifier phrases; no physics
