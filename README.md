@@ -47,5 +47,6 @@ Needs Python 3.11 or newer and nothing outside the standard library. It recomput
 | `src/ai_eval/` | the pipeline: collect, blind, judge, analyze, bridge, robustness, report |
 | `report/` | the write-up as Markdown and PDF |
 | `figures/` | the figure above and the script that draws it |
+| `docs/` | the development log and the pre-publication findings memo, kept verbatim; the git history runs from June 2026 |
 
 Code is MIT licensed ([LICENSE](LICENSE)); data, prompts and rubric are CC BY 4.0 ([LICENSE-DATA](LICENSE-DATA)). Cite with [CITATION.cff](CITATION.cff).

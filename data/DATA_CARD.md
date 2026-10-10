@@ -64,12 +64,16 @@ Caveats on the archive:
 - The `gemini` arm of `gen46` is truncated: 113 of its 180 answers stop mid-sentence because the model's internal reasoning consumed the output budget. The report discusses this (Limitation 9). The frozen judges graded the cut-off text; the truncation inflates the Gemini step in Finding 5 and the report says so.
 - `gen4` is a single-sample run; its per-question means pool two judges over one answer.
 
-## What is not released, and why
+## What is in the git history but not in the tree
 
-- The April 2026 pilot (30 questions, 90 answers, 270 grades) used an earlier question set and appears in no claim.
-- Two aborted or superseded collections from June 2026 (a Sonnet 4 three-sample collection that was never fully judged because the model was retired mid-run, and a 59-judgment partial) appear in no claim.
+The repository carries the development history from June 2026 onward. Earlier states of the working tree therefore hold files that the release tree omits:
+
+- The April 2026 pilot (30 questions, 90 answers, 270 grades), under `data/legacy/`; it used an earlier question set and appears in no claim.
+- Two aborted or superseded collections from June 2026 under `data/legacy/` (a Sonnet 4 three-sample collection never fully judged because the model was retired mid-run, and a 59-judgment partial); they appear in no claim.
 - Rotated intermediate copies of the files above, which differ only in `generated_at` or in four repaired records.
-- API keys, which the pipeline reads from the environment.
+- The post drafts under `drafts/`, versions 1 through 7.
+
+API keys were never committed; the pipeline reads them from the environment.
 
 ## Licenses
 
