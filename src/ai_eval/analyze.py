@@ -25,11 +25,11 @@ import logging
 import math
 import random
 from collections import defaultdict
-from datetime import UTC, datetime
 from typing import Any
 
 from ai_eval.paths import (
     data_dir,
+    generated_at_stamp,
     load_prompts_by_id,
     read_json,
     write_json_with_rotation,
@@ -1177,8 +1177,13 @@ def compute_run_metadata(
     scores: list[dict[str, Any]],
     lookup: dict[str, dict[str, Any]],
     prompts_by_id: dict[int, dict[str, Any]],
+    generated_at: str | None = None,
 ) -> dict[str, Any]:
-    """Capture counts and model snapshots for reproducibility."""
+    """Capture counts and model snapshots for reproducibility.
+
+    ``generated_at`` defaults to :func:`ai_eval.paths.generated_at_stamp`, so
+    the environment override applies; an explicit value wins over both.
+    """
     n_judgments = len(scores)
     n_null = sum(1 for s in scores if s["scores"] is None)
     judge_models: set[str] = {s["judge_model"] for s in scores}
@@ -1195,7 +1200,7 @@ def compute_run_metadata(
             judge_versions[s["judge_model"]].add(str(ver))
     return {
         "analyze_version": ANALYZE_VERSION,
-        "generated_at": datetime.now(UTC).isoformat(),
+        "generated_at": generated_at or generated_at_stamp(),
         "n_prompts": len(prompts_by_id),
         "n_responder_models": len(responder_models),
         "n_judge_models": len(judge_models),
@@ -1393,11 +1398,18 @@ def print_summary(results: dict[str, Any]) -> None:
     print("\n" + "=" * 70)
 
 
-def analyze() -> None:
-    """Run Phase 4: unblind, compute statistics, and output results."""
-    scores = load_judge_scores()
-    lookup = load_blind_lookup()
-    prompts_by_id: dict[int, Any] = dict(load_prompts_by_id())
+def compute_results(
+    scores: list[dict[str, Any]],
+    lookup: dict[str, dict[str, Any]],
+    prompts_by_id: dict[int, dict[str, Any]],
+    generated_at: str | None = None,
+) -> dict[str, Any]:
+    """Compute the full analysis in memory.
+
+    This is the whole of Phase 4 minus file IO, so that the release
+    reproduction and the robustness checks can run the identical computation
+    without touching the committed outputs.
+    """
     unblinded = unblind_scores(scores, lookup)
 
     model_averages = compute_model_averages(unblinded)
@@ -1417,7 +1429,7 @@ def analyze() -> None:
     contextual_calibration = compute_contextual_calibration(unblinded, prompts_by_id)
     pressure_drift = compute_pressure_drift(unblinded, prompts_by_id)
     variance_components = compute_variance_components(unblinded)
-    run_metadata = compute_run_metadata(scores, lookup, prompts_by_id)
+    run_metadata = compute_run_metadata(scores, lookup, prompts_by_id, generated_at)
 
     results: dict[str, Any] = {
         "metadata": run_metadata,
@@ -1437,6 +1449,15 @@ def analyze() -> None:
         "pressure_drift": pressure_drift,
         "variance_components": variance_components,
     }
+    return results
+
+
+def analyze() -> None:
+    """Run Phase 4: unblind, compute statistics, and output results."""
+    scores = load_judge_scores()
+    lookup = load_blind_lookup()
+    prompts_by_id: dict[int, Any] = dict(load_prompts_by_id())
+    results = compute_results(scores, lookup, prompts_by_id)
 
     output_path = data_dir() / "analysis_results.json"
     write_json_with_rotation(output_path, results)

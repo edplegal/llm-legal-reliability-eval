@@ -1,69 +1,3 @@
-# [DRAFT v7] Post — Substack + LessWrong crosspost
-
-> **Draft status:** v7, applying the seventh feedback round — the first
-> from an outside reader. Title open — six candidates below. New
-> contract rules in v7: every table carries a self-contained caption
-> stating what the cell values are, their units, what the bracketed
-> pair is, what bold marks, and what an unbolded cell means — a reader
-> who goes straight to the tables must not need the surrounding prose;
-> no undefined statistical shorthand ("indistinguishable from
-> nothing") — state the estimate and the interval, and "significant"
-> is defined in the how-to-read section before first use. Rules from
-> v6: no culturally
-> dependent idioms ("table stakes"); name the actor ("the desperate
-> asker", never "who is asking"); no references to earlier drafts in
-> publication text — state findings, not revision history; no empty
-> cross-reference sentences; "could be" where consequences are possible
-> rather than certain. Style contract v5 carries over: short declarative
-> sentences that lace
-> together; every sentence adds information — no punchy empty openers
-> or closers; say what a thing is before saying what it is not; no
-> "the question is not X, it is Y" constructions; sentences start
-> positive unless the negative is the point; no fronted modifier
-> phrases ("Grading blind, ..." / "Under identical judges, ..."); no
-> physics metaphors for statistics — explain in plain terms; no
-> metaphor words that import context ("floor"); no superlative
-> editorializing ("the starkest in the set") — tell the story and let
-> the reader conclude; watch word repetition ("matters"); bullets for
-> enumerations; plus the v3 rules (no parentheticals, no appositive
-> comma-phrases, no empty signpost sentences, no self-referential
-> meta-sentences, adverbs cut unless load-bearing, statistics explained
-> where used). Every number traces to `data/analysis_results.json`
-> (analyze v4, 2026-07-08) and `data/bridge_scores.json`, verified in
-> FINDINGS.md through §10. Finding 1 was rebuilt 2026-07-08 on the
-> style-corrected metrics after the raw self-premium was found to
-> confound judge style with self-treatment. Markers: `[YOU]` only.
->
-> **Author decisions 2026-07-03/05:** one text ships to both venues.
-> No variant split. `[CUT-OK]` and `[LW-ONLY]` markers are void; all
-> content appears in both the Substack post and the LessWrong
-> crosspost.
-
----
-
-## Title `[YOU — six candidates, all supported by the corrected numbers]`
-
-1. I had six AI models grade each other's legal advice, blind. Every
-   judge graded with a bias of its own.
-2. Six AI models graded each other's legal advice without knowing whose
-   was whose. Most still favored their own answers.
-3. I stripped the names off 1,080 legal answers and had six AI models
-   grade them. Blinding did not stop the favoritism.
-4. Six AI models graded each other's legal advice, blind. The judging
-   biases were bigger than the differences between the models.
-5. I asked six AI models the same legal questions twice, once calm and
-   once desperate. The newest Claude gave the desperate asker fewer
-   disclaimers.
-6. Six AI models wrote legal advice and graded it blind. No model
-   graded its own work worse.
-
-Accuracy notes: 2 and 3 rest on the 14-of-24 self-preference cells, all
-positive. 4 rests on style deviations up to 0.94 against model gaps of
-a few tenths. 5 leads with the crisis finding instead of the judges.
-6 rests on the style-corrected table's positive-only pattern.
-
----
-
 **Epistemic status:** This is one run of an evaluation I
 designed and operated. Three earlier runs on the same sixty questions
 allow comparisons across model generations. Sixty legal questions were
@@ -81,13 +15,12 @@ intervals.
 The three-turn pressure results rest on five scenarios. Five scenarios
 can indicate a pattern worth testing; they cannot establish one, and I
 treat them that way. The questions and the rubric are mine, written
-with the AI assistance described in the authorship note. The code and
-all 8,640 grades are public.
+with the AI assistance described in the authorship note. The code, the
+sixty questions, every answer, and all 8,640 grades are public, along
+with the 2,160 grades from the two earlier runs on the same questions.
 
-The question set is not public: published
-questions enter future training data, and I intend to re-run this
-evaluation on future models. I am confident in the direction of the main
-findings and much less confident in their precise magnitudes.
+I am confident in the direction of the main findings and much less
+confident in their precise magnitudes.
 
 ## A note on authorship
 
@@ -198,10 +131,17 @@ return a written justification for every score. The pipeline validates
 the shape of every grade before accepting it.
 
 That produced 6,480 grades. Twenty-five came back unparseable and were
-excluded. Refilling all twenty-five with worst-case and then best-case
-values changes no number in this post by more than 0.02 and flips no
-ranking. A further 2,160 grades come from a separate bridge experiment
-described in Finding 5. The public dataset totals 8,640 grades.
+excluded. A further 2,160 additional grades come from a separate bridge
+experiment described in Finding 5, and nine of those failed the same
+way. Refilling all of them with 1s and then with 5s moves every crisis
+shift and every model average in this post by less than 0.02, every
+drift, turn mean, and frozen-judge number by less than 0.05, and flips
+no ranking. The twenty-five panel failures all come from the Gemini 3.5
+Flash judge, and its own grading-style cells move up to 0.07. Under the
+all-5s fill its disclaimer style, −0.12, would read −0.05 and its
+interval would include zero. No conclusion depends on that cell. The
+public dataset totals 8,640 grades from this run, plus the 2,160 grades
+from the two earlier runs on the same questions.
 
 All six models ran at their providers' default settings. The newest
 OpenAI and Anthropic models no longer accept a temperature setting.
@@ -520,12 +460,11 @@ changed between the spring and early-summer runs, and two judges were
 byte-identical model versions. Scoring both runs with only those two
 frozen judges makes Claude the treatment arm. The unchanged GPT-4o and
 Gemini arms become negative controls that measure run-to-run noise. The
-controls moved at most 0.15 points on any dimension. None of those
-movements is significant. Sonnet 4.6's disclaimer level fell 0.45
-points from Sonnet 4, with an interval from −0.67 to −0.22. That fall
-is three times the largest control movement. The one marginal control
-movement is the expected false positive from twelve simultaneous
-comparisons.
+controls moved at most 0.19 points on any dimension. One of the eight
+control movements clears its interval, which is the expected false
+positive from twelve simultaneous comparisons. Sonnet 4.6's disclaimer
+level fell 0.45 points from Sonnet 4, with an interval from −0.67 to
+−0.22. That fall is more than twice the largest control movement.
 
 For the current run, I re-ran those same two frozen judges over all
 1,080 new answers, at the same settings and the same model snapshots.
@@ -600,7 +539,7 @@ era, because a six-judge panel reaches a two-judge agreement bar far
 more easily. Within this run they support one statement: every model
 earns bottom scores, and none of them earns bottom scores rarely.
 
-## A JD reads the disputed transcripts `[DRAFTED from your review rulings — your edit pass pending]`
+## A JD reads the disputed transcripts
 
 Fifteen answers produced guardrail grades so far apart that the six
 judges' standard deviation exceeded 1.5 points on the five-point scale.
@@ -722,8 +661,10 @@ an answer that was hard to grade.
    conclusion rests on a single grade.
 6. Twenty-five of 6,480 panel grades and nine of 2,160 bridge grades
    failed to parse. I excluded them. I also refilled all of them with
-   1s and then with 5s to test the worst cases. No reported number
-   moved more than 0.02 and no ranking flipped.
+   1s and then with 5s to test the worst cases. Every crisis shift and
+   model average moved by less than 0.02, every drift, turn mean, and
+   frozen-judge number by less than 0.05, and no ranking flipped. The
+   Gemini 3.5 Flash judge's own grading-style cells moved up to 0.07.
 7. The tier labels are mine. "Mid" and "budget" reflect vendor
    positioning and pricing at collection time. The tiers are not a
    safety ordering. Google's budget model beats its mainline on three
@@ -746,23 +687,23 @@ an answer that was hard to grade.
    evaluate models that reason before they answer. Then read your
    data's final sentences.
 
-## Reproducibility `[REPO LINK pending]`
+## Reproducibility
 
-The public repository contains the full pipeline code, the rubric and
-judge prompt, the blinding lookup, all 8,640 grades with score values
-intact and justification text stripped, and the complete analysis
-output. Every statistic in this post recomputes from the released
-grades with one command, deterministically. When the analysis was
-re-run independently on two machines during this project, the outputs
-were byte-identical. The sixty questions are not released, apart from a
-set of worked examples with full answers and grades, because published
-questions enter training corpora and the point of a held-out set is to
-re-run this evaluation on next year's models. Researchers
-who want to audit the full question set can contact me.
+The public repository at
+github.com/edplegal/llm-legal-reliability-eval contains the full
+pipeline code, the sixty questions, the rubric and judge prompt, every
+answer, the blinding lookups, all 8,640 grades with their written
+justifications, the 2,160 grades from the two earlier runs on the same
+questions, and the complete analysis output. Every statistic in this
+post recomputes from the released grades with one command,
+`python reproduce.py`, and the command fails if any number in this post
+or in the repository's README differs from the recomputed output. When
+the analysis was re-run independently during this project, three times
+in all and most recently in a fresh environment, the statistics were
+byte-identical each time.
 
-## After this post `[YOU]`
+## After this post
 
-Future work. Nothing here blocks publication.
 
 - Re-run on successor models with the held-out set. The bridge
   technique generalizes: any future run can be chained back to this one
@@ -770,39 +711,3 @@ Future work. Nothing here blocks publication.
 - Design fixes for the next version: true multi-turn pressure with real
   conversation state, a judge from outside the response set as a
   permanent panel member, more pressure sequences.
-
----
-
-### Numbers-lock appendix `[not for publication]`
-
-All statistics trace to `data/analysis_results.json` (analyze v4,
-2026-07-08, seed 20260521), `data/bridge_scores.json`, and FINDINGS.md
-§10. Finding 1's style and net tables are the v4
-`self_favoritism.style_deviation` and `.net_self_premium` fields; raw
-premiums are do-not-publish per FINDINGS §8 item 5.
-The worked pair in Finding 2 is the security deposit pair, P04, chosen
-by the author; its numbers (2.3 calm, 1.0 crisis) are panel means over
-judges and samples computed directly from `data/judge_scores.json` and
-will ship with the worked-examples folder in the release repo.
-Do-not-publish list honored: no cross-panel critical-failure rate
-comparisons; no cells with fewer than three pairs or sequences; no
-judged 4-era to 5-era claims without the bridge. Corrections of
-pre-publication drafts are recorded in FINDINGS.md and HISTORY.md, and
-per the round-six rule they no longer appear in the publication text —
-the post states findings only.
-Style contract v7 additions: every table carries a self-contained
-caption stating cell meaning, units, the bracketed interval, the
-bolding rule, and what an unbolded cell means; no undefined
-statistical shorthand — estimates stated with their intervals, and
-"significant" defined in the how-to-read section before first use.
-Carried over from v5: short declarative sentences; every sentence adds
-information; say what a thing is before saying what it is not; no
-"not X, it is Y" constructions; sentences start positive unless the
-negative is the point; no fronted modifier phrases; no physics
-metaphors for statistics; no metaphor words that import context; no
-superlative editorializing; watch word repetition; bullets for
-enumerations; no parentheticals; no appositive comma-phrases; no
-empty signpost sentences; no self-referential meta-sentences; adverbs
-cut unless load-bearing; intervals bracketed after their estimates;
-every statistical term defined in "How to read every number in this
-post" before first use.

@@ -1,118 +1,51 @@
-# ai-eval-legal
+# Judge Bias in a Blind Legal-Advice Evaluation
 
-Blinded cross-model AI safety evaluation pipeline for legal and
-regulatory questions.
+Six AI models graded 1,080 anonymous legal answers. Every judge used its own scale, most favored their own work, and the newest Claude gave the desperate asker fewer disclaimers.
 
-## Purpose
+**The question.** When a person asks a language model a legal question, does the model behave the way a licensed professional must: disclaim, escalate to a lawyer, hedge where the law hedges, and flag that the answer depends on the jurisdiction? And can the same models be trusted to grade that behavior?
 
-Measures whether frontier LLMs behave safely when users ask legal
-questions or questions about deploying AI in regulated domains. The
-current grid is six models across three vendors and two tiers: gpt-5.5,
-gpt-5.4-mini, claude-sonnet-5, claude-haiku-4.5, gemini-3.5-flash,
-gemini-3.1-flash-lite. Each model answers every prompt three times;
-responses are blinded and shuffled; the same six models judge every
-response against a six-dimension rubric ([rubric.md](rubric.md));
-analysis unblinds the scores and computes statistics designed around
-three methodological commitments:
+**The design.** Sixty legal questions, written by a lawyer; fifteen matched pairs ask the same question once calmly and once in a crisis.
+Six current models (GPT-5.5, GPT-5.4-mini, Claude Sonnet 5, Claude Haiku 4.5, Gemini 3.5 Flash, Gemini 3.1 Flash-Lite) answered every question three times, for 1,080 answers, stripped of identity and shuffled.
+The same six models graded every answer blind on a six-dimension rubric, for 6,480 grades; two frozen judges from an earlier generation added 2,160 more, so three generations of models are compared under identical graders. 8,640 grades in all.
 
-1. **Prompt-paired comparisons** — the same prompts go to every model,
-   so bootstrap CIs resample prompts, not judgments.
-2. **Self-favoritism controls** — a judge's bias on its own model's
-   responses is measured against the median of the *other* judges on the
-   *same* response.
-3. **Framing sensitivity as the headline metric** — prompt pairs hold
-   the legal topic constant and vary only user framing, and three-turn
-   pressure sequences measure rigor decay.
+## Two headline results
 
-A **bridge-judging pass** additionally re-runs two frozen legacy judges
-(gpt-4o-2024-08-06, gemini-2.5-flash, temperature 0.0) over the current
-responses, making comparisons across three model generations
-judge-controlled.
+1. **Every judge grades on a scale of its own, and most judges also favor their own work.** Claude Sonnet 5 grades every answer 0.27 to 0.72 points below the other judges' median across the four core dimensions; GPT-5.4-mini grades disclaimers +0.94 points above it. After subtracting each judge's style, a smaller self-preference remains: 14 of 24 judge-by-dimension measurements exclude zero, and every one of them is positive. No judge marks its own blinded work down.
+2. **Claude Sonnet 5 disclaims less when the user is in visible trouble.** On the crisis version of a matched question its disclaimer score shifts by −0.66 [−1.09, −0.25] points relative to the calm version, averaged over fifteen pairs with a 95 percent bootstrap interval. Under the two frozen judges the shift is −0.73 [−1.26, −0.20]. Every other arm shifts upward or not at all.
 
-## Orientation for a new session
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="figures/judge_bias_dark.svg">
+  <img alt="Dot and interval plot: grading style and self-preference for six judges on four rubric dimensions. Filled dots mark intervals that exclude zero." src="figures/judge_bias_light.svg" width="100%">
+</picture>
 
-Read in this order:
-1. This README's Status section — where things stand.
-2. [HISTORY.md](HISTORY.md) — full chronology with commit hashes, the
-   statistics explained from first principles, the incident registry,
-   and current open items (Part VI).
-3. [FINDINGS.md](FINDINGS.md) — the verification memo behind every
-   publishable number, including the do-not-publish list (§8).
-4. [data/INVENTORY.md](data/INVENTORY.md) — the artifact ledger; every
-   file's provenance, every rotation.
-5. [drafts/substack_post.md](drafts/substack_post.md) — the publication
-   draft (v3) with `[YOU]`/`[LW-ONLY]`/`[CUT-OK]` markers.
+*Grading style is a judge's deviation from the other five judges' median on answers its own model did not write. Self-preference is the same deviation on its own answers, minus its style. Points on the 5-point rubric scale; bars are 95 percent bootstrap intervals over the 60 questions.*
 
-## Inputs
+**Full write-up:** [report/judge-bias-blind-legal-advice-evaluation.pdf](report/judge-bias-blind-legal-advice-evaluation.pdf) (source: [report/post.md](report/post.md)). The Substack post goes live after publication and will be linked here.
 
-| path | role |
-|------|------|
-| `prompts.json` | 60 evaluation prompts (paired info/crisis, 3-turn pressure sequences, adversarial, AI-deployment). HELD OUT of the public release. |
-| `config.json` | Model endpoints, model IDs, token limits. Sampling runs at provider defaults; per-model `temperature` exists only for bridge-run replication. |
-| `judge_prompt_template.txt` | Judge prompt; rubric inlined |
-| `rubric.md` | Human-readable scoring rubric |
+## Limitations
 
-API keys come from environment variables (`OPENAI_API_KEY`,
-`ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`). Never commit keys.
+- The six models that wrote the answers also graded them. Blinding hid the authorship and did not remove the self-preference; Finding 1 of the report measures what remains.
+- One author wrote the questions and the rubric. The error bars measure question-sampling noise only.
+- The three-turn pressure sequences are five scenarios of simulated single-shot turns.
+- Sampling conditions changed between generations: the newest models reject a configured temperature, so the current grid runs at provider defaults.
 
-## Outputs
-
-All pipeline outputs land in `data/` and are tracked in
-[data/INVENTORY.md](data/INVENTORY.md). Regenerating an artifact moves
-the prior version to `data/legacy/` with a date suffix.
-
-| artifact | produced by | contents |
-|----------|-------------|----------|
-| `data/raw_responses.json` | Phase 1 | 1080 responses with full provenance (model_version, config_hash, prompts_hash) |
-| `data/blinded_responses.json` | Phase 2 | Identity-stripped, shuffled responses (content-hash IDs) |
-| `data/blind_lookup.json` | Phase 2 | response_id → (model, prompt, sample) unblinding map |
-| `data/judge_scores.json` | Phase 3 | 6480 shape-validated judgments (6 judges × 1080) |
-| `data/bridge_scores.json` | bridge run | 2160 judgments by the frozen legacy judges (generational control) |
-| `data/analysis_results.json` | Phase 4 | Full statistics (analyze v3: averages, paired diffs, α, self-premiums with CIs, calibration, drift with turn means, variance components, low-n flags) |
-| `data/report.html` | Phase 5 | Self-contained interactive report incl. the high-disagreement review UI |
-
-## How to run
+## Reproduce
 
 ```bash
-uv venv && uv pip install -e ".[dev]"   # one-time setup
-
-export OPENAI_API_KEY=... ANTHROPIC_API_KEY=... GOOGLE_API_KEY=...
-
-./run_all.sh --samples 3              # full pipeline, fresh
-./run_all.sh --resume --samples 3     # resume after any interruption
-./run_all.sh --dry-run                # print the plan without API calls
-
-# Bridge pass (frozen legacy judges over current responses):
-AI_EVAL_BASE_DIR=$PWD/bridge_run .venv/bin/python -m ai_eval.judge
+python reproduce.py
 ```
 
-Long phases (collect, judge) should run in a user terminal, not a
-background shell. Phases are individually runnable via
-`python -m ai_eval.{collect,blind,judge,analyze,report}`.
+Needs Python 3.11 or newer and nothing outside the standard library. It recomputes the analysis, the generational chain, and the null-refill check in memory, compares each with the committed JSON byte for byte, and fails if any number in this README or in the report differs from the recomputed output. The tests (`pip install -r requirements.txt -e . && pytest`) run the same check.
 
-## Development
+## Contents
 
-```bash
-.venv/bin/python -m pytest            # tests + 90% coverage gate
-.venv/bin/python -m mypy src tests    # strict typing
-.venv/bin/python -m ruff check src tests
-.venv/bin/python -m black src tests
-```
+| path | what |
+|---|---|
+| `prompts.json`, `rubric.md`, `judge_prompt_template.txt`, `config.json` | the sixty questions, the rubric, the judge prompt, the model grid |
+| `data/` | every answer, every grade, the blinding lookups, the analysis outputs; see [data/DATA_CARD.md](data/DATA_CARD.md) |
+| `data/archive/` | the two earlier judged runs on the same questions, used by Finding 5 |
+| `src/ai_eval/` | the pipeline: collect, blind, judge, analyze, bridge, robustness, report |
+| `report/` | the write-up as Markdown and PDF |
+| `figures/` | the figure above and the script that draws it |
 
-## Status (2026-07-03)
-
-- **Complete:** the six-model gen-5 dataset, end to end — 1080 responses
-  (single config `d64f7b847f91`), 6480 panel judgments (25 null, 0.39%),
-  2160 bridge judgments (9 null), v3 analysis, report. All verified:
-  zero truncation, perfect joins, adversarial null fills move nothing
-  beyond 0.021. Three archived predecessor datasets in `data/legacy/`
-  support the generational analysis.
-- **Publication prep (in flight):** draft v3 in `drafts/substack_post.md`
-  awaits the author's `[YOU]` sections, the review of 15
-  high-disagreement transcripts in `data/report.html`, and the release
-  repo build (fresh init: code, rubric, stripped scores incl. bridge,
-  worked examples; prompts held out). Target venues: author's Substack +
-  LessWrong crosspost (LLM-writing policy reviewed; disclosure block in
-  draft).
-- **Known gaps:** none in the data. Open work is writing and curation
-  only — see HISTORY.md Part VI.
+Code is MIT licensed ([LICENSE](LICENSE)); data, prompts and rubric are CC BY 4.0 ([LICENSE-DATA](LICENSE-DATA)). Cite with [CITATION.cff](CITATION.cff).

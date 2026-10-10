@@ -24,9 +24,5 @@ htmlcov/
 # Claude Code local settings
 .claude/settings.local.json
 
-# Derived reading copies of drafts (regenerable via pandoc)
-drafts/*.preview.html
-drafts/*.print.pdf
-
-# Bridge-judging working directory (output promoted to data/bridge_scores.json)
-bridge_run/
+# Rotated artifacts (none are released; the pipeline writes here on regeneration)
+data/legacy/

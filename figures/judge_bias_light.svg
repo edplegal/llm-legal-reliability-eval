@@ -1,0 +1,221 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1088' height='554' viewBox='0 0 1088 554' role='img' aria-labelledby='t d' font-family='-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif'>
+<title id='t'>Judge grading style and self-preference, by judge and dimension</title>
+<desc id='d'>Dot and interval plot. Six judges on the vertical axis, four rubric dimensions as columns, grading style on the top row and self-preference on the bottom row. Filled dots mark 95 percent intervals that exclude zero.</desc>
+<rect width='1088' height='554' fill='#fcfcfb'/>
+<text x='130.0' y='30.0' font-size='17' fill='#0b0b0b' font-weight='600'>Every judge grades on a scale of its own, and most favor their own answers</text>
+<text x='130.0' y='52.0' font-size='12.5' fill='#52514e' >Points on the 5-point rubric scale. Bars are 95% bootstrap intervals over the 60 questions.</text>
+<text x='130.0' y='70.0' font-size='12.5' fill='#52514e' >Filled dot: the interval excludes zero. Hollow dot: the interval includes zero.</text>
+<text x='12.0' y='116.0' font-size='13' fill='#0b0b0b' font-weight='600'>Grading style</text>
+<text x='242.0' y='116.0' font-size='11' fill='#52514e' >points above (+) or below (−) the other judges' median, on answers its own model did not write</text>
+<g transform='translate(130,126)'>
+<text x='107.5' y='-30.0' font-size='12.5' fill='#0b0b0b' font-weight='600' text-anchor='middle'>Disclaimer</text>
+<line x1='0.0' y1='0' x2='0.0' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='0.0' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-1.0</text>
+<line x1='48.9' y1='0' x2='48.9' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='48.9' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-0.5</text>
+<line x1='97.7' y1='0' x2='97.7' y2='150' stroke='#898781' stroke-width='1'/>
+<text x='97.7' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>0</text>
+<line x1='146.6' y1='0' x2='146.6' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='146.6' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+0.5</text>
+<line x1='195.5' y1='0' x2='195.5' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='195.5' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+1.0</text>
+<text x='-10.0' y='16.5' font-size='11.5' fill='#52514e' text-anchor='end'>GPT-5.5</text>
+<line x1='59.2' y1='12.5' x2='74.6' y2='12.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='66.6' cy='12.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>GPT-5.5, Disclaimer, grading style: -0.32 [-0.39, -0.24]</title></circle>
+<text x='-10.0' y='41.5' font-size='11.5' fill='#52514e' text-anchor='end'>GPT-5.4-mini</text>
+<line x1='179.4' y1='37.5' x2='201.2' y2='37.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='190.1' cy='37.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>GPT-5.4-mini, Disclaimer, grading style: +0.94 [+0.84, +1.06]</title></circle>
+<text x='-10.0' y='66.5' font-size='11.5' fill='#52514e' text-anchor='end'>Claude Sonnet 5</text>
+<line x1='53.6' y1='62.5' x2='65.8' y2='62.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='59.5' cy='62.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Claude Sonnet 5, Disclaimer, grading style: -0.39 [-0.45, -0.33]</title></circle>
+<text x='-10.0' y='91.5' font-size='11.5' fill='#52514e' text-anchor='end'>Claude Haiku 4.5</text>
+<line x1='96.7' y1='87.5' x2='115.9' y2='87.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='106.4' cy='87.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>Claude Haiku 4.5, Disclaimer, grading style: +0.09 [-0.01, +0.19]</title></circle>
+<text x='-10.0' y='116.5' font-size='11.5' fill='#52514e' text-anchor='end'>Gemini 3.5 Flash</text>
+<line x1='79.9' y1='112.5' x2='91.9' y2='112.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='86.1' cy='112.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.5 Flash, Disclaimer, grading style: -0.12 [-0.18, -0.06]</title></circle>
+<text x='-10.0' y='141.5' font-size='11.5' fill='#52514e' text-anchor='end'>Gemini 3.1 Lite</text>
+<line x1='112.8' y1='137.5' x2='126.9' y2='137.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='119.8' cy='137.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.1 Lite, Disclaimer, grading style: +0.23 [+0.15, +0.30]</title></circle>
+</g>
+<g transform='translate(371,126)'>
+<text x='107.5' y='-30.0' font-size='12.5' fill='#0b0b0b' font-weight='600' text-anchor='middle'>Escalation</text>
+<line x1='0.0' y1='0' x2='0.0' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='0.0' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-1.0</text>
+<line x1='48.9' y1='0' x2='48.9' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='48.9' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-0.5</text>
+<line x1='97.7' y1='0' x2='97.7' y2='150' stroke='#898781' stroke-width='1'/>
+<text x='97.7' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>0</text>
+<line x1='146.6' y1='0' x2='146.6' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='146.6' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+0.5</text>
+<line x1='195.5' y1='0' x2='195.5' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='195.5' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+1.0</text>
+<line x1='85.4' y1='12.5' x2='105.0' y2='12.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='94.7' cy='12.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>GPT-5.5, Escalation, grading style: -0.03 [-0.13, +0.07]</title></circle>
+<line x1='152.6' y1='37.5' x2='171.6' y2='37.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='162.1' cy='37.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>GPT-5.4-mini, Escalation, grading style: +0.66 [+0.56, +0.76]</title></circle>
+<line x1='19.7' y1='62.5' x2='35.1' y2='62.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='27.2' cy='62.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Claude Sonnet 5, Escalation, grading style: -0.72 [-0.80, -0.64]</title></circle>
+<line x1='99.9' y1='87.5' x2='112.5' y2='87.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='106.1' cy='87.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Claude Haiku 4.5, Escalation, grading style: +0.09 [+0.02, +0.15]</title></circle>
+<line x1='72.1' y1='112.5' x2='83.8' y2='112.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='77.9' cy='112.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.5 Flash, Escalation, grading style: -0.20 [-0.26, -0.14]</title></circle>
+<line x1='110.6' y1='137.5' x2='122.8' y2='137.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='116.7' cy='137.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.1 Lite, Escalation, grading style: +0.19 [+0.13, +0.26]</title></circle>
+</g>
+<g transform='translate(612,126)'>
+<text x='107.5' y='-30.0' font-size='12.5' fill='#0b0b0b' font-weight='600' text-anchor='middle'>Confidence</text>
+<line x1='0.0' y1='0' x2='0.0' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='0.0' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-1.0</text>
+<line x1='48.9' y1='0' x2='48.9' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='48.9' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-0.5</text>
+<line x1='97.7' y1='0' x2='97.7' y2='150' stroke='#898781' stroke-width='1'/>
+<text x='97.7' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>0</text>
+<line x1='146.6' y1='0' x2='146.6' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='146.6' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+0.5</text>
+<line x1='195.5' y1='0' x2='195.5' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='195.5' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+1.0</text>
+<line x1='95.7' y1='12.5' x2='108.2' y2='12.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='102.0' cy='12.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>GPT-5.5, Confidence, grading style: +0.04 [-0.02, +0.11]</title></circle>
+<line x1='98.2' y1='37.5' x2='115.3' y2='37.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='106.7' cy='37.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>GPT-5.4-mini, Confidence, grading style: +0.09 [+0.01, +0.18]</title></circle>
+<line x1='28.0' y1='62.5' x2='47.2' y2='62.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='37.8' cy='62.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Claude Sonnet 5, Confidence, grading style: -0.61 [-0.71, -0.52]</title></circle>
+<line x1='69.6' y1='87.5' x2='88.2' y2='87.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='78.9' cy='87.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Claude Haiku 4.5, Confidence, grading style: -0.19 [-0.29, -0.10]</title></circle>
+<line x1='107.2' y1='112.5' x2='119.0' y2='112.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='113.2' cy='112.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.5 Flash, Confidence, grading style: +0.16 [+0.10, +0.22]</title></circle>
+<line x1='94.5' y1='137.5' x2='109.6' y2='137.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='101.8' cy='137.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.1 Lite, Confidence, grading style: +0.04 [-0.03, +0.12]</title></circle>
+</g>
+<g transform='translate(853,126)'>
+<text x='107.5' y='-30.0' font-size='12.5' fill='#0b0b0b' font-weight='600' text-anchor='middle'>Jurisdiction</text>
+<line x1='0.0' y1='0' x2='0.0' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='0.0' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-1.0</text>
+<line x1='48.9' y1='0' x2='48.9' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='48.9' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-0.5</text>
+<line x1='97.7' y1='0' x2='97.7' y2='150' stroke='#898781' stroke-width='1'/>
+<text x='97.7' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>0</text>
+<line x1='146.6' y1='0' x2='146.6' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='146.6' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+0.5</text>
+<line x1='195.5' y1='0' x2='195.5' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='195.5' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+1.0</text>
+<line x1='97.9' y1='12.5' x2='107.0' y2='12.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='102.3' cy='12.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>GPT-5.5, Jurisdiction, grading style: +0.05 [+0.00, +0.10]</title></circle>
+<line x1='120.1' y1='37.5' x2='134.6' y2='37.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='127.1' cy='37.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>GPT-5.4-mini, Jurisdiction, grading style: +0.30 [+0.23, +0.38]</title></circle>
+<line x1='64.8' y1='62.5' x2='78.6' y2='62.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='71.8' cy='62.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Claude Sonnet 5, Jurisdiction, grading style: -0.27 [-0.34, -0.20]</title></circle>
+<line x1='78.6' y1='87.5' x2='100.9' y2='87.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='89.7' cy='87.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>Claude Haiku 4.5, Jurisdiction, grading style: -0.08 [-0.20, +0.03]</title></circle>
+<line x1='95.7' y1='112.5' x2='103.0' y2='112.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='99.3' cy='112.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.5 Flash, Jurisdiction, grading style: +0.02 [-0.02, +0.05]</title></circle>
+<line x1='102.2' y1='137.5' x2='119.6' y2='137.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='110.4' cy='137.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.1 Lite, Jurisdiction, grading style: +0.13 [+0.05, +0.22]</title></circle>
+</g>
+<text x='12.0' y='324.0' font-size='13' fill='#0b0b0b' font-weight='600'>Self-preference</text>
+<text x='242.0' y='324.0' font-size='11' fill='#52514e' >the same deviation on its own answers, minus its grading style</text>
+<g transform='translate(130,334)'>
+<line x1='0.0' y1='0' x2='0.0' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='0.0' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-1.0</text>
+<line x1='48.9' y1='0' x2='48.9' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='48.9' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-0.5</text>
+<line x1='97.7' y1='0' x2='97.7' y2='150' stroke='#898781' stroke-width='1'/>
+<text x='97.7' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>0</text>
+<line x1='146.6' y1='0' x2='146.6' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='146.6' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+0.5</text>
+<line x1='195.5' y1='0' x2='195.5' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='195.5' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+1.0</text>
+<text x='-10.0' y='16.5' font-size='11.5' fill='#52514e' text-anchor='end'>GPT-5.5</text>
+<line x1='93.0' y1='12.5' x2='110.8' y2='12.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='102.0' cy='12.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>GPT-5.5, Disclaimer, self-preference: +0.04 [-0.05, +0.13]</title></circle>
+<text x='-10.0' y='41.5' font-size='11.5' fill='#52514e' text-anchor='end'>GPT-5.4-mini</text>
+<line x1='82.0' y1='37.5' x2='122.7' y2='37.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='102.5' cy='37.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>GPT-5.4-mini, Disclaimer, self-preference: +0.05 [-0.16, +0.26]</title></circle>
+<text x='-10.0' y='66.5' font-size='11.5' fill='#52514e' text-anchor='end'>Claude Sonnet 5</text>
+<line x1='76.5' y1='62.5' x2='103.0' y2='62.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='89.5' cy='62.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>Claude Sonnet 5, Disclaimer, self-preference: -0.08 [-0.22, +0.05]</title></circle>
+<text x='-10.0' y='91.5' font-size='11.5' fill='#52514e' text-anchor='end'>Claude Haiku 4.5</text>
+<line x1='118.7' y1='87.5' x2='148.0' y2='87.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='132.5' cy='87.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Claude Haiku 4.5, Disclaimer, self-preference: +0.36 [+0.21, +0.51]</title></circle>
+<text x='-10.0' y='116.5' font-size='11.5' fill='#52514e' text-anchor='end'>Gemini 3.5 Flash</text>
+<line x1='105.1' y1='112.5' x2='129.9' y2='112.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='117.5' cy='112.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.5 Flash, Disclaimer, self-preference: +0.20 [+0.07, +0.33]</title></circle>
+<text x='-10.0' y='141.5' font-size='11.5' fill='#52514e' text-anchor='end'>Gemini 3.1 Lite</text>
+<line x1='104.8' y1='137.5' x2='128.1' y2='137.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='116.4' cy='137.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.1 Lite, Disclaimer, self-preference: +0.19 [+0.07, +0.31]</title></circle>
+</g>
+<g transform='translate(371,334)'>
+<line x1='0.0' y1='0' x2='0.0' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='0.0' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-1.0</text>
+<line x1='48.9' y1='0' x2='48.9' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='48.9' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-0.5</text>
+<line x1='97.7' y1='0' x2='97.7' y2='150' stroke='#898781' stroke-width='1'/>
+<text x='97.7' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>0</text>
+<line x1='146.6' y1='0' x2='146.6' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='146.6' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+0.5</text>
+<line x1='195.5' y1='0' x2='195.5' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='195.5' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+1.0</text>
+<line x1='101.0' y1='12.5' x2='121.9' y2='12.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='110.7' cy='12.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>GPT-5.5, Escalation, self-preference: +0.13 [+0.03, +0.25]</title></circle>
+<line x1='102.5' y1='37.5' x2='132.8' y2='37.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='117.2' cy='37.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>GPT-5.4-mini, Escalation, self-preference: +0.20 [+0.05, +0.36]</title></circle>
+<line x1='91.1' y1='62.5' x2='107.5' y2='62.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='99.3' cy='62.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>Claude Sonnet 5, Escalation, self-preference: +0.02 [-0.07, +0.10]</title></circle>
+<line x1='99.0' y1='87.5' x2='121.6' y2='87.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='110.5' cy='87.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Claude Haiku 4.5, Escalation, self-preference: +0.13 [+0.01, +0.24]</title></circle>
+<line x1='114.3' y1='112.5' x2='135.6' y2='112.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='125.1' cy='112.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.5 Flash, Escalation, self-preference: +0.28 [+0.17, +0.39]</title></circle>
+<line x1='131.0' y1='137.5' x2='152.6' y2='137.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='141.7' cy='137.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.1 Lite, Escalation, self-preference: +0.45 [+0.34, +0.56]</title></circle>
+</g>
+<g transform='translate(612,334)'>
+<line x1='0.0' y1='0' x2='0.0' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='0.0' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-1.0</text>
+<line x1='48.9' y1='0' x2='48.9' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='48.9' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-0.5</text>
+<line x1='97.7' y1='0' x2='97.7' y2='150' stroke='#898781' stroke-width='1'/>
+<text x='97.7' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>0</text>
+<line x1='146.6' y1='0' x2='146.6' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='146.6' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+0.5</text>
+<line x1='195.5' y1='0' x2='195.5' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='195.5' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+1.0</text>
+<line x1='109.7' y1='12.5' x2='125.7' y2='12.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='117.4' cy='12.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>GPT-5.5, Confidence, self-preference: +0.20 [+0.12, +0.29]</title></circle>
+<line x1='107.6' y1='37.5' x2='130.9' y2='37.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='119.4' cy='37.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>GPT-5.4-mini, Confidence, self-preference: +0.22 [+0.10, +0.34]</title></circle>
+<line x1='88.7' y1='62.5' x2='115.6' y2='62.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='102.8' cy='62.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>Claude Sonnet 5, Confidence, self-preference: +0.05 [-0.09, +0.18]</title></circle>
+<line x1='88.5' y1='87.5' x2='111.6' y2='87.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='100.1' cy='87.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>Claude Haiku 4.5, Confidence, self-preference: +0.02 [-0.09, +0.14]</title></circle>
+<line x1='114.0' y1='112.5' x2='138.3' y2='112.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='126.0' cy='112.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.5 Flash, Confidence, self-preference: +0.29 [+0.17, +0.41]</title></circle>
+<line x1='120.6' y1='137.5' x2='146.5' y2='137.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='132.7' cy='137.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.1 Lite, Confidence, self-preference: +0.36 [+0.23, +0.50]</title></circle>
+</g>
+<g transform='translate(853,334)'>
+<line x1='0.0' y1='0' x2='0.0' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='0.0' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-1.0</text>
+<line x1='48.9' y1='0' x2='48.9' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='48.9' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>-0.5</text>
+<line x1='97.7' y1='0' x2='97.7' y2='150' stroke='#898781' stroke-width='1'/>
+<text x='97.7' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>0</text>
+<line x1='146.6' y1='0' x2='146.6' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='146.6' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+0.5</text>
+<line x1='195.5' y1='0' x2='195.5' y2='150' stroke='#e4e3df' stroke-width='1'/>
+<text x='195.5' y='166.0' font-size='10.5' fill='#898781' text-anchor='middle'>+1.0</text>
+<line x1='86.7' y1='12.5' x2='103.3' y2='12.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='94.7' cy='12.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>GPT-5.5, Jurisdiction, self-preference: -0.03 [-0.11, +0.06]</title></circle>
+<line x1='76.5' y1='37.5' x2='105.3' y2='37.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='90.6' cy='37.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>GPT-5.4-mini, Jurisdiction, self-preference: -0.07 [-0.22, +0.08]</title></circle>
+<line x1='91.7' y1='62.5' x2='109.7' y2='62.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='101.0' cy='62.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>Claude Sonnet 5, Jurisdiction, self-preference: +0.03 [-0.06, +0.12]</title></circle>
+<line x1='80.2' y1='87.5' x2='102.8' y2='87.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='91.7' cy='87.5' r='4.5' fill='#fcfcfb' stroke='#2a78d6' stroke-width='2'><title>Claude Haiku 4.5, Jurisdiction, self-preference: -0.06 [-0.18, +0.05]</title></circle>
+<line x1='100.8' y1='112.5' x2='116.2' y2='112.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='108.4' cy='112.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.5 Flash, Jurisdiction, self-preference: +0.11 [+0.03, +0.19]</title></circle>
+<line x1='99.8' y1='137.5' x2='119.3' y2='137.5' stroke='#2a78d6' stroke-width='2' stroke-linecap='round'/>
+<circle cx='109.5' cy='137.5' r='4.5' fill='#2a78d6' stroke='#2a78d6' stroke-width='2'><title>Gemini 3.1 Lite, Jurisdiction, self-preference: +0.12 [+0.02, +0.22]</title></circle>
+</g>
+<text x='130.0' y='532.0' font-size='10.5' fill='#898781' >Source: data/analysis_results.json (analyze v4, seed 20260521, 2000 bootstrap draws); 6455 valid grades of 6480.</text>
+</svg>

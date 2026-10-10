@@ -1,0 +1,203 @@
+{
+  "metadata": {
+    "robustness_version": 1,
+    "generated_at": "2026-10-09T23:25:36.762421+00:00",
+    "n_judgments_total": 6480,
+    "n_nulls_refilled": 25,
+    "null_judgments_by_judge": {
+      "gemini": 25
+    },
+    "n_bridge_judgments_total": 2160,
+    "n_bridge_nulls_refilled": 9,
+    "bridge_null_judgments_by_judge": {
+      "bridge_gemini25": 9
+    },
+    "fills": [
+      1,
+      5
+    ],
+    "base_n_critical_failures": 910,
+    "base_n_high_disagreement": 15
+  },
+  "refills": {
+    "fill_1": {
+      "families": {
+        "style": {
+          "max_abs_change": 0.066,
+          "at": "gemini/confidence",
+          "before": 0.158,
+          "after": 0.092
+        },
+        "net": {
+          "max_abs_change": 0.04,
+          "at": "gemini/disclaimer",
+          "before": 0.202,
+          "after": 0.162
+        },
+        "crisis": {
+          "max_abs_change": 0.019,
+          "at": "claude/escalation",
+          "before": 0.619,
+          "after": 0.6
+        },
+        "confidence_drift": {
+          "max_abs_change": 0.034,
+          "at": "chatgpt_mini",
+          "before": -1.334,
+          "after": -1.3
+        },
+        "disclaimer_turn_means": {
+          "max_abs_change": 0.038,
+          "at": "gemini/turn_2",
+          "before": 4.448,
+          "after": 4.41
+        },
+        "disclaimer_means": {
+          "max_abs_change": 0.009,
+          "at": "gemini",
+          "before": 3.439,
+          "after": 3.43
+        },
+        "alpha": {
+          "max_abs_change": 0.044,
+          "at": "regulatory",
+          "before": 0.648,
+          "after": 0.604
+        },
+        "variance_pct": {
+          "max_abs_change": 1.1,
+          "at": "pct_judge",
+          "before": 36.6,
+          "after": 37.7
+        }
+      },
+      "significance_flips": [],
+      "core_dimension_ranking_flips": [],
+      "n_critical_failures": 913,
+      "n_high_disagreement": 16,
+      "bridge": {
+        "max_abs_change": 0.044,
+        "at": "crisis/chatgpt/escalation",
+        "before": 1.122,
+        "after": 1.078,
+        "significance_flips": []
+      }
+    },
+    "fill_5": {
+      "families": {
+        "style": {
+          "max_abs_change": 0.072,
+          "at": "gemini/disclaimer",
+          "before": -0.119,
+          "after": -0.047
+        },
+        "net": {
+          "max_abs_change": 0.044,
+          "at": "gemini/disclaimer",
+          "before": 0.202,
+          "after": 0.158
+        },
+        "crisis": {
+          "max_abs_change": 0.018,
+          "at": "chatgpt/disclaimer",
+          "before": 0.208,
+          "after": 0.226
+        },
+        "confidence_drift": {
+          "max_abs_change": 0.024,
+          "at": "chatgpt",
+          "before": -1.382,
+          "after": -1.358
+        },
+        "disclaimer_turn_means": {
+          "max_abs_change": 0.042,
+          "at": "chatgpt/turn_3",
+          "before": 2.158,
+          "after": 2.2
+        },
+        "disclaimer_means": {
+          "max_abs_change": 0.017,
+          "at": "claude",
+          "before": 2.191,
+          "after": 2.208
+        },
+        "alpha": {
+          "max_abs_change": 0.013,
+          "at": "disclaimer",
+          "before": 0.734,
+          "after": 0.721
+        },
+        "variance_pct": {
+          "max_abs_change": 1.1,
+          "at": "pct_judge",
+          "before": 36.6,
+          "after": 37.7
+        }
+      },
+      "significance_flips": [
+        {
+          "cell": "style/chatgpt/jurisdiction",
+          "before_value": 0.047,
+          "after_value": 0.046,
+          "before_ci": [
+            0.002,
+            0.095
+          ],
+          "after_ci": [
+            0.0,
+            0.094
+          ]
+        },
+        {
+          "cell": "style/chatgpt_mini/confidence",
+          "before_value": 0.092,
+          "after_value": 0.088,
+          "before_ci": [
+            0.005,
+            0.18
+          ],
+          "after_ci": [
+            -0.0,
+            0.176
+          ]
+        },
+        {
+          "cell": "style/gemini/disclaimer",
+          "before_value": -0.119,
+          "after_value": -0.047,
+          "before_ci": [
+            -0.182,
+            -0.06
+          ],
+          "after_ci": [
+            -0.112,
+            0.017
+          ]
+        },
+        {
+          "cell": "style/gemini/jurisdiction",
+          "before_value": 0.016,
+          "after_value": 0.059,
+          "before_ci": [
+            -0.021,
+            0.054
+          ],
+          "after_ci": [
+            0.011,
+            0.108
+          ]
+        }
+      ],
+      "core_dimension_ranking_flips": [],
+      "n_critical_failures": 910,
+      "n_high_disagreement": 20,
+      "bridge": {
+        "max_abs_change": 0.029,
+        "at": "crisis/gemini/jurisdiction",
+        "before": -0.073,
+        "after": -0.044,
+        "significance_flips": []
+      }
+    }
+  }
+}

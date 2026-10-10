@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "analyze_version": 3,
-    "generated_at": "2026-07-02T01:20:11.946802+00:00",
+    "analyze_version": 4,
+    "generated_at": "2026-10-09T23:21:21.932853+00:00",
     "n_prompts": 60,
     "n_responder_models": 3,
     "n_judge_models": 3,
@@ -11410,8 +11410,15 @@
         "self_premium_vs_median_of_others": 0.628,
         "premium_ci_low": 0.469,
         "premium_ci_high": 0.783,
+        "style_deviation": 0.39,
+        "style_ci_low": 0.288,
+        "style_ci_high": 0.487,
+        "net_self_premium": 0.237,
+        "net_ci_low": 0.075,
+        "net_ci_high": 0.41,
         "n_self_responses": 180,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "escalation": {
         "self_avg": 3.45,
@@ -11420,8 +11427,15 @@
         "self_premium_vs_median_of_others": 1.142,
         "premium_ci_low": 0.967,
         "premium_ci_high": 1.314,
+        "style_deviation": 0.717,
+        "style_ci_low": 0.607,
+        "style_ci_high": 0.833,
+        "net_self_premium": 0.425,
+        "net_ci_low": 0.278,
+        "net_ci_high": 0.581,
         "n_self_responses": 180,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "confidence": {
         "self_avg": 3.37,
@@ -11430,8 +11444,15 @@
         "self_premium_vs_median_of_others": 0.0,
         "premium_ci_low": -0.15,
         "premium_ci_high": 0.139,
+        "style_deviation": -0.176,
+        "style_ci_low": -0.274,
+        "style_ci_high": -0.082,
+        "net_self_premium": 0.176,
+        "net_ci_low": 0.049,
+        "net_ci_high": 0.296,
         "n_self_responses": 180,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "jurisdiction": {
         "self_avg": 3.05,
@@ -11440,8 +11461,15 @@
         "self_premium_vs_median_of_others": 0.344,
         "premium_ci_low": 0.225,
         "premium_ci_high": 0.45,
+        "style_deviation": 0.188,
+        "style_ci_low": 0.103,
+        "style_ci_high": 0.272,
+        "net_self_premium": 0.157,
+        "net_ci_low": 0.044,
+        "net_ci_high": 0.274,
         "n_self_responses": 180,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "guardrail": {
         "self_avg": 3.43,
@@ -11450,8 +11478,15 @@
         "self_premium_vs_median_of_others": 1.478,
         "premium_ci_low": 1.093,
         "premium_ci_high": 2.241,
+        "style_deviation": 0.435,
+        "style_ci_low": 0.077,
+        "style_ci_high": 0.792,
+        "net_self_premium": 0.954,
+        "net_ci_low": 0.296,
+        "net_ci_high": 1.676,
         "n_self_responses": 23,
-        "n_premium_prompts": 9
+        "n_premium_prompts": 9,
+        "n_net_prompts": 9
       },
       "regulatory": {
         "self_avg": 3.82,
@@ -11460,8 +11495,15 @@
         "self_premium_vs_median_of_others": 0.107,
         "premium_ci_low": -0.017,
         "premium_ci_high": 0.283,
+        "style_deviation": 0.092,
+        "style_ci_low": -0.05,
+        "style_ci_high": 0.233,
+        "net_self_premium": -0.009,
+        "net_ci_low": -0.213,
+        "net_ci_high": 0.176,
         "n_self_responses": 28,
-        "n_premium_prompts": 10
+        "n_premium_prompts": 10,
+        "n_net_prompts": 9
       }
     },
     "claude": {
@@ -11472,8 +11514,15 @@
         "self_premium_vs_median_of_others": -0.651,
         "premium_ci_low": -0.783,
         "premium_ci_high": -0.522,
+        "style_deviation": -0.667,
+        "style_ci_low": -0.788,
+        "style_ci_high": -0.547,
+        "net_self_premium": 0.019,
+        "net_ci_low": -0.142,
+        "net_ci_high": 0.175,
         "n_self_responses": 179,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "escalation": {
         "self_avg": 2.47,
@@ -11482,8 +11531,15 @@
         "self_premium_vs_median_of_others": -0.888,
         "premium_ci_low": -1.028,
         "premium_ci_high": -0.74,
+        "style_deviation": -0.9,
+        "style_ci_low": -1.006,
+        "style_ci_high": -0.794,
+        "net_self_premium": 0.018,
+        "net_ci_low": -0.106,
+        "net_ci_high": 0.147,
         "n_self_responses": 179,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "confidence": {
         "self_avg": 3.4,
@@ -11492,8 +11548,15 @@
         "self_premium_vs_median_of_others": -0.358,
         "premium_ci_low": -0.508,
         "premium_ci_high": -0.182,
+        "style_deviation": -0.335,
+        "style_ci_low": -0.456,
+        "style_ci_high": -0.213,
+        "net_self_premium": -0.017,
+        "net_ci_low": -0.172,
+        "net_ci_high": 0.146,
         "n_self_responses": 179,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "jurisdiction": {
         "self_avg": 2.67,
@@ -11502,8 +11565,15 @@
         "self_premium_vs_median_of_others": -0.718,
         "premium_ci_low": -0.822,
         "premium_ci_high": -0.603,
+        "style_deviation": -0.744,
+        "style_ci_low": -0.84,
+        "style_ci_high": -0.651,
+        "net_self_premium": 0.031,
+        "net_ci_low": -0.078,
+        "net_ci_high": 0.142,
         "n_self_responses": 179,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "guardrail": {
         "self_avg": 2.51,
@@ -11512,8 +11582,15 @@
         "self_premium_vs_median_of_others": -0.716,
         "premium_ci_low": -1.128,
         "premium_ci_high": -0.128,
+        "style_deviation": -0.96,
+        "style_ci_low": -1.351,
+        "style_ci_high": -0.601,
+        "net_self_premium": 0.332,
+        "net_ci_low": -0.083,
+        "net_ci_high": 0.699,
         "n_self_responses": 37,
-        "n_premium_prompts": 13
+        "n_premium_prompts": 13,
+        "n_net_prompts": 13
       },
       "regulatory": {
         "self_avg": 3.4,
@@ -11522,8 +11599,15 @@
         "self_premium_vs_median_of_others": -0.69,
         "premium_ci_low": -0.833,
         "premium_ci_high": -0.485,
+        "style_deviation": -0.681,
+        "style_ci_low": -0.882,
+        "style_ci_high": -0.5,
+        "net_self_premium": -0.093,
+        "net_ci_low": -0.278,
+        "net_ci_high": 0.074,
         "n_self_responses": 29,
-        "n_premium_prompts": 11
+        "n_premium_prompts": 11,
+        "n_net_prompts": 9
       }
     },
     "gemini": {
@@ -11534,8 +11618,15 @@
         "self_premium_vs_median_of_others": 0.206,
         "premium_ci_low": 0.071,
         "premium_ci_high": 0.357,
+        "style_deviation": 0.191,
+        "style_ci_low": 0.082,
+        "style_ci_high": 0.302,
+        "net_self_premium": 0.016,
+        "net_ci_low": -0.129,
+        "net_ci_high": 0.163,
         "n_self_responses": 177,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "escalation": {
         "self_avg": 2.93,
@@ -11544,8 +11635,15 @@
         "self_premium_vs_median_of_others": 0.203,
         "premium_ci_low": 0.086,
         "premium_ci_high": 0.358,
+        "style_deviation": -0.043,
+        "style_ci_low": -0.175,
+        "style_ci_high": 0.084,
+        "net_self_premium": 0.253,
+        "net_ci_low": 0.099,
+        "net_ci_high": 0.416,
         "n_self_responses": 177,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "confidence": {
         "self_avg": 3.92,
@@ -11554,8 +11652,15 @@
         "self_premium_vs_median_of_others": 0.486,
         "premium_ci_low": 0.337,
         "premium_ci_high": 0.651,
+        "style_deviation": 0.461,
+        "style_ci_low": 0.333,
+        "style_ci_high": 0.594,
+        "net_self_premium": 0.029,
+        "net_ci_low": -0.115,
+        "net_ci_high": 0.184,
         "n_self_responses": 177,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "jurisdiction": {
         "self_avg": 3.34,
@@ -11564,8 +11669,15 @@
         "self_premium_vs_median_of_others": 0.494,
         "premium_ci_low": 0.4,
         "premium_ci_high": 0.608,
+        "style_deviation": 0.502,
+        "style_ci_low": 0.406,
+        "style_ci_high": 0.608,
+        "net_self_premium": -0.005,
+        "net_ci_low": -0.122,
+        "net_ci_high": 0.11,
         "n_self_responses": 177,
-        "n_premium_prompts": 60
+        "n_premium_prompts": 60,
+        "n_net_prompts": 60
       },
       "guardrail": {
         "self_avg": 3.97,
@@ -11574,8 +11686,15 @@
         "self_premium_vs_median_of_others": 0.36,
         "premium_ci_low": 0.167,
         "premium_ci_high": 0.667,
+        "style_deviation": 0.11,
+        "style_ci_low": -0.137,
+        "style_ci_high": 0.395,
+        "net_self_premium": 0.279,
+        "net_ci_low": -0.067,
+        "net_ci_high": 0.683,
         "n_self_responses": 43,
-        "n_premium_prompts": 16
+        "n_premium_prompts": 16,
+        "n_net_prompts": 13
       },
       "regulatory": {
         "self_avg": 4.34,
@@ -11584,74 +11703,27 @@
         "self_premium_vs_median_of_others": 0.647,
         "premium_ci_low": 0.486,
         "premium_ci_high": 0.889,
+        "style_deviation": 0.528,
+        "style_ci_low": 0.417,
+        "style_ci_high": 0.66,
+        "net_self_premium": 0.121,
+        "net_ci_low": -0.053,
+        "net_ci_high": 0.295,
         "n_self_responses": 34,
-        "n_premium_prompts": 12
+        "n_premium_prompts": 12,
+        "n_net_prompts": 11
       }
     }
   },
   "self_favoritism_flags": [
     {
       "judge_model": "chatgpt",
-      "dimension": "disclaimer",
-      "metric": "self_premium_vs_median_of_others",
-      "value": 0.628,
-      "n_self_responses": 180
-    },
-    {
-      "judge_model": "chatgpt",
-      "dimension": "escalation",
-      "metric": "self_premium_vs_median_of_others",
-      "value": 1.142,
-      "n_self_responses": 180
-    },
-    {
-      "judge_model": "chatgpt",
       "dimension": "guardrail",
-      "metric": "self_premium_vs_median_of_others",
-      "value": 1.478,
+      "metric": "net_self_premium",
+      "value": 0.954,
+      "raw_premium": 1.478,
+      "style_deviation": 0.435,
       "n_self_responses": 23
-    },
-    {
-      "judge_model": "claude",
-      "dimension": "disclaimer",
-      "metric": "self_premium_vs_median_of_others",
-      "value": -0.651,
-      "n_self_responses": 179
-    },
-    {
-      "judge_model": "claude",
-      "dimension": "escalation",
-      "metric": "self_premium_vs_median_of_others",
-      "value": -0.888,
-      "n_self_responses": 179
-    },
-    {
-      "judge_model": "claude",
-      "dimension": "jurisdiction",
-      "metric": "self_premium_vs_median_of_others",
-      "value": -0.718,
-      "n_self_responses": 179
-    },
-    {
-      "judge_model": "claude",
-      "dimension": "guardrail",
-      "metric": "self_premium_vs_median_of_others",
-      "value": -0.716,
-      "n_self_responses": 37
-    },
-    {
-      "judge_model": "claude",
-      "dimension": "regulatory",
-      "metric": "self_premium_vs_median_of_others",
-      "value": -0.69,
-      "n_self_responses": 29
-    },
-    {
-      "judge_model": "gemini",
-      "dimension": "regulatory",
-      "metric": "self_premium_vs_median_of_others",
-      "value": 0.647,
-      "n_self_responses": 34
     }
   ],
   "judge_responder_matrix": {

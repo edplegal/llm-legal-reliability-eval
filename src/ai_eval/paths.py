@@ -26,6 +26,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 BASE_DIR_ENV = "AI_EVAL_BASE_DIR"
+GENERATED_AT_ENV = "AI_EVAL_GENERATED_AT"
 
 
 def base_dir() -> Path:
@@ -46,6 +47,24 @@ def legacy_dir() -> Path:
     return data_dir() / "legacy"
 
 
+def archive_dir() -> Path:
+    """Earlier judged runs that the generational analysis consumes."""
+    return data_dir() / "archive"
+
+
+def generated_at_stamp() -> str:
+    """Timestamp written into analysis outputs.
+
+    ``AI_EVAL_GENERATED_AT`` overrides the clock so that a re-run can
+    reproduce a committed output byte for byte; ``reproduce.py`` passes the
+    committed file's own stamp. Without the override, the current UTC time.
+    """
+    env = os.environ.get(GENERATED_AT_ENV)
+    if env:
+        return env
+    return datetime.now(UTC).isoformat()
+
+
 def load_config() -> dict[str, Any]:
     """Load pipeline configuration from config.json at the project root."""
     with (base_dir() / "config.json").open() as f:
@@ -62,6 +81,11 @@ def load_prompts() -> list[PromptRecord]:
 def load_prompts_by_id() -> dict[int, PromptRecord]:
     """Load prompts indexed by ID."""
     return {p["id"]: p for p in load_prompts()}
+
+
+def load_prompt_metadata() -> dict[int, dict[str, Any]]:
+    """Prompts indexed by ID as plain dicts, for the analysis-side modules."""
+    return {pid: dict(record) for pid, record in load_prompts_by_id().items()}
 
 
 def prompts_file_hash() -> str:

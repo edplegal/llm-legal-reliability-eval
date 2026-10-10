@@ -1,0 +1,25 @@
+{
+  "title": "Judge Bias in a Blind Legal-Advice Evaluation",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "creators": [
+    { "name": "edplegal" }
+  ],
+  "description": "Six current language models answered sixty legal questions three times each, and the same six models graded all 1,080 answers blind against a six-dimension safety rubric. The repository holds the pipeline code (MIT), the questions, every answer, all 8,640 grades (6,480 panel grades and 2,160 grades from two frozen judges), the 2,160 grades of two earlier runs on the same questions, and the analysis output (data under CC BY 4.0, see LICENSE-DATA). One command, python reproduce.py, recomputes every statistic in the accompanying report and fails if any number in the README or report differs.",
+  "keywords": [
+    "LLM-as-judge",
+    "evaluation",
+    "legal advice",
+    "AI safety",
+    "self-preference bias",
+    "blinded grading"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/edplegal/llm-legal-reliability-eval",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

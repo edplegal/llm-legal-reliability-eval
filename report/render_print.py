@@ -1,4 +1,4 @@
-"""Produce a print copy of a draft: publication text only, no markers.
+"""Render the report: publication text only, no draft markers, to Markdown or PDF.
 
 The filter removes everything that is not publication text:
 
@@ -16,15 +16,14 @@ are matched by keyword, never by bare brackets.
 
 Usage:
     # cleaned markdown on stdout
-    python3 drafts/render_print.py < drafts/substack_post.md
+    python3 report/render_print.py < report/post.md
 
-    # print-ready PDF (pandoc + xelatex); title is left as two ruled
-    # lines to write on, since the title decision is open
-    python3 drafts/render_print.py --pdf drafts/substack_post.print.pdf \
-        < drafts/substack_post.md
+    # the PDF (pandoc + xelatex), with the title block below
+    python3 report/render_print.py \
+        --pdf report/judge-bias-blind-legal-advice-evaluation.pdf < report/post.md
 
-Print copies are gitignored; the markdown stays the single source of
-truth.
+``report/post.md`` is already publication text, so ``clean`` is a no-op on
+it; the filter stays so that a marked-up draft renders the same way.
 """
 
 import re
@@ -48,13 +47,13 @@ NOTE_LINES = [
     re.compile(r"^Future work\. Nothing here blocks publication\.$"),
 ]
 
-# Two ruled lines at the top of the PDF to hand-write the title on.
-TITLE_SLOT_TEX = r"""
-\vspace*{\baselineskip}
-\noindent{\color{gray}\rule{\textwidth}{0.4pt}}\\[2.2\baselineskip]
-\noindent{\color{gray}\rule{\textwidth}{0.4pt}}
-\vspace{2\baselineskip}
-"""
+TITLE = "Judge Bias in a Blind Legal-Advice Evaluation"
+SUBTITLE = (
+    "Six AI models graded 1,080 anonymous legal answers. Every judge used "
+    "its own scale, most favored their own work, and the newest Claude gave "
+    "the desperate asker fewer disclaimers."
+)
+DATE = "October 2026"
 
 # Tables carry five columns of intervals; footnotesize plus tighter
 # column padding keeps them inside the text block.
@@ -70,9 +69,7 @@ def clean(markdown: str) -> str:
     """Return publication text only: body between front matter and appendix."""
     lines = markdown.splitlines()
 
-    start = next(
-        (i for i, line in enumerate(lines) if BODY_START.match(line)), None
-    )
+    start = next((i for i, line in enumerate(lines) if BODY_START.match(line)), None)
     if start is None:
         raise SystemExit("render_print: no '**Epistemic status:**' body start found")
 
@@ -97,9 +94,7 @@ def to_pdf(markdown: str, output: Path) -> None:
     """Render cleaned markdown to a print PDF via pandoc and xelatex."""
     with tempfile.TemporaryDirectory() as tmp:
         header = Path(tmp) / "header.tex"
-        title_slot = Path(tmp) / "title_slot.tex"
         header.write_text(HEADER_TEX)
-        title_slot.write_text(TITLE_SLOT_TEX)
         subprocess.run(
             [
                 "pandoc",
@@ -118,8 +113,12 @@ def to_pdf(markdown: str, output: Path) -> None:
                 "linestretch=1.35",
                 "-H",
                 str(header),
-                "--include-before-body",
-                str(title_slot),
+                "--metadata",
+                f"title={TITLE}",
+                "--metadata",
+                f"subtitle={SUBTITLE}",
+                "--metadata",
+                f"date={DATE}",
             ],
             input=markdown.encode(),
             check=True,
@@ -133,7 +132,9 @@ def main() -> None:
     elif len(sys.argv) == 1:
         sys.stdout.write(cleaned)
     else:
-        raise SystemExit(f"usage: {Path(sys.argv[0]).name} [--pdf OUTPUT.pdf] < draft.md")
+        raise SystemExit(
+            f"usage: {Path(sys.argv[0]).name} [--pdf OUTPUT.pdf] < draft.md"
+        )
 
 
 if __name__ == "__main__":

@@ -3,11 +3,13 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ai-eval"
-version = "0.2.0"
-description = "Blinded cross-model AI safety evaluation pipeline"
+name = "llm-legal-reliability-eval"
+version = "1.0.0"
+description = "Blinded cross-model evaluation of LLM safety behavior on legal questions: pipeline, data, and analysis"
 readme = "README.md"
 requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "edplegal" }]
 dependencies = [
     "requests>=2.31",
 ]
@@ -17,6 +19,8 @@ ai-eval-collect = "ai_eval.collect:main"
 ai-eval-blind = "ai_eval.blind:main"
 ai-eval-judge = "ai_eval.judge:main"
 ai-eval-analyze = "ai_eval.analyze:main"
+ai-eval-bridge = "ai_eval.bridge:main"
+ai-eval-robustness = "ai_eval.robustness:main"
 ai-eval-report = "ai_eval.report:main"
 
 [project.optional-dependencies]

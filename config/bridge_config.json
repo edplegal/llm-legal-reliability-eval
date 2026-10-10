@@ -1,0 +1,20 @@
+{
+  "models": {
+    "bridge_gpt4o": {
+      "provider": "openai",
+      "model": "gpt-4o",
+      "api_key_env": "OPENAI_API_KEY",
+      "base_url": "https://api.openai.com/v1/chat/completions",
+      "temperature": 0.0
+    },
+    "bridge_gemini25": {
+      "provider": "google",
+      "model": "gemini-2.5-flash",
+      "api_key_env": "GOOGLE_API_KEY",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta/models",
+      "temperature": 0.0
+    }
+  },
+  "response_max_tokens": 8192,
+  "judge_max_tokens": 4096
+}
