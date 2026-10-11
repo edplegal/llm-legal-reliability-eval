@@ -65,6 +65,15 @@ class TestMathHelpers:
     def test_mean_empty(self) -> None:
         assert mean([]) == 0.0
 
+    def test_mean_cancelling_magnitudes_is_correctly_rounded(self) -> None:
+        # Naive float summation, as in builtin sum before 3.12, returns 0.0 here.
+        assert mean([1e16, 1.0, -1e16]) == 1.0 / 3.0
+
+    def test_mean_order_of_values_does_not_change_result(self) -> None:
+        values = [0.1] * 10 + [1e16, -1e16, 0.7, 0.3]
+        assert mean(values) == mean(list(reversed(values)))
+        assert mean(values) == mean(sorted(values))
+
     def test_std_dev_identical(self) -> None:
         assert std_dev([3.0, 3.0, 3.0]) == 0.0
 

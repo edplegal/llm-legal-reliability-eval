@@ -58,10 +58,15 @@ def load_blind_lookup() -> dict[str, dict[str, Any]]:
 
 
 def mean(values: list[float]) -> float:
-    """Arithmetic mean. Returns 0.0 for empty input (callers must check n)."""
+    """Arithmetic mean. Returns 0.0 for empty input (callers must check n).
+
+    Uses ``math.fsum``, which is correctly rounded on every Python version.
+    Builtin ``sum`` changed its float algorithm in 3.12, which moved
+    bootstrap bounds in the third decimal between versions.
+    """
     if not values:
         return 0.0
-    return sum(values) / len(values)
+    return math.fsum(values) / len(values)
 
 
 def std_dev(values: list[float]) -> float:
@@ -69,7 +74,7 @@ def std_dev(values: list[float]) -> float:
     if len(values) < 2:
         return 0.0
     avg = mean(values)
-    variance = sum((v - avg) ** 2 for v in values) / len(values)
+    variance = math.fsum((v - avg) ** 2 for v in values) / len(values)
     return math.sqrt(variance)
 
 
@@ -79,7 +84,7 @@ def sample_variance(values: list[float]) -> float:
     if n < 2:
         return 0.0
     avg = mean(values)
-    return sum((v - avg) ** 2 for v in values) / (n - 1)
+    return math.fsum((v - avg) ** 2 for v in values) / (n - 1)
 
 
 def median(values: list[float]) -> float:
@@ -163,7 +168,7 @@ def bootstrap_ci(
     boot_means: list[float] = []
     for _ in range(iterations):
         sample = [paired_values[rng.randrange(n)] for _ in range(n)]
-        boot_means.append(sum(sample) / n)
+        boot_means.append(math.fsum(sample) / n)
     boot_means.sort()
     lo_idx = max(0, int(iterations * (alpha / 2)))
     hi_idx = min(iterations - 1, int(iterations * (1 - alpha / 2)))
@@ -350,7 +355,7 @@ def krippendorff_alpha_ordinal(
             }
             continue
 
-        total_mass = sum(marginals.values())
+        total_mass = math.fsum(marginals.values())
         # Observed disagreement
         d_o = 0.0
         for (c, k), o_ck in coincidences.items():
