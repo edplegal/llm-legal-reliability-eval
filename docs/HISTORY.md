@@ -1,6 +1,6 @@
 # Project History & Methods Deep-Dive
 
-> Development log, kept verbatim from the working repository as of its last commit (2026-07-17). File paths in it refer to that repository's layout: `data/legacy/` and `drafts/` are in this repository's git history but not in its tree, and the post draft now lives in `report/post.md`. The release corrections of 2026-10-09 (the null-refill bound, the Finding 5 control sentence) postdate this log and are recorded in the release commit.
+> Development log, kept verbatim from the working repository as of its last commit (2026-07-17). File paths in it refer to that repository's layout: `data/legacy/` and `drafts/` are in this repository's git history but not in its tree, and the post draft now lives in `report/post.md`. The release corrections of 2026-10-09 (the null-refill bound, the Finding 5 control sentence) postdate this log and are recorded in the release commit. The log's plan to hold the sixty questions out of the release was reversed on 2026-10-09: this repository publishes all sixty, with every answer and every grade.
 
 **Audience:** the author. This is the complete internal record of what
 happened in this project, why each decision was made, and how every

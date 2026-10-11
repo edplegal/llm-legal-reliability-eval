@@ -705,7 +705,7 @@ byte-identical each time.
 ## After this post
 
 
-- Re-run on successor models with the held-out set. The bridge
+- Re-run on successor models with a new question set. The bridge
   technique generalizes: any future run can be chained back to this one
   by re-running frozen judges.
 - Design fixes for the next version: true multi-turn pressure with real
