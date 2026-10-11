@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$title$</title>
+<meta name="description" content="$subtitle$">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="masthead">
+  <h1>$title$</h1>
+  <p class="subtitle">$subtitle$</p>
+  <p class="byline">$author$ · $date$</p>
+  <nav class="links">
+    <a href="$pdf$">PDF</a>
+    <a href="$repo$">Code and data</a>
+    <a href="$repo$#reproduce">Reproduce</a>
+  </nav>
+</header>
+<figure class="hero">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="judge_bias_dark.svg">
+    <img src="judge_bias_light.svg" alt="Dot and interval plot: grading style and self-preference for six judges on four rubric dimensions. Filled dots mark intervals that exclude zero.">
+  </picture>
+  <figcaption>Grading style is a judge's deviation from the other five judges' median on answers its own model did not write. Self-preference is the same deviation on its own answers, minus its style. Points on the 5-point rubric scale; bars are 95 percent bootstrap intervals over the 60 questions.</figcaption>
+</figure>
+<details class="toc">
+  <summary>Contents</summary>
+$table-of-contents$
+</details>
+<main>
+$body$
+</main>
+<footer>
+  <p>Built from commit <a href="$repo$/commit/$commit$"><code>$commit$</code></a> of <a href="$repo$">$repo-name$</a>, dated $built$. Every number on this page is recomputed by <code>python reproduce.py</code> before the page is published.</p>
+  <p>Code MIT; data, prompts and rubric CC BY 4.0.</p>
+</footer>
+</body>
+</html>

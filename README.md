@@ -1,5 +1,9 @@
 # Judge Bias in a Blind Legal-Advice Evaluation
 
+[![Reproduce](https://github.com/edplegal/llm-legal-reliability-eval/actions/workflows/reproduce.yml/badge.svg)](https://github.com/edplegal/llm-legal-reliability-eval/actions/workflows/reproduce.yml)
+
+**Read the report:** [edplegal.github.io/llm-legal-reliability-eval](https://edplegal.github.io/llm-legal-reliability-eval/) · [PDF](report/judge-bias-blind-legal-advice-evaluation.pdf)
+
 Six AI models graded 1,080 anonymous legal answers. Every judge used its own scale, most favored their own work, and the newest Claude gave the desperate asker fewer disclaimers.
 
 **The question.** When a person asks a language model a legal question, does the model behave the way a licensed professional must: disclaim, escalate to a lawyer, hedge where the law hedges, and flag that the answer depends on the jurisdiction? And can the same models be trusted to grade that behavior?
@@ -20,7 +24,7 @@ The same six models graded every answer blind on a six-dimension rubric, for 6,4
 
 *Grading style is a judge's deviation from the other five judges' median on answers its own model did not write. Self-preference is the same deviation on its own answers, minus its style. Points on the 5-point rubric scale; bars are 95 percent bootstrap intervals over the 60 questions.*
 
-**Full write-up:** [report/judge-bias-blind-legal-advice-evaluation.pdf](report/judge-bias-blind-legal-advice-evaluation.pdf) (source: [report/post.md](report/post.md)). The Substack post goes live after publication and will be linked here.
+**Full write-up:** [the report online](https://edplegal.github.io/llm-legal-reliability-eval/), or as [PDF](report/judge-bias-blind-legal-advice-evaluation.pdf) (source: [report/post.md](report/post.md)). The Substack post goes live after publication and will be linked here.
 
 ## Limitations
 
@@ -35,7 +39,7 @@ The same six models graded every answer blind on a six-dimension rubric, for 6,4
 python reproduce.py
 ```
 
-Needs Python 3.11 or newer and nothing outside the standard library. It recomputes the analysis, the generational chain, and the null-refill check in memory, compares each with the committed JSON byte for byte, and fails if any number in this README or in the report differs from the recomputed output. The tests (`pip install -r requirements.txt -e . && pytest`) run the same check.
+Needs Python 3.11 or newer and nothing outside the standard library. GitHub runs it on Python 3.11, 3.12 and 3.13 at every push; the badge above shows the latest result. It recomputes the analysis, the generational chain, and the null-refill check in memory, compares each with the committed JSON byte for byte, and fails if any number in this README or in the report differs from the recomputed output. The tests (`pip install -r requirements.txt -e . && pytest`) run the same check.
 
 ## Contents
 
@@ -45,7 +49,8 @@ Needs Python 3.11 or newer and nothing outside the standard library. It recomput
 | `data/` | every answer, every grade, the blinding lookups, the analysis outputs; see [data/DATA_CARD.md](data/DATA_CARD.md) |
 | `data/archive/` | the two earlier judged runs on the same questions, used by Finding 5 |
 | `src/ai_eval/` | the pipeline: collect, blind, judge, analyze, bridge, robustness, report |
-| `report/` | the write-up as Markdown and PDF |
+| `report/` | the write-up as Markdown and PDF, and the scripts that render the PDF and the web page |
+| `.github/workflows/` | the reproduction check and the web-page build, both run on every push |
 | `figures/` | the figure above and the script that draws it |
 | `docs/` | the development log and the pre-publication findings memo, kept verbatim; the git history runs from June 2026 |
 

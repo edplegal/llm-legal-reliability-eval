@@ -1,0 +1,205 @@
+:root {
+  --bg: #fdfcfa;
+  --fg: #1d1d1b;
+  --muted: #5d5b56;
+  --rule: #dedad2;
+  --accent: #1f5f8b;
+  --table-stripe: #f4f2ed;
+  --code-bg: #f1efe9;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161615;
+    --fg: #e6e3dc;
+    --muted: #a19d94;
+    --rule: #3a3936;
+    --accent: #7db7e0;
+    --table-stripe: #1f1f1d;
+    --code-bg: #232321;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 46rem;
+  padding: 2.5rem 1rem 4rem;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+}
+
+h1,
+h2,
+h3 {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.25;
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: 2rem;
+}
+
+h2 {
+  margin-top: 2.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 1.4rem;
+}
+
+h3 {
+  margin-top: 2rem;
+  font-size: 1.15rem;
+}
+
+.subtitle {
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font-size: 1.2rem;
+}
+
+.byline {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+}
+
+.links a {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.links a:hover {
+  border-color: var(--accent);
+}
+
+.hero {
+  margin: 2rem 0;
+}
+
+.hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+figcaption {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.toc {
+  margin: 1.5rem 0 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.95rem;
+}
+
+.toc summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.toc ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
+/* Five columns of intervals do not fit a phone; tables scroll sideways
+   inside the column instead of widening the page. */
+table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
+}
+
+th,
+td {
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  white-space: nowrap;
+}
+
+thead th {
+  border-bottom: 2px solid var(--fg);
+}
+
+tbody tr:nth-child(even) {
+  background: var(--table-stripe);
+}
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 0 1rem;
+  border-left: 3px solid var(--rule);
+  color: var(--muted);
+}
+
+code {
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  background: var(--code-bg);
+  font-size: 0.88em;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background: var(--code-bg);
+}
+
+pre code {
+  padding: 0;
+  background: none;
+}
+
+hr {
+  margin: 2.5rem 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.85rem;
+}

@@ -26,3 +26,6 @@ htmlcov/
 
 # Rotated artifacts (none are released; the pipeline writes here on regeneration)
 data/legacy/
+
+# Report web page, built by report/build_site.py
+_site/
